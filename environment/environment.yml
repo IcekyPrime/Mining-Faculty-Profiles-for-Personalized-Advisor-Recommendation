@@ -1,0 +1,8 @@
+name: dm-mentor
+channels:
+  - defaults
+dependencies:
+  - python=3.11
+  - requests
+  - beautifulsoup4
+  - lxml

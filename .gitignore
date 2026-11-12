@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pyc
+
+# 虚拟环境
+.venv/
+venv/
+env/
+
+# 打包产物
+build/
+dist/
+*.spec
+
+# 爬取缓存（体积大，可用 run_pipeline.py 重新生成）
+data/raw/
+
+# 中间过程文件
+data/deleted_phase*.csv
+data/sparse_teachers.csv
+
+# 本地配置
+.env
+.env.*
+
+# 本地任务说明
+Instruction.md

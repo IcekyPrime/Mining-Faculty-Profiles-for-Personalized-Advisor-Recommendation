@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>交大导师 · 导师选择系统</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="brand-mark">导</span>
+        <div class="brand-text">
+          <span class="brand-name">交大导师</span>
+          <span class="brand-sub">导师选择与推荐</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="view-search" class="view">
+    <section class="hero">
+      <h1 class="hero-title">找到你的导师</h1>
+      <p class="hero-desc">检索五个学院的教师，按综合评分、学术能力与教学口碑筛选</p>
+      <div class="search-bar">
+        <input id="search-input" class="search-input" type="text" placeholder="输入姓名、研究方向或关键词" autocomplete="off">
+        <button id="search-btn" class="btn btn-primary">搜索</button>
+      </div>
+      <div class="filters">
+        <select id="college-select" class="select"></select>
+        <div class="sort-group" id="sort-group">
+          <button class="chip active" data-sort="score">综合评分</button>
+          <button class="chip" data-sort="academic">学术能力</button>
+          <button class="chip" data-sort="teaching">教学口碑</button>
+          <button class="chip" data-sort="relevance">相关度</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats" id="stats"></section>
+
+    <section class="results">
+      <div class="results-head">
+        <span id="results-count" class="results-count"></span>
+      </div>
+      <div id="results-list" class="results-list"></div>
+      <div class="pagination" id="pagination">
+        <button id="load-more" class="btn btn-ghost">加载更多</button>
+      </div>
+      <div id="empty" class="empty hidden">
+        <p class="empty-title">没有找到匹配的教师</p>
+        <p class="empty-sub">试试更换关键词或学院</p>
+      </div>
+    </section>
+  </main>
+
+  <main id="view-detail" class="view hidden">
+    <div id="detail-root" class="detail-root"></div>
+  </main>
+
+  <script src="/static/js/echarts.min.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

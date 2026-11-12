@@ -1,0 +1,71 @@
+{
+  "_说明": {
+    "用途": "将《缺失信息.csv》中列出的缺失字段补录到本文件，之后可据此批量回写数据库。",
+    "使用方法": [
+      "打开 data/exports/缺失信息.csv，确认每位教师缺失哪些字段。",
+      "在下方「导师」数组中，为每位需要补录的教师新增一个对象。",
+      "对象结构与「_示例」完全一致，字段名保持英文（对应数据库列名）。",
+      "只填写你已收集到的字段即可，未收集到的字段可以省略或留空。",
+      "teacher_id 必须填写，用于匹配数据库中的教师（取自缺失信息.csv 的「教师ID」列）。"
+    ],
+    "字段说明": {
+      "teacher_id": "整数，必填。数据库中教师的唯一 ID。",
+      "name": "字符串，选填。姓名，用于人工核对。",
+      "research_directions": "字符串，选填。研究方向。",
+      "bio": "字符串，选填。个人简介，可多行。",
+      "email": "字符串，选填。邮箱地址。",
+      "honors": "字符串数组，选填。荣誉/人才称号，如 [\"杰青\", \"IEEE Fellow\"]。",
+      "institute": "字符串，选填。所属研究所/实验室。",
+      "personal_homepage": "字符串，选填。个人主页 URL。",
+      "homepage_url": "字符串，选填。教师主页 URL（备用字段）。",
+      "h_index": "整数，选填。H 指数。",
+      "citation_count": "整数，选填。总引用量。",
+      "paper_count": "整数，选填。论文总数（若填写了 papers 列表则可不填）。",
+      "papers": "对象数组，选填。论文列表，每项含 title/year/venue/citation_count/authors/doi。"
+    },
+    "论文字段说明": {
+      "title": "字符串。论文标题。",
+      "year": "整数。发表年份，如 2023。",
+      "venue": "字符串。发表会议/期刊，如 CVPR、NeurIPS。",
+      "citation_count": "整数，选填。该论文被引次数。",
+      "authors": "字符串，选填。作者列表。",
+      "doi": "字符串，选填。DOI 号。"
+    },
+    "注意": "教学评分（teaching_score/teaching_count）来自选课社区，无需手工补录；姓名拼音、学院、职称等字段系统已有，也无需填写。"
+  },
+
+  "_示例": {
+    "teacher_id": 123,
+    "name": "示例教授",
+    "research_directions": "机器学习、计算机视觉、多模态大模型",
+    "bio": "上海交通大学教授、博士生导师。主要研究方向为机器学习与计算机视觉，长期从事深度学习模型与视觉感知研究。",
+    "email": "example@sjtu.edu.cn",
+    "honors": ["杰青", "长江学者", "IEEE Fellow"],
+    "institute": "人工智能研究院",
+    "personal_homepage": "https://example.sjtu.edu.cn",
+    "homepage_url": "",
+    "h_index": 42,
+    "citation_count": 12800,
+    "paper_count": 156,
+    "papers": [
+      {
+        "title": "Example: A Method for Visual Representation Learning",
+        "year": 2023,
+        "venue": "CVPR",
+        "citation_count": 230,
+        "authors": "A. Author, B. Author, Example Professor",
+        "doi": "10.1109/CVPR.2023.12345"
+      },
+      {
+        "title": "Another Example: Efficient Multimodal Fusion",
+        "year": 2024,
+        "venue": "NeurIPS",
+        "citation_count": 95,
+        "authors": "Example Professor, C. Author",
+        "doi": ""
+      }
+    ]
+  },
+
+  "导师": []
+}
