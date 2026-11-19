@@ -1,5 +1,8 @@
 """处理层 · 学术影响力排名：基于合作网络的 PageRank 与 HITS（Hub/Authority）。"""
-import sqlite3, os, csv
+import csv
+import os
+import sqlite3
+
 import networkx as nx
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

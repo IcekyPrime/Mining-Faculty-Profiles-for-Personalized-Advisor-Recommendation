@@ -1,4 +1,5 @@
 """SQLite 数据库 schema 与写入。"""
+import json
 import sqlite3
 
 from crawler import config
@@ -42,7 +43,8 @@ CREATE TABLE IF NOT EXISTS papers (
     citation_count INTEGER,
     venue TEXT,
     doi TEXT,
-    paper_id TEXT
+    paper_id TEXT,
+    authors TEXT
 );
 
 CREATE TABLE IF NOT EXISTS courses (
@@ -56,6 +58,32 @@ CREATE TABLE IF NOT EXISTS courses (
     last_semester TEXT,
     course_url TEXT
 );
+
+CREATE TABLE IF NOT EXISTS processing (
+    teacher_id INTEGER PRIMARY KEY,
+    keywords TEXT,
+    cluster INTEGER,
+    community INTEGER,
+    pagerank REAL,
+    hits_authority REAL,
+    hits_hub REAL,
+    score REAL,
+    teaching_score REAL,
+    teaching_count INTEGER,
+    score_v2 REAL,
+    score_coverage REAL,
+    score_parts TEXT
+);
+
+CREATE INDEX IF NOT EXISTS idx_teachers_college ON teachers(college);
+CREATE INDEX IF NOT EXISTS idx_teachers_name ON teachers(name);
+CREATE INDEX IF NOT EXISTS idx_teachers_h_index ON teachers(h_index);
+CREATE INDEX IF NOT EXISTS idx_courses_teacher ON courses(teacher_id);
+CREATE INDEX IF NOT EXISTS idx_papers_teacher ON papers(teacher_id);
+CREATE INDEX IF NOT EXISTS idx_papers_teacher_citations
+    ON papers(teacher_id, citation_count DESC);
+CREATE INDEX IF NOT EXISTS idx_processing_score ON processing(score DESC);
+CREATE INDEX IF NOT EXISTS idx_processing_teaching ON processing(teaching_score);
 """
 
 
@@ -70,6 +98,7 @@ def reset(db_path=None):
     conn = connect(db_path)
     conn.execute("DROP TABLE IF EXISTS papers")
     conn.execute("DROP TABLE IF EXISTS courses")
+    conn.execute("DROP TABLE IF EXISTS processing")
     conn.execute("DROP TABLE IF EXISTS teachers")
     conn.executescript(SCHEMA)
     return conn
@@ -117,10 +146,13 @@ def save_teachers(conn, teachers):
         tid = cur.lastrowid
         for p in t.get("papers") or []:
             cur.execute(
-                """INSERT INTO papers (teacher_id, title, year, citation_count, venue, doi, paper_id)
-                   VALUES (?,?,?,?,?,?,?)""",
+                """INSERT INTO papers
+                   (teacher_id, title, year, citation_count, venue, doi, paper_id, authors)
+                   VALUES (?,?,?,?,?,?,?,?)""",
                 (tid, p.get("title"), p.get("year"), p.get("citation_count"),
-                 p.get("venue"), p.get("doi"), p.get("paper_id")),
+                 p.get("venue"), p.get("doi"), p.get("paper_id"),
+                 json.dumps(p["authors"], ensure_ascii=False)
+                 if p.get("authors") else None),
             )
         for p in t.get("papers_cs") or []:
             cur.execute(

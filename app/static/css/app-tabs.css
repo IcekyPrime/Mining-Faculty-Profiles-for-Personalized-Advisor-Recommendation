@@ -1,0 +1,317 @@
+/* ---------------------------------------------------------------- 多级分区
+ * v1.1.1 新增：页面一级分区（名录 / 洞察 / 说明）与档案页二级分区。
+ * 只加导航与容器样式，原有栅格与卡片样式不动。
+ */
+
+.view-tabs {
+  position: sticky;
+  top: 64px;
+  z-index: 20;
+  display: flex;
+  gap: 6px;
+  margin: 6px 0 18px;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--topbar);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-sm);
+  width: fit-content;
+  max-width: 100%;
+}
+
+.view-tab {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  border: 0;
+  border-radius: 999px;
+  padding: 9px 18px;
+  background: transparent;
+  color: var(--ink-2);
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .18s ease, color .18s ease;
+}
+
+.view-tab .view-tab-sub {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.view-tab:hover { color: var(--ink); background: var(--surface-2); }
+
+.view-tab.active {
+  background: var(--accent);
+  color: #fdfbf5;
+}
+
+.view-tab.active .view-tab-sub { color: rgba(253, 251, 245, .72); }
+
+.view-tab:focus-visible,
+.detail-subtab:focus-visible {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 2px;
+}
+
+.pane { animation: pane-in .22s ease both; }
+
+@keyframes pane-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+.pane-head { margin: 8px 0 18px; }
+
+.pane-title {
+  margin: 6px 0 8px;
+  font-family: var(--display);
+  font-size: 34px;
+  letter-spacing: -.03em;
+}
+
+.pane-desc {
+  max-width: 62ch;
+  color: var(--ink-2);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* ---------------------------------------------------------------- 洞察网格 */
+.insight-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.insight-panel.wide { grid-column: 1 / -1; }
+
+.chart-box-sm { height: 240px; }
+
+.coverage-row {
+  display: grid;
+  grid-template-columns: 74px 1fr 96px;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 0;
+  font-size: 12px;
+  color: var(--ink-2);
+}
+
+.coverage-label { color: var(--ink); }
+
+.coverage-track,
+.community-track {
+  position: relative;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--surface-3);
+  overflow: hidden;
+}
+
+.coverage-track i,
+.community-track i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  display: block;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+
+.coverage-value { text-align: right; font-variant-numeric: tabular-nums; }
+.coverage-value em { color: var(--ink-3); font-style: normal; }
+
+.top-score-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 18px; margin-top: 12px; }
+
+.top-score-head {
+  grid-column: 1 / -1;
+  font-size: 11px;
+  color: var(--ink-3);
+  letter-spacing: .06em;
+}
+
+.top-score-item {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.top-score-item:hover { border-color: var(--accent-line); background: var(--accent-soft); }
+
+.top-score-item .rank { font-size: 11px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+
+.top-score-item .who { display: flex; flex-direction: column; gap: 2px; font-size: 13px; font-weight: 600; }
+.top-score-item .who em { font-style: normal; font-size: 10px; font-weight: 400; color: var(--ink-3); }
+
+.top-score-item .scores { display: flex; align-items: baseline; gap: 8px; font-variant-numeric: tabular-nums; }
+.top-score-item .scores b { font-family: var(--display); font-size: 18px; color: var(--accent); }
+.top-score-item .scores i { font-style: normal; font-size: 10px; color: var(--ink-3); }
+
+.cluster-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+
+.cluster-card {
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+}
+
+.cluster-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+.cluster-head strong { font-family: var(--display); font-size: 17px; color: var(--ink); }
+
+.mini-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 9px; }
+
+.mini-tag {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  color: var(--accent);
+  font-size: 11px;
+}
+
+.cluster-members { font-size: 11px; color: var(--ink-3); }
+
+.member-link {
+  border: 0;
+  padding: 0 4px;
+  background: transparent;
+  color: var(--ink-2);
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 3px;
+}
+
+.member-link:hover { color: var(--accent); }
+
+.community-row {
+  display: grid;
+  grid-template-columns: 42px 1fr 52px;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 0;
+  font-size: 12px;
+  color: var(--ink-2);
+}
+
+.community-id { color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.community-size { text-align: right; font-variant-numeric: tabular-nums; }
+
+.rule-grid { width: 100%; border-collapse: collapse; font-size: 12px; }
+.rule-grid th {
+  text-align: left;
+  font-weight: 600;
+  font-size: 11px;
+  color: var(--ink-3);
+  border-bottom: 1px solid var(--line);
+  padding: 6px 4px;
+}
+.rule-grid td {
+  padding: 6px 4px;
+  border-bottom: 1px dashed var(--line);
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+.rule-grid td:first-child { color: var(--ink); }
+
+/* ---------------------------------------------------------------- 项目说明 */
+.about-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+
+.about-list { margin: 0; padding-left: 18px; color: var(--ink-2); font-size: 13px; line-height: 1.9; }
+.about-list li::marker { color: var(--accent); }
+.about-list b { color: var(--ink); }
+
+.about-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.about-table td { padding: 7px 4px; border-bottom: 1px dashed var(--line); color: var(--ink-2); }
+.about-table td:first-child { width: 84px; color: var(--ink); font-weight: 600; }
+
+/* ---------------------------------------------------------------- 档案页二级分区 */
+.detail-tabs {
+  display: flex;
+  gap: 4px;
+  margin: 12px 0 16px;
+  padding: 5px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  width: fit-content;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.detail-subtab {
+  border: 0;
+  border-radius: 999px;
+  padding: 7px 16px;
+  background: transparent;
+  color: var(--ink-2);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .16s ease, color .16s ease;
+}
+
+.detail-subtab:hover { background: var(--surface-2); color: var(--ink); }
+
+.detail-subtab.active { background: var(--accent); color: #fdfbf5; }
+
+#detail-root[data-pane] .panel[data-pane] { animation: pane-in .18s ease both; }
+
+#detail-root[data-pane="overview"] .panel[data-pane="academic"],
+#detail-root[data-pane="overview"] .panel[data-pane="teaching"],
+#detail-root[data-pane="overview"] .panel[data-pane="network"],
+#detail-root[data-pane="academic"] .panel[data-pane="overview"],
+#detail-root[data-pane="academic"] .panel[data-pane="teaching"],
+#detail-root[data-pane="academic"] .panel[data-pane="network"],
+#detail-root[data-pane="teaching"] .panel[data-pane="overview"],
+#detail-root[data-pane="teaching"] .panel[data-pane="academic"],
+#detail-root[data-pane="teaching"] .panel[data-pane="network"],
+#detail-root[data-pane="network"] .panel[data-pane="overview"],
+#detail-root[data-pane="network"] .panel[data-pane="academic"],
+#detail-root[data-pane="network"] .panel[data-pane="teaching"] {
+  display: none;
+}
+
+.detail-col.is-empty { display: none; }
+.detail-grid.single-col { grid-template-columns: minmax(0, 1fr); }
+
+/* ---------------------------------------------------------------- 响应式 */
+@media (max-width: 900px) {
+  .view-tabs { top: 56px; }
+  .insight-grid,
+  .about-grid { grid-template-columns: minmax(0, 1fr); }
+  .insight-panel.wide { grid-column: auto; }
+  .top-score-list { grid-template-columns: minmax(0, 1fr); }
+  .view-tab { padding: 8px 13px; font-size: 13px; }
+  .view-tab-sub { display: none; }
+}
+
+@media (max-width: 560px) {
+  .pane-title { font-size: 26px; }
+  .detail-tabs { width: 100%; justify-content: space-between; }
+  .detail-subtab { flex: 1; text-align: center; padding: 8px 6px; }
+}

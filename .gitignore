@@ -27,3 +27,14 @@ data/sparse_teachers.csv
 
 # 本地任务说明
 Instruction.md
+
+# 测试与工具缓存
+.pytest_cache/
+.ruff_cache/
+
+# SQLite WAL 临时文件
+*.db-wal
+*.db-shm
+
+# 合并前自动备份（体积大，可由 merge 脚本重新生成）
+data/db/backup/

@@ -1,0 +1,268 @@
+/* ================================================================
+   应用外壳：AI 查询页的常用检索 chips、名录页工具条、
+   以及「设置」抽屉（外观 + 关于项目）。
+   ================================================================ */
+
+/* ---------------------------------------------------------------- 常用检索 */
+.query-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.query-chips-label {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+  text-transform: uppercase;
+}
+
+.query-chip {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-2);
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: border-color 0.16s ease, color 0.16s ease, background 0.16s ease;
+}
+
+.query-chip:hover {
+  border-color: var(--accent-line);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* ---------------------------------------------------------------- 名录工具条 */
+.results-tools {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.list-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  margin: 16px 0 4px;
+}
+
+.list-toolbar-note {
+  font-size: 11px;
+  color: var(--ink-3);
+}
+
+.list-sort {
+  background: var(--surface);
+  border-radius: 10px;
+}
+
+.list-sort .sort-btn {
+  padding: 5px 11px;
+}
+
+.ghost-link {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink-3);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 6px 14px;
+  transition: color 0.16s ease, border-color 0.16s ease, background 0.16s ease;
+}
+
+.ghost-link:hover {
+  color: var(--accent);
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+}
+
+/* ---------------------------------------------------------------- 顶栏设置入口 */
+.settings-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 8px;
+  padding: 6px 11px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink-2);
+  font-size: 12px;
+  cursor: pointer;
+  transition: border-color 0.16s ease, color 0.16s ease;
+}
+
+.settings-btn:hover { border-color: var(--accent-line); color: var(--accent); }
+.settings-btn svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+/* ---------------------------------------------------------------- 设置抽屉 */
+.settings-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  background: rgba(8, 13, 10, 0.5);
+  backdrop-filter: blur(3px);
+}
+
+.settings-drawer {
+  position: fixed;
+  inset: 0 0 0 auto;
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  width: min(460px, 94vw);
+  background: var(--bg);
+  border-left: 1px solid var(--line);
+  box-shadow: -24px 0 60px rgba(10, 16, 12, 0.28);
+  animation: drawer-in 0.24s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes drawer-in {
+  from { transform: translateX(28px); }
+  to { transform: translateX(0); }
+}
+
+.settings-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 24px 16px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.settings-head h2 {
+  margin-top: 4px;
+  font-family: var(--display);
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.settings-close {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--ink-2);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.16s ease, color 0.16s ease;
+}
+
+.settings-close:hover { border-color: var(--accent-line); color: var(--accent); }
+
+.settings-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 24px 32px;
+  overscroll-behavior: contain;
+}
+
+.settings-group {
+  padding: 20px 0 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.settings-group:last-child { border-bottom: 0; }
+
+.settings-title {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+
+.settings-note {
+  margin-top: 7px;
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--ink-3);
+}
+
+.theme-seg {
+  display: inline-flex;
+  margin-top: 12px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-2);
+}
+
+.theme-choice {
+  border: 0;
+  background: transparent;
+  color: var(--ink-2);
+  border-radius: 999px;
+  padding: 7px 18px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.16s ease, color 0.16s ease;
+}
+
+.theme-choice.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid var(--accent-line);
+  padding: 6px 17px;
+}
+
+/* 抽屉里的说明面板：单列、去掉外层大圆角，读起来像设置项里的说明 */
+.settings-group .about-grid {
+  grid-template-columns: 1fr;
+  margin-top: 12px;
+}
+
+.settings-group .about-grid .panel {
+  background: var(--surface);
+  border-radius: 14px;
+  padding: 16px 18px;
+}
+
+.settings-group .about-grid .panel .section-title { font-size: 13px; }
+
+.settings-credit {
+  margin-top: 14px;
+  font-size: 11px;
+  line-height: 1.8;
+  color: var(--ink-3);
+}
+
+.settings-credit a {
+  color: var(--ink-3);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+body.settings-open { overflow: hidden; }
+
+@media (max-width: 900px) {
+  .settings-btn span { display: none; }
+  .settings-btn { padding: 7px 9px; }
+}
+
+@media (max-width: 560px) {
+  .settings-drawer { width: 100%; border-left: 0; }
+  .settings-head { padding: 18px 18px 14px; }
+  .settings-body { padding: 6px 18px 28px; }
+  .results-tools { gap: 8px; }
+  .ghost-link { font-size: 11px; padding: 5px 10px; }
+  .query-chips { gap: 6px; }
+}

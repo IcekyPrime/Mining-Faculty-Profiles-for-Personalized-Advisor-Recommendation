@@ -1,5 +1,8 @@
 """处理层 · 相似检索：Shingling + MinHash + LSH（自实现），召回研究方向相似的导师。"""
-import sqlite3, json, os, hashlib
+import hashlib
+import json
+import os
+import sqlite3
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DB = os.path.join(ROOT, 'data', 'db', 'mentor.db')
@@ -52,7 +55,7 @@ def main():
 
     # 候选对
     cand = set()
-    for (b, key), tids in buckets.items():
+    for tids in buckets.values():
         if len(tids) < 2:
             continue
         for i in range(len(tids)):

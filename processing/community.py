@@ -1,5 +1,8 @@
 """处理层 · 社区发现：在研究方向相似图上运行 Louvain（模块度），识别研究社群。"""
-import sqlite3, json, os
+import json
+import os
+import sqlite3
+
 import networkx as nx
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,7 +29,7 @@ def main():
     # kNN 相似图（每个教师连相似度最高的 K 个）
     G = nx.Graph()
     G.add_nodes_from(tids)
-    for i, a in enumerate(tids):
+    for a in tids:
         sims = sorted(((jaccard(data[a], data[b]), b) for b in tids if b != a), reverse=True)[:KNN]
         for s, b in sims:
             if s > 0:

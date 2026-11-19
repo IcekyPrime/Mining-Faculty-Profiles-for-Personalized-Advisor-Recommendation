@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """解析并清洗计算机学院导师名单，输出 data/raw/cs_names.json（去重保序）。"""
-import json, os, re
+import json
+import os
 
 RAW = """
 臧斌宇

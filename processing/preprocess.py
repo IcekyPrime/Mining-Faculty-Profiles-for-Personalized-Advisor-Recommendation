@@ -1,5 +1,9 @@
 """处理层 · 预处理：清洗、论文年份/作者抽取、中英文姓名索引、合作网络构建。"""
-import sqlite3, re, json, os
+import json
+import os
+import re
+import sqlite3
+
 from pypinyin import lazy_pinyin
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -7,7 +11,9 @@ DB = os.path.join(ROOT, 'data', 'db', 'mentor.db')
 EXP = os.path.join(ROOT, 'data', 'exports')
 os.makedirs(EXP, exist_ok=True)
 
-RE_YEAR = re.compile(r'(19|20)\d{2}')
+RE_YEAR = re.compile(r'\b(?:19|20)\d{2}\b')
+MIN_YEAR = 1950
+MAX_YEAR = 2027
 
 
 def pinyin_forms(name):
@@ -61,16 +67,22 @@ def extract_authors(title):
 
 
 def extract_year(title):
-    m = RE_YEAR.findall(title or '')
-    if m:
-        return int(m[-1])
-    return None
+    """取标题/引用串中最后一个合理的四位年份。
+
+    论文引用串里靠前的四位数常是卷号/页码，出版年一般在末尾；
+    因此收集全部候选后取最后一个落在 1950–2027 区间的值。
+    """
+    candidates = []
+    for match in RE_YEAR.finditer(title or ''):
+        year = int(match.group(0))
+        if MIN_YEAR <= year <= MAX_YEAR:
+            candidates.append(year)
+    return candidates[-1] if candidates else None
 
 
 def build_collab_graph(conn, pinyin_index):
     """基于 CS 论文作者列表构建合作网络（仅匹配到本库教师的边）。"""
     edges = {}
-    missing = 0
     rows = conn.execute("""SELECT p.teacher_id, p.title FROM papers p
                            JOIN teachers t ON p.teacher_id=t.id WHERE t.college='计算机学院'""").fetchall()
     for tid, title in rows:
@@ -80,8 +92,7 @@ def build_collab_graph(conn, pinyin_index):
             ids = pinyin_index.get(norm(a))
             if ids:
                 matched.update(ids)
-        if tid in matched:
-            matched.remove(tid)
+        matched.discard(tid)
         for other in matched:
             a, b = (tid, other) if tid < other else (other, tid)
             edges[(a, b)] = edges.get((a, b), 0) + 1
@@ -94,15 +105,21 @@ def main():
     index = build_pinyin_index(conn)
     print(f'  拼音索引覆盖 {len(index)} 个姓名形式')
 
-    print('抽取论文年份 ...')
+    print('抽取/修复论文年份 ...')
     n_year = 0
-    for pid, title in conn.execute("SELECT id, title FROM papers WHERE year IS NULL").fetchall():
+    # 修复空值、旧正则截断出的 19/20、以及超出 1950–2027 的异常年份；
+    # 正常四位年份（Semantic Scholar 给出的）保持不变，找不到年份时置空。
+    rows = conn.execute(
+        "SELECT id, title, year FROM papers WHERE year IS NULL OR year < ? "
+        "OR year > ?", (MIN_YEAR, MAX_YEAR)
+    ).fetchall()
+    for pid, title, old in rows:
         y = extract_year(title)
-        if y:
+        if y != old:
             conn.execute("UPDATE papers SET year=? WHERE id=?", (y, pid))
             n_year += 1
     conn.commit()
-    print(f'  补齐年份 {n_year} 篇')
+    print(f'  修复/清理年份 {n_year} 篇')
 
     print('构建合作网络 ...')
     edges = build_collab_graph(conn, index)
@@ -112,9 +129,10 @@ def main():
     with open(os.path.join(EXP, 'pinyin_index.json'), 'w', encoding='utf-8') as f:
         json.dump({k: sorted(v) for k, v in index.items()}, f, ensure_ascii=False)
     with open(os.path.join(EXP, 'collab_edges.csv'), 'w', encoding='utf-8') as f:
-        f.write('src,dst,weight\n')
-        for (a, b), w in sorted(edges.items(), key=lambda x: -x[1]):
-            f.write(f'{a},{b},{w}\n')
+        lines = ['src,dst,weight\n']
+        lines.extend(f'{a},{b},{w}\n'
+                     for (a, b), w in sorted(edges.items(), key=lambda x: -x[1]))
+        f.writelines(lines)
     print(f'中间结果已写入 {EXP}')
     conn.close()
 

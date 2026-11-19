@@ -1,0 +1,13 @@
+# 运行时 + 处理层 + 采集层依赖（Python >= 3.10）
+# 桌面壳（pywebview）按需安装：pip install ".[desktop]"
+flask>=3.0
+numpy>=1.24
+pandas>=2.0
+scikit-learn>=1.3
+networkx>=3.0
+mlxtend>=0.22
+jieba>=0.42
+pypinyin>=0.50
+requests>=2.31
+beautifulsoup4>=4.12
+lxml>=5.0

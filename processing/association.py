@@ -1,5 +1,8 @@
 """处理层 · 关联规则：以规范研究方向为项集，挖掘研究方向共现规则（Apriori）。"""
-import sqlite3, json, os
+import json
+import os
+import sqlite3
+
 import pandas as pd
 from mlxtend.frequent_patterns import apriori, association_rules
 

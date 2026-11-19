@@ -1,0 +1,29 @@
+{
+  "source": "D:\\homework\\data mining\\大作业\\导师信息补录_258-515_第四十轮\\mentor-整合版.db",
+  "target": "D:\\homework\\data mining\\大作业\\Mining-Faculty-Profiles-for-Personalized-Advisor-Recommendation-副本\\data\\db\\mentor.db",
+  "started_at": "2026-11-16 22:37:14",
+  "backup": "D:\\homework\\data mining\\大作业\\Mining-Faculty-Profiles-for-Personalized-Advisor-Recommendation-副本\\data\\db\\backup\\mentor_before_merge_20261116_223714.db",
+  "honors_normalized": 332,
+  "h_index_zero_to_null": 7,
+  "papers_year_fixed": 7308,
+  "papers_year_cleared": 3667,
+  "papers_deduped": 564,
+  "dropped_column": "teachers.teaching_score",
+  "teachers": 773,
+  "papers": 13088,
+  "courses": 1663,
+  "coverage": {
+    "research_directions": 760,
+    "bio": 609,
+    "honors": 495,
+    "email": 765,
+    "institute": 581,
+    "personal_homepage": 531,
+    "h_index": 734,
+    "citation_count": 528,
+    "paper_count": 501
+  },
+  "papers_year_coverage": 9908,
+  "papers_citation_coverage": 2398,
+  "finished_at": "2026-11-16 22:37:15"
+}
