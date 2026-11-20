@@ -1,4 +1,7 @@
-"""处理层 · 综合评分：融合学术产出、引用影响、荣誉与教学口碑，输出可解释的导师能力分。"""
+"""处理层 · 综合评分：融合学术产出、引用影响、荣誉与教学口碑，输出可解释的导师能力分。
+
+无课程评分的教师使用全库导师教学评分均值填充，并在 teaching_imputed 中标记。
+"""
 import sqlite3, json, os
 import numpy as np
 
@@ -30,6 +33,8 @@ def main():
         conn.execute("ALTER TABLE processing ADD COLUMN teaching_score REAL")
     if 'teaching_count' not in cols:
         conn.execute("ALTER TABLE processing ADD COLUMN teaching_count INTEGER")
+    if 'teaching_imputed' not in cols:
+        conn.execute("ALTER TABLE processing ADD COLUMN teaching_imputed INTEGER DEFAULT 0")
     conn.commit()
     rows = conn.execute("""SELECT id, h_index, citation_count, paper_count, honors, title FROM teachers""").fetchall()
     print(f'评分对象 {len(rows)} 人')
@@ -67,20 +72,30 @@ def main():
         ws = r['ws'] or 0.0
         teaching_count.append(wc)
         teaching_score.append((ws / wc) if wc > 0 else None)
-    rating_vals = [x if x is not None else 0.0 for x in teaching_score]
-    rating_norm = normalize(rating_vals)
 
-    # 综合分 = 学术产出 0.25 + 引用影响 0.25 + 荣誉 0.25 + 教学 0.25（可解释）
-    W = (0.25, 0.25, 0.25, 0.25)
+    # 无评分的教师用全库导师教学评分均值填充，并标记来源
+    valid_teach = [x for x in teaching_score if x is not None]
+    teach_mean = sum(valid_teach) / len(valid_teach) if valid_teach else 0.0
+    teaching_imputed = [0 if x is not None else 1 for x in teaching_score]
+    teaching_score = [x if x is not None else teach_mean for x in teaching_score]
+    rating_norm = normalize(teaching_score)
+    print(f'  教学评分实测 {len(valid_teach)} 人，均值 {teach_mean:.4f}，'
+          f'填充 {sum(teaching_imputed)} 人')
+
+    # 综合分 = 论文 0.10 + 引用 0.20 + 荣誉 0.35 + 教学 0.25（可解释）
+    W = (0.10, 0.20, 0.35, 0.25)
     scores = W[0]*papers + W[1]*cites + W[2]*honor_norm + W[3]*rating_norm
     scores = np.round(scores * 100, 1)
 
-    for rid, s, ts, tc in zip(ids, scores, teaching_score, teaching_count):
+    for rid, s, ts, tc, ti in zip(ids, scores, teaching_score, teaching_count,
+                                  teaching_imputed):
         conn.execute(
-            "INSERT INTO processing(teacher_id, score, teaching_score, teaching_count) VALUES(?,?,?,?) "
+            "INSERT INTO processing(teacher_id, score, teaching_score, teaching_count, "
+            "teaching_imputed) VALUES(?,?,?,?,?) "
             "ON CONFLICT(teacher_id) DO UPDATE SET score=excluded.score, "
-            "teaching_score=excluded.teaching_score, teaching_count=excluded.teaching_count",
-            (rid, float(s), ts, tc))
+            "teaching_score=excluded.teaching_score, teaching_count=excluded.teaching_count, "
+            "teaching_imputed=excluded.teaching_imputed",
+            (rid, float(s), ts, tc, ti))
     conn.commit()
 
     name_map = {r['id']: r['name'] for r in conn.execute("SELECT id, name FROM teachers").fetchall()}

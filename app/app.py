@@ -112,9 +112,11 @@ def build_summary(row, processing):
     t = dict(row)
     keywords = _json(processing["keywords"] if processing else None, [])
     directions = t.get("research_directions") or ""
-    ts = processing.get("teaching_score") if processing else None
+    ts = _to_float(processing.get("teaching_score")) if processing else None
     tc = (processing.get("teaching_count") or 0) if processing else 0
-    rating = {"avg": _to_float(ts), "count": tc}
+    imputed = bool(processing.get("teaching_imputed")) if processing else False
+    # 展示口径：无课程评分的教师教学评分仍为 0；均值仅用于评分计算
+    rating = {"avg": 0.0 if imputed else ts, "count": tc}
     return {
         "id": t["id"],
         "name": t["name"],
@@ -131,6 +133,8 @@ def build_summary(row, processing):
         "paper_count": t.get("paper_count"),
         "honors": _json(t.get("honors"), []),
         "rating": rating,
+        "teaching_used": ts,
+        "teaching_imputed": imputed,
         "score": processing["score"] if processing else None,
     }
 
@@ -265,6 +269,95 @@ def api_search():
     })
 
 
+# ---------------------------------------------------------------- 评分构成
+# 与 processing/score.py 保持一致的口径
+HONOR_W = {
+    "院士": 5.0, "杰青": 4.0, "长江": 3.5, "万人计划": 3.5, "优青": 3.0,
+    "国家级高层次人才": 3.0, "海外高层次": 3.0, "国家级青年人才": 2.5,
+    "IEEE Fellow": 2.5, "Fellow": 2.0, "ACM Fellow": 2.5, "CCF Fellow": 2.0,
+    "博导": 1.0, "国家级人才": 3.0, "青年长江": 3.0,
+}
+SCORE_W = [
+    ("paper", 0.10),
+    ("citation", 0.20),
+    ("honor", 0.35),
+    ("teaching", 0.25),
+]
+
+
+def _percentile(sorted_vals, q):
+    """线性插值分位数，与 numpy.percentile 默认口径接近。"""
+    n = len(sorted_vals)
+    if n == 0:
+        return 0.0
+    if n == 1:
+        return float(sorted_vals[0])
+    pos = q * (n - 1)
+    lo = int(pos)
+    hi = min(lo + 1, n - 1)
+    frac = pos - lo
+    return sorted_vals[lo] * (1 - frac) + sorted_vals[hi] * frac
+
+
+def _norm_p5_95(vals, v):
+    if not vals:
+        return 0.0
+    s = sorted(vals)
+    lo, hi = _percentile(s, 0.05), _percentile(s, 0.95)
+    if hi <= lo:
+        return 0.0
+    return max(0.0, min(1.0, (v - lo) / (hi - lo)))
+
+
+def _honor_score(honors, title):
+    s = sum(HONOR_W.get(x, 0) for x in (honors or []))
+    t = title or ""
+    if "院士" in t:
+        s += 5
+    elif "教授" in t and "副" not in t:
+        s += 1.0
+    return s
+
+
+def build_score_parts(conn, item):
+    """返回四项分项：原始值、归一值、权重与贡献分，贡献之和即综合评分。"""
+    papers, cites, honors, teach = [], [], [], []
+    for r in conn.execute("SELECT paper_count, citation_count, honors, title FROM teachers"):
+        papers.append(r["paper_count"] or 0)
+        cites.append(r["citation_count"] or 0)
+        honors.append(_honor_score(_json(r["honors"], []), r["title"]))
+    for r in conn.execute(
+        "SELECT t.id, p.teaching_score FROM teachers t "
+        "LEFT JOIN processing p ON p.teacher_id = t.id"
+    ):
+        teach.append(_to_float(r["teaching_score"], 0) or 0)
+
+    raw = {
+        "paper": item.get("paper_count") or 0,
+        "citation": item.get("citation_count") or 0,
+        "honor": _honor_score(item.get("honors", []), item.get("title")),
+        "teaching": item.get("teaching_used") or 0,
+    }
+    pools = {"paper": papers, "citation": cites, "honor": honors, "teaching": teach}
+    has = {
+        "paper": item.get("paper_count") is not None,
+        "citation": item.get("citation_count") is not None,
+        "honor": True,
+        "teaching": item.get("teaching_used") is not None,
+    }
+
+    parts, total = [], 0.0
+    for key, w in SCORE_W:
+        n = _norm_p5_95(pools[key], raw[key]) if has[key] else 0.0
+        exact = n * w * 100
+        total += exact
+        parts.append({
+            "key": key, "weight": w, "raw": raw[key],
+            "norm": round(n, 3), "contribution": round(exact, 1),
+        })
+    return {"parts": parts, "total": round(total, 1)}
+
+
 @app.route("/api/teacher/<int:tid>")
 def api_teacher(tid):
     conn = get_db()
@@ -276,6 +369,12 @@ def api_teacher(tid):
         processing = dict(p) if p else None
 
         item = build_summary(row, processing)
+
+        # 详情页专用字段
+        item["bio"] = row["bio"] or ""
+        item["email"] = row["email"] or ""
+        item["personal_homepage"] = row["personal_homepage"] or ""
+        item["homepage_url"] = row["homepage_url"] or ""
 
         # 课程
         courses = [
@@ -385,6 +484,8 @@ def api_teacher(tid):
             "教学口碑": percentile(ratings_all, rating_val),
         }
 
+        item["score_parts"] = build_score_parts(conn, item)
+
         return jsonify(item)
     finally:
         conn.close()
@@ -401,6 +502,102 @@ def api_colleges():
             )
         ]
         return jsonify(cols)
+    finally:
+        conn.close()
+
+
+@app.route("/api/insights")
+def api_insights():
+    """概况页数据：学院分布、字段覆盖率、评分分布、聚类、社区与关联规则。"""
+    from collections import Counter
+
+    conn = get_db()
+    try:
+        total = conn.execute("SELECT COUNT(*) FROM teachers").fetchone()[0]
+
+        colleges = [
+            {"name": r["college"], "count": r["n"]}
+            for r in conn.execute(
+                "SELECT college, COUNT(*) AS n FROM teachers GROUP BY college ORDER BY n DESC"
+            )
+        ]
+
+        coverage_fields = [
+            "research_directions", "bio", "honors", "email",
+            "institute", "homepage_url", "h_index", "citation_count", "paper_count",
+        ]
+        coverage = []
+        for f in coverage_fields:
+            n = conn.execute(
+                f"SELECT COUNT(*) FROM teachers WHERE {f} IS NOT NULL AND {f}!='' AND {f}!='[]'"
+            ).fetchone()[0]
+            coverage.append({"field": f, "filled": n, "total": total,
+                             "pct": round(n / total * 100, 1) if total else 0.0})
+
+        bins = [0] * 10
+        for r in conn.execute("SELECT score FROM processing WHERE score IS NOT NULL"):
+            bins[min(int(r["score"] // 10), 9)] += 1
+
+        top = [
+            {"id": r["id"], "name": r["name"], "college": r["college"], "score": r["score"]}
+            for r in conn.execute(
+                "SELECT t.id, t.name, t.college, p.score FROM processing p "
+                "JOIN teachers t ON t.id = p.teacher_id WHERE p.score IS NOT NULL "
+                "ORDER BY p.score DESC LIMIT 10"
+            )
+        ]
+
+        names = {r["id"]: r["name"] for r in conn.execute("SELECT id, name FROM teachers")}
+
+        clusters = {}
+        communities = {}
+        for r in conn.execute(
+            "SELECT teacher_id, cluster, community, keywords FROM processing"
+        ):
+            kws = _json(r["keywords"], [])
+            if r["cluster"] is not None:
+                c = clusters.setdefault(r["cluster"], {"members": [], "kw": Counter()})
+                c["members"].append(r["teacher_id"])
+                c["kw"].update(kws)
+            if r["community"] is not None:
+                c = communities.setdefault(r["community"], {"members": [], "kw": Counter()})
+                c["members"].append(r["teacher_id"])
+                c["kw"].update(kws)
+
+        def pack(group, limit=6):
+            out = []
+            for gid, g in group.items():
+                out.append({
+                    "id": gid,
+                    "size": len(g["members"]),
+                    "keywords": [k for k, _ in g["kw"].most_common(limit)],
+                    "sample": [names.get(t, "") for t in g["members"][:6]],
+                })
+            out.sort(key=lambda x: -x["size"])
+            return out
+
+        rules = []
+        if os.path.exists(os.path.join(BASE, "data", "exports", "association_rules.json")):
+            with open(os.path.join(BASE, "data", "exports", "association_rules.json"),
+                      encoding="utf-8") as f:
+                rules = json.load(f)[:12]
+
+        teach = conn.execute(
+            "SELECT COUNT(teaching_score) FROM processing WHERE teaching_score IS NOT NULL"
+        ).fetchone()[0]
+
+        return jsonify({
+            "total": total,
+            "teaching": {"filled": teach, "total": total,
+                         "pct": round(teach / total * 100, 1) if total else 0.0},
+            "colleges": colleges,
+            "coverage": coverage,
+            "histogram": {"bins": [f"{i * 10}-{i * 10 + 10}" for i in range(10)], "counts": bins},
+            "top": top,
+            "clusters": pack(clusters),
+            "communities": pack(communities),
+            "rules": rules,
+        })
     finally:
         conn.close()
 

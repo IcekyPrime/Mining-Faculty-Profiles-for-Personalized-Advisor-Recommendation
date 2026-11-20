@@ -1,10 +1,8 @@
 # Python
 __pycache__/
 *.py[cod]
+*.pyc
 *.egg-info/
-.pyc
-
-# 虚拟环境
 .venv/
 venv/
 env/
@@ -13,17 +11,25 @@ env/
 build/
 dist/
 *.spec
+*.exe
+*.apk
 
-# 爬取缓存（体积大，可用 run_pipeline.py 重新生成）
+# 爬取缓存
 data/raw/
 
-# 中间过程文件
+# 数据库备份与中间文件
+data/db/mentor_before_*.db
 data/deleted_phase*.csv
 data/sparse_teachers.csv
 
-# 本地配置
+# 本地配置与账号
 .env
 .env.*
-
-# 本地任务说明
 Instruction.md
+
+# 移动端构建产物
+mobile/dist/
+mobile/android/build/
+mobile/android/debug.keystore
+mobile/android/res/raw/
+mobile/preview*.png

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f6f2e9">
+  <title>交我导</title>
+  <link rel="icon" href="img/icon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="mobile.css">
+  <script>
+    /* 在样式生效前恢复主题，避免刷新后闪回浅色 */
+    try {
+      var saved = localStorage.getItem("theme");
+      if (saved === "dark" || saved === "light") {
+        document.documentElement.dataset.theme = saved;
+      }
+    } catch (e) { /* 忽略 */ }
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#" id="brand-home">
+        <img class="brand-mark" src="img/icon.png" alt="">
+        <span class="brand-text">
+          <span class="brand-name" data-i18n="brand.name">交我导</span>
+          <span class="brand-sub" data-i18n="brand.sub">ADVISOR FINDER</span>
+        </span>
+      </a>
+      <nav class="topnav">
+        <button id="settings-btn" class="nav-btn" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="3.2"></circle>
+            <path d="M12 3.5v2.4M12 18.1v2.4M3.5 12h2.4M18.1 12h2.4M6 6l1.7 1.7M16.3 16.3l1.7 1.7M18 6l-1.7 1.7M7.7 16.3l-1.7 1.7"></path>
+          </svg>
+          <span data-i18n="nav.settings">设置</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section id="view-search" class="view">
+      <nav class="view-tabs" role="tablist">
+        <button class="view-tab active" data-view="search" type="button">
+          <span data-i18n="tabs.search">查询</span><em data-i18n="tabs.sub.search">SEARCH</em>
+        </button>
+        <button class="view-tab" data-view="directory" type="button">
+          <span data-i18n="tabs.directory">导师名录</span><em data-i18n="tabs.sub.directory">DIRECTORY</em>
+        </button>
+        <button class="view-tab" data-view="overview" type="button">
+          <span data-i18n="tabs.overview">数据概况</span><em data-i18n="tabs.sub.overview">OVERVIEW</em>
+        </button>
+      </nav>
+
+      <section class="hero" data-pane="search">
+        <div class="hero-copy">
+          <h1 class="hero-title">
+            <span data-i18n="hero.title1">找到适合你的</span><br>
+            <span class="accent" data-i18n="hero.title2">那位导师</span>
+          </h1>
+        </div>
+        <aside class="hero-panel">
+          <div class="panel-top">
+            <span class="panel-kicker" data-i18n="hero.panel">MATCHING SIGNALS</span>
+            <span class="panel-dot"></span>
+          </div>
+          <div class="signal">
+            <div class="signal-head"><span data-i18n="hero.signal.direction">研究方向</span><b id="signal-direction">0</b></div>
+            <div class="signal-track"><i id="bar-direction" style="width:0%"></i></div>
+          </div>
+          <div class="signal">
+            <div class="signal-head"><span data-i18n="hero.signal.academic">学术指标</span><b id="signal-academic">0</b></div>
+            <div class="signal-track"><i id="bar-academic" style="width:0%"></i></div>
+          </div>
+          <div class="signal">
+            <div class="signal-head"><span data-i18n="hero.signal.teaching">教学口碑</span><b id="signal-teaching">0</b></div>
+            <div class="signal-track"><i id="bar-teaching" style="width:0%"></i></div>
+          </div>
+          <div class="panel-foot"><span id="panel-total">0</span> <span data-i18n="hero.panelFoot">份公开教师档案</span></div>
+        </aside>
+      </section>
+
+      <section class="search-panel" data-pane="search">
+        <div class="query-chips" id="query-chips">
+          <span class="query-chips-label" data-i18n="chips.label">常用检索</span>
+          <div class="query-chip-list">
+            <button class="query-chip" data-q="人工智能" data-i18n="chip.ai" type="button">人工智能</button>
+            <button class="query-chip" data-q="芯片" data-i18n="chip.chip" type="button">芯片</button>
+            <button class="query-chip" data-q="机器人" data-i18n="chip.robot" type="button">机器人</button>
+            <button class="query-chip" data-q="计算机视觉" data-i18n="chip.cv" type="button">计算机视觉</button>
+            <button class="query-chip" data-q="电力系统" data-i18n="chip.power" type="button">电力系统</button>
+            <button class="query-chip" data-q="操作系统" data-i18n="chip.os" type="button">操作系统</button>
+          </div>
+        </div>
+
+        <form id="search-form" class="search-bar" role="search">
+          <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="M16.5 16.5L21 21"></path>
+          </svg>
+          <input id="search-input" class="search-input" type="search" autocomplete="off"
+                 placeholder="输入姓名、研究方向或关键词" data-i18n-placeholder="search.placeholder">
+          <button id="clear-btn" class="clear-btn hidden" type="button" data-i18n="search.clear">清除</button>
+          <button class="btn btn-primary" type="submit" data-i18n="search.button">搜索</button>
+        </form>
+
+        <div class="filters">
+          <div id="college-pills" class="college-pills"></div>
+          <div class="sort-wrap">
+            <div id="sort-group" class="sort-group">
+              <button class="sort-btn active" data-sort="score" type="button" data-i18n="sort.score">综合评分</button>
+              <button class="sort-btn" data-sort="academic" type="button" data-i18n="sort.academic">学术能力</button>
+              <button class="sort-btn" data-sort="teaching" type="button" data-i18n="sort.teaching">教学口碑</button>
+              <button class="sort-btn" data-sort="relevance" type="button" data-i18n="sort.relevance">相关度</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats" id="stats" data-pane="directory"></section>
+
+      <section id="results" class="results" data-pane="directory">
+        <div class="results-head">
+          <div>
+            <span class="section-kicker" data-i18n="dir.kicker">DIRECTORY</span>
+            <h2 class="results-title" data-i18n="dir.title">导师名录</h2>
+          </div>
+          <div class="results-tools">
+            <button id="edit-query" class="ghost-link" type="button" data-i18n="dir.editQuery">修改检索条件</button>
+            <span id="results-count" class="results-count"></span>
+          </div>
+        </div>
+        <div id="results-list" class="results-list"></div>
+        <div class="pagination" id="pagination">
+          <button id="load-more" class="btn btn-ghost" type="button" data-i18n="dir.loadMore">加载更多</button>
+        </div>
+        <div id="empty" class="empty hidden">
+          <p class="empty-title" data-i18n="dir.empty.title">没有找到匹配的教师</p>
+          <p class="empty-sub" data-i18n="dir.empty.sub">试试更换关键词或学院</p>
+        </div>
+      </section>
+
+      <section id="pane-overview" class="pane hidden" data-pane="overview">
+        <header class="pane-head">
+          <span class="section-kicker" data-i18n="insight.kicker">OVERVIEW</span>
+          <h2 class="pane-title" data-i18n="insight.title">数据概况</h2>
+        </header>
+
+        <div class="insight-grid">
+          <section class="panel">
+            <div class="section-title" data-i18n="insight.colleges">学院分布</div>
+            <div id="insight-colleges" class="chart-box chart-box-sm"></div>
+          </section>
+
+          <section class="panel">
+            <div class="section-title" data-i18n="insight.coverage">字段覆盖率</div>
+            <div id="insight-coverage" class="coverage-table"></div>
+          </section>
+
+          <section class="panel wide">
+            <div class="section-title" data-i18n="insight.scores">综合评分分布</div>
+            <div id="insight-scores" class="chart-box chart-box-sm"></div>
+            <div id="insight-top" class="top-score-list"></div>
+          </section>
+
+          <section class="panel wide">
+            <div class="section-title" data-i18n="insight.clusters">研究方向聚类</div>
+            <div id="insight-clusters" class="cluster-grid"></div>
+          </section>
+
+          <section class="panel">
+            <div class="section-title" data-i18n="insight.communities">合作社区</div>
+            <div id="insight-communities" class="community-list"></div>
+          </section>
+
+          <section class="panel">
+            <div class="section-title" data-i18n="insight.rules">关联规则</div>
+            <div id="insight-rules" class="rule-table"></div>
+          </section>
+        </div>
+      </section>
+    </section>
+
+    <section id="view-detail" class="view hidden">
+      <div id="detail-root" class="detail-root"></div>
+    </section>
+  </main>
+
+  <div id="settings-backdrop" class="settings-backdrop hidden"></div>
+  <aside id="settings-drawer" class="settings-drawer hidden" role="dialog" aria-modal="true">
+    <header class="settings-head">
+      <div>
+        <span class="section-kicker" data-i18n="settings.kicker">SETTINGS</span>
+        <h2 data-i18n="settings.title">设置</h2>
+      </div>
+      <button id="settings-close" class="settings-close" type="button" aria-label="关闭">×</button>
+    </header>
+
+    <div class="settings-body">
+      <section class="settings-group">
+        <h3 class="settings-title" data-i18n="settings.appearance">外观</h3>
+        <div class="seg" role="group">
+          <button class="seg-btn" data-theme-choice="light" type="button" data-i18n="settings.theme.light">浅色</button>
+          <button class="seg-btn" data-theme-choice="dark" type="button" data-i18n="settings.theme.dark">深色</button>
+        </div>
+      </section>
+
+      <section class="settings-group">
+        <h3 class="settings-title" data-i18n="settings.language">语言</h3>
+        <div class="seg" role="group">
+          <button class="seg-btn" data-lang-choice="zh" type="button">中文</button>
+          <button class="seg-btn" data-lang-choice="en" type="button">English</button>
+        </div>
+      </section>
+
+      <section class="settings-group settings-foot">
+        <h3 class="settings-title" data-i18n="settings.links">相关链接</h3>
+        <a class="settings-link" target="_blank" rel="noopener"
+           href="https://github.com/IcekyPrime/Mining-Faculty-Profiles-for-Personalized-Advisor-Recommendation"
+           data-i18n="settings.github">GitHub 项目主页</a>
+        <p class="settings-note" data-i18n="settings.disclaimer">数据来自各学院公开教师主页与公开学术接口，仅供课程学习；评分与排序仅作检索参考，不构成选导师建议。</p>
+      </section>
+    </div>
+  </aside>
+
+  <script src="js/mobile-env.js"></script>
+  <script src="data.js"></script>
+  <script src="js/mobile-api.js"></script>
+  <script src="js/echarts.min.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/mobile-chrome.js"></script>
+</body>
+</html>

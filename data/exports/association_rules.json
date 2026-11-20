@@ -1,86 +1,79 @@
 [
  {
-  "antecedent": "电力电子",
-  "consequent": "新能源",
-  "support": 0.02,
-  "confidence": 0.611,
-  "lift": 9.688
- },
- {
   "antecedent": "新能源",
   "consequent": "电力电子",
+  "support": 0.024,
+  "confidence": 0.4,
+  "lift": 11.257
+ },
+ {
+  "antecedent": "电力电子",
+  "consequent": "新能源",
+  "support": 0.024,
+  "confidence": 0.667,
+  "lift": 11.257
+ },
+ {
+  "antecedent": "芯片设计",
+  "consequent": "集成电路",
   "support": 0.02,
-  "confidence": 0.324,
-  "lift": 9.688
+  "confidence": 0.667,
+  "lift": 6.062
  },
  {
   "antecedent": "新能源",
   "consequent": "电力系统",
-  "support": 0.022,
-  "confidence": 0.353,
-  "lift": 4.424
+  "support": 0.025,
+  "confidence": 0.429,
+  "lift": 5.277
  },
  {
-  "antecedent": "计算机视觉",
-  "consequent": "机器学习",
-  "support": 0.02,
-  "confidence": 0.314,
-  "lift": 2.823
+  "antecedent": "电力系统",
+  "consequent": "新能源",
+  "support": 0.025,
+  "confidence": 0.312,
+  "lift": 5.277
  },
  {
   "antecedent": "网络安全",
   "consequent": "人工智能",
-  "support": 0.026,
-  "confidence": 0.737,
-  "lift": 2.309
+  "support": 0.024,
+  "confidence": 0.667,
+  "lift": 2.153
  },
  {
   "antecedent": "深度学习",
   "consequent": "人工智能",
   "support": 0.022,
-  "confidence": 0.667,
-  "lift": 2.089
- },
- {
-  "antecedent": "信息安全",
-  "consequent": "人工智能",
-  "support": 0.026,
-  "confidence": 0.583,
-  "lift": 1.828
+  "confidence": 0.65,
+  "lift": 2.099
  },
  {
   "antecedent": "计算机视觉",
   "consequent": "人工智能",
-  "support": 0.037,
-  "confidence": 0.571,
-  "lift": 1.791
+  "support": 0.036,
+  "confidence": 0.583,
+  "lift": 1.884
  },
  {
-  "antecedent": "多智能体",
+  "antecedent": "信息安全",
   "consequent": "人工智能",
-  "support": 0.02,
-  "confidence": 0.55,
-  "lift": 1.724
+  "support": 0.024,
+  "confidence": 0.519,
+  "lift": 1.675
  },
  {
   "antecedent": "机器学习",
   "consequent": "人工智能",
-  "support": 0.048,
-  "confidence": 0.433,
-  "lift": 1.358
+  "support": 0.046,
+  "confidence": 0.409,
+  "lift": 1.321
  },
  {
   "antecedent": "机器人",
   "consequent": "人工智能",
-  "support": 0.035,
-  "confidence": 0.333,
-  "lift": 1.045
- },
- {
-  "antecedent": "电力系统",
-  "consequent": "人工智能",
-  "support": 0.026,
-  "confidence": 0.326,
-  "lift": 1.02
+  "support": 0.03,
+  "confidence": 0.31,
+  "lift": 1.002
  }
 ]

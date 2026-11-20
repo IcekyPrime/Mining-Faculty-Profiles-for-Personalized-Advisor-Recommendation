@@ -6,7 +6,7 @@
 
 ```powershell
 cd processing
-python preprocess.py        # 1. 拼音索引 + 论文年份 + 合作网络
+python preprocess.py        # 1. 拼音索引 + 论文年份 + 合作网络（官网 + arXiv + Crossref）
 python keyword_extract.py   # 2. jieba + TF-IDF 关键词
 python similarity_index.py  # 3. MinHash + LSH
 python ranking.py           # 4. PageRank + HITS
@@ -16,11 +16,13 @@ python association.py       # 7. Apriori 关联规则
 python score.py             # 8. 综合评分
 ```
 
+合作网络所需的非计算机学院作者数据由数据层预先生成缓存：`python -m crawler.arxiv_client --batch`、`python -m crawler.crossref_client`。
+
 ## 模块与课程知识点对应
 
 | 模块 | 算法 | 课程知识点 | 产出 |
 |---|---|---|---|
-| `preprocess.py` | 拼音姓名索引、作者抽取 | 数据清洗/集成 | `exports/pinyin_index.json`、`collab_edges.csv`、论文年份 |
+| `preprocess.py` | 拼音姓名索引、作者抽取 | 数据清洗/集成 | `exports/pinyin_index.json`、`collab_edges.csv`、`collab_summary.json`、论文年份 |
 | `keyword_extract.py` | jieba 分词 + TF-IDF | 文本知识抽取、向量化 | `processing.keywords` |
 | `similarity_index.py` | Shingling + MinHash + LSH | 相似检索（similar.pdf） | `exports/similar_pairs.json` |
 | `ranking.py` | PageRank + HITS | 链接分析（link.pdf） | `processing.pagerank/hits_*` |
@@ -31,9 +33,10 @@ python score.py             # 8. 综合评分
 
 ## 处理结果概况
 
-- 关键词抽取：746 人（有研究方向/简介文本）。
-- 合作网络：167 条边、127 位教师（仅计算机学院，因其论文含英文作者列表）。
-- Louvain：12 个研究社区，模块度 0.65。
+- 关键词抽取：773 人（有研究方向/简介文本）。
+- 相似导师：103 对（MinHash + LSH，Jaccard ≥ 0.25）。
+- 合作网络：2347 条边、676 位教师，覆盖五个学院。其中官网论文 167 条边（计算机学院），arXiv 1575 条边（372 位非计算机学院教师、7793 篇论文），Crossref 752 条边（470 位教师、7946 条作品）。
+- Louvain：20 个研究社区，模块度 0.678。
 - K-means：8 个主题簇（大致对应操作系统/集成电路/电力系统/机器人/安全等方向）。
-- 关联规则：12 条（如 {新能源}→{电力电子}、{深度学习}→{人工智能}）。
-- 综合评分：746 人（融合论文产出、引用影响、荣誉、教学口碑，0–100 分）。
+- 关联规则：11 条（如 {新能源}→{电力电子}、{深度学习}→{人工智能}）。
+- 综合评分：773 人（融合论文产出、引用影响、荣誉、教学口碑，0–100 分）；教学评分实测 498 人，其余 275 人用全库均值 3.616 填充。

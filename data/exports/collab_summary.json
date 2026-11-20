@@ -1,0 +1,11 @@
+{
+ "cs_edges": 167,
+ "arxiv_edges": 1575,
+ "crossref_edges": 752,
+ "merged_edges": 2347,
+ "nodes": 676,
+ "arxiv_teachers": 372,
+ "arxiv_papers": 7793,
+ "crossref_teachers": 470,
+ "crossref_papers": 7946
+}

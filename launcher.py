@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""交大导师 · 桌面应用启动器
+"""交我导 · 桌面应用启动器
 
 启动内置 Flask 服务，并打开原生窗口。
 """
@@ -37,7 +37,7 @@ def main():
     wait_until_ready()
 
     webview.create_window(
-        "交大导师 · 导师选择系统",
+        "交我导",
         URL,
         width=1100,
         height=780,

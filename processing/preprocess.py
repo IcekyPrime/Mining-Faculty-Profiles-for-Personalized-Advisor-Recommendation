@@ -75,17 +75,66 @@ def build_collab_graph(conn, pinyin_index):
                            JOIN teachers t ON p.teacher_id=t.id WHERE t.college='计算机学院'""").fetchall()
     for tid, title in rows:
         authors = extract_authors(title)
-        matched = set()
-        for a in authors:
-            ids = pinyin_index.get(norm(a))
-            if ids:
-                matched.update(ids)
-        if tid in matched:
-            matched.remove(tid)
+        groups = [pinyin_index[norm(a)] for a in authors if norm(a) in pinyin_index]
+        matched = set().union(*groups) if groups else set()
+        matched.discard(tid)
         for other in matched:
+            # 同一英文姓名对应多位教师（同音）时无法区分，不连边
+            if any(tid in g and other in g for g in groups):
+                continue
             a, b = (tid, other) if tid < other else (other, tid)
             edges[(a, b)] = edges.get((a, b), 0) + 1
     return edges
+
+
+def build_author_graph(pinyin_index, conn, subdir, papers_key):
+    """基于论文完整作者列表构建合作边（arXiv / Crossref 通用，覆盖非计算机学院）。"""
+    edges = {}
+    dir_ = os.path.join(ROOT, 'data', 'raw', subdir)
+    if not os.path.isdir(dir_):
+        return edges, 0, 0
+    colleges = dict(conn.execute("SELECT id, college FROM teachers").fetchall())
+    teachers, papers_n = 0, 0
+    for fn in sorted(os.listdir(dir_)):
+        if not fn.endswith('.json'):
+            continue
+        try:
+            tid = int(fn[:-5])
+        except ValueError:
+            continue
+        if colleges.get(tid) == '计算机学院':
+            continue
+        try:
+            data = json.load(open(os.path.join(dir_, fn), encoding='utf-8'))
+        except Exception:
+            continue
+        papers = data.get(papers_key) or []
+        if not papers:
+            continue
+        teachers += 1
+        papers_n += len(papers)
+        for p in papers:
+            groups = [pinyin_index[norm(a)] for a in p.get('authors') or []
+                      if norm(a) in pinyin_index]
+            matched = set().union(*groups) if groups else set()
+            matched.discard(tid)
+            for other in matched:
+                # 同一英文姓名对应多位教师（同音）时无法区分，不连边
+                if any(tid in g and other in g for g in groups):
+                    continue
+                edge = (tid, other) if tid < other else (other, tid)
+                edges[edge] = edges.get(edge, 0) + 1
+    return edges, teachers, papers_n
+
+
+def build_arxiv_graph(pinyin_index, conn):
+    """基于 arXiv 论文的完整作者列表构建合作边。"""
+    return build_author_graph(pinyin_index, conn, 'arxiv', 'arxiv_papers')
+
+
+def build_crossref_graph(pinyin_index, conn):
+    """基于 Crossref 作品的完整作者列表构建合作边。"""
+    return build_author_graph(pinyin_index, conn, 'crossref', 'works')
 
 
 def main():
@@ -105,8 +154,20 @@ def main():
     print(f'  补齐年份 {n_year} 篇')
 
     print('构建合作网络 ...')
-    edges = build_collab_graph(conn, index)
-    print(f'  合作边 {len(edges)} 条，涉及 {len({x for e in edges for x in e})} 位教师')
+    cs_edges = build_collab_graph(conn, index)
+    print(f'  官网论文：合作边 {len(cs_edges)} 条，涉及 {len({x for e in cs_edges for x in e})} 位教师')
+
+    arxiv_edges, n_teachers, n_papers = build_arxiv_graph(index, conn)
+    print(f'  arXiv 论文：{n_teachers} 位教师、{n_papers} 篇，合作边 {len(arxiv_edges)} 条')
+
+    crossref_edges, c_teachers, c_papers = build_crossref_graph(index, conn)
+    print(f'  Crossref 作品：{c_teachers} 位教师、{c_papers} 条，合作边 {len(crossref_edges)} 条')
+
+    edges = dict(cs_edges)
+    for source in (arxiv_edges, crossref_edges):
+        for k, w in source.items():
+            edges[k] = edges.get(k, 0) + w
+    print(f'  合并后：合作边 {len(edges)} 条，涉及 {len({x for e in edges for x in e})} 位教师')
 
     # 保存中间结果
     with open(os.path.join(EXP, 'pinyin_index.json'), 'w', encoding='utf-8') as f:
@@ -115,6 +176,18 @@ def main():
         f.write('src,dst,weight\n')
         for (a, b), w in sorted(edges.items(), key=lambda x: -x[1]):
             f.write(f'{a},{b},{w}\n')
+    with open(os.path.join(EXP, 'collab_summary.json'), 'w', encoding='utf-8') as f:
+        json.dump({
+            'cs_edges': len(cs_edges),
+            'arxiv_edges': len(arxiv_edges),
+            'crossref_edges': len(crossref_edges),
+            'merged_edges': len(edges),
+            'nodes': len({x for e in edges for x in e}),
+            'arxiv_teachers': n_teachers,
+            'arxiv_papers': n_papers,
+            'crossref_teachers': c_teachers,
+            'crossref_papers': c_papers,
+        }, f, ensure_ascii=False, indent=1)
     print(f'中间结果已写入 {EXP}')
     conn.close()
 

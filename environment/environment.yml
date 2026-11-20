@@ -3,6 +3,17 @@ channels:
   - defaults
 dependencies:
   - python=3.11
-  - requests
-  - beautifulsoup4
-  - lxml
+  - pip
+  - pip:
+      - flask
+      - pywebview
+      - requests
+      - beautifulsoup4
+      - lxml
+      - jieba
+      - pypinyin
+      - numpy
+      - pandas
+      - scikit-learn
+      - networkx
+      - mlxtend
