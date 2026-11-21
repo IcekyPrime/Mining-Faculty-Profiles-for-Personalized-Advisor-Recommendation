@@ -187,6 +187,42 @@
     </section>
   </main>
 
+  <!-- AI 对话抽屉：停靠底部，拖动上方三角展开，展开后不遮挡顶栏 -->
+  <section id="ai-sheet" class="ai-sheet" data-state="peek" aria-label="AI 导师助手">
+    <header id="ai-handle" class="ai-handle">
+      <button id="ai-tri" class="ai-tri" type="button" aria-label="展开 AI 对话" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14.5l6-6 6 6"></path></svg>
+      </button>
+      <div class="ai-handle-copy">
+        <span class="ai-handle-title" data-i18n="ai.title">AI 导师助手</span>
+      </div>
+      <span id="ai-engine" class="ai-engine" data-i18n="ai.engine.rule">本地规则引擎</span>
+    </header>
+
+    <div class="ai-body">
+      <div id="ai-messages" class="ai-messages" role="log" aria-live="polite"></div>
+      <div class="ai-composer-wrap">
+        <div id="ai-suggest" class="ai-suggest"></div>
+        <form id="ai-form" class="ai-composer">
+          <textarea id="ai-input" class="ai-input" rows="1" maxlength="800"
+                    placeholder="直接说出你的需求，例如：我喜欢数据挖掘，推荐几位导师"
+                    data-i18n-placeholder="ai.placeholder"></textarea>
+          <div class="ai-composer-side">
+            <label class="ai-online">
+              <input id="ai-online" type="checkbox">
+              <span data-i18n="ai.online">联网补充</span>
+            </label>
+            <button id="ai-send" class="btn btn-primary ai-send" type="submit" data-i18n="ai.send">发送</button>
+          </div>
+        </form>
+        <div class="ai-foot">
+          <span data-i18n="ai.disclaimer">回答基于本地教师库与公开学术来源，仅供检索参考。</span>
+          <button id="ai-clear" class="ai-clear" type="button" data-i18n="ai.clear">清空对话</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <div id="settings-backdrop" class="settings-backdrop hidden"></div>
   <aside id="settings-drawer" class="settings-drawer hidden" role="dialog" aria-modal="true">
     <header class="settings-head">
@@ -214,6 +250,33 @@
         </div>
       </section>
 
+      <section class="settings-group">
+        <h3 class="settings-title" data-i18n="settings.ai">AI 服务</h3>
+        <label class="settings-check">
+          <input id="ai-api-enabled" type="checkbox">
+          <span data-i18n="settings.ai.enable">启用 API 回答</span>
+        </label>
+        <label class="settings-field">
+          <span data-i18n="settings.ai.base">站点</span>
+          <input id="ai-api-base" type="url" autocomplete="off" placeholder="https://api.deepseek.com/v1">
+        </label>
+        <label class="settings-field">
+          <span data-i18n="settings.ai.model">模型</span>
+          <input id="ai-api-model" type="text" autocomplete="off" placeholder="deepseek-flash">
+        </label>
+        <label class="settings-field">
+          <span data-i18n="settings.ai.key">API Key</span>
+          <input id="ai-api-key" type="password" autocomplete="new-password" placeholder="sk-...">
+        </label>
+        <div class="settings-actions">
+          <button id="ai-api-save" class="btn btn-primary" type="button" data-i18n="settings.ai.save">保存</button>
+          <button id="ai-api-test" class="btn btn-ghost" type="button" data-i18n="settings.ai.test">测试连接</button>
+        </div>
+        <p id="ai-api-status" class="settings-note"></p>
+        <p class="settings-note" data-i18n="settings.ai.agentNote">启用后由模型先判断意图并调用本地/联网工具，再总结回答。</p>
+        <p class="settings-note" data-i18n="settings.ai.note">Key 只保存在本机用户目录，不写入项目仓库。</p>
+      </section>
+
       <section class="settings-group settings-foot">
         <h3 class="settings-title" data-i18n="settings.links">相关链接</h3>
         <a class="settings-link" target="_blank" rel="noopener"
@@ -227,5 +290,7 @@
   <script src="/static/js/echarts.min.js"></script>
   <script src="/static/js/i18n.js"></script>
   <script src="/static/js/app.js"></script>
+  <script src="/static/js/chat.js"></script>
+  <script src="/static/js/ai-settings.js"></script>
 </body>
 </html>

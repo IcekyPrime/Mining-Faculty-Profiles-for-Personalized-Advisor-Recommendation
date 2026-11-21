@@ -21,6 +21,10 @@ def base_dir():
 
 
 BASE = base_dir()
+# 对话模块位于项目根目录的 assistant/，同时兼容源码运行与打包运行
+_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _ROOT not in sys.path:
+    sys.path.insert(0, _ROOT)
 DB_PATH = os.path.join(BASE, "data", "db", "mentor.db")
 COLLAB_CSV = os.path.join(BASE, "data", "exports", "collab_edges.csv")
 SIMILAR_JSON = os.path.join(BASE, "data", "exports", "similar_pairs.json")
@@ -600,6 +604,11 @@ def api_insights():
         })
     finally:
         conn.close()
+
+
+from assistant.api import register_chat
+
+register_chat(app)
 
 
 if __name__ == "__main__":

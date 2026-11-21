@@ -51,6 +51,7 @@ Copy-Item "$WWW\js\echarts.min.js" "$RAW\web_echarts" -Force
 Copy-Item "$WWW\js\mobile-api.js" "$RAW\web_api" -Force
 Copy-Item "$WWW\js\mobile-chrome.js" "$RAW\web_chrome" -Force
 Copy-Item "$WWW\js\mobile-env.js" "$RAW\web_env" -Force
+Copy-Item "$WWW\js\mobile-ai.js" "$RAW\web_ai" -Force
 Copy-Item "$WWW\img\campus.jpg" "$RAW\web_campus" -Force
 Copy-Item "$WWW\img\icon.png" "$RAW\web_icon" -Force
 
@@ -66,8 +67,8 @@ Write-Host "== 2/6 链接资源与 assets =="
     --java "$BUILD\gen" `
     --min-sdk-version 23 `
     --target-sdk-version 34 `
-    --version-code 10 `
-    --version-name 1.9 `
+    --version-code 16 `
+    --version-name 2.5 `
     -0 html `
     -0 css `
     -0 js `

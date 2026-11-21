@@ -189,6 +189,39 @@
     </section>
   </main>
 
+  <!-- 端侧 AI 对话抽屉：Qwen3-0.6B 通过 wllama 在 WebView 内运行 -->
+  <section id="ai-sheet" class="ai-sheet" data-state="peek" aria-label="AI 导师助手">
+    <header id="ai-handle" class="ai-handle">
+      <button id="ai-tri" class="ai-tri" type="button" aria-label="展开 AI 对话" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14.5l6-6 6 6"></path></svg>
+      </button>
+      <div class="ai-handle-copy">
+        <span class="ai-handle-title" data-i18n="ai.title">AI 导师助手</span>
+      </div>
+      <span id="ai-engine" class="ai-engine" data-i18n="ai.engine.rule">本地规则引擎</span>
+    </header>
+
+    <div class="ai-body">
+      <div id="ai-messages" class="ai-messages" role="log" aria-live="polite"></div>
+      <div class="ai-composer-wrap">
+        <div id="ai-suggest" class="ai-suggest"></div>
+        <form id="ai-form" class="ai-composer">
+          <textarea id="ai-input" class="ai-input" rows="1" maxlength="500"
+                    placeholder="例如：我喜欢数据挖掘，推荐几位导师"
+                    data-i18n-placeholder="ai.placeholder"></textarea>
+          <div class="ai-composer-side">
+            <button id="ai-clear" class="ai-clear" type="button" data-i18n="ai.clear">清空对话</button>
+            <button id="ai-send" class="btn btn-primary ai-send" type="submit"
+                    data-i18n="ai.send">发送</button>
+          </div>
+        </form>
+        <div class="ai-foot">
+          <span data-i18n="ai.disclaimer">回答基于本地教师库与公开学术来源，仅供检索参考。</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <div id="settings-backdrop" class="settings-backdrop hidden"></div>
   <aside id="settings-drawer" class="settings-drawer hidden" role="dialog" aria-modal="true">
     <header class="settings-head">
@@ -216,6 +249,32 @@
         </div>
       </section>
 
+      <section class="settings-group">
+        <h3 class="settings-title" data-i18n="settings.ai">AI 服务</h3>
+        <label class="settings-check">
+          <input id="ai-api-enabled" type="checkbox">
+          <span data-i18n="settings.ai.enable">启用 API 回答</span>
+        </label>
+        <label class="settings-field">
+          <span data-i18n="settings.ai.base">站点</span>
+          <input id="ai-api-base" type="url" autocomplete="off" placeholder="https://api.deepseek.com/v1">
+        </label>
+        <label class="settings-field">
+          <span data-i18n="settings.ai.model">模型</span>
+          <input id="ai-api-model" type="text" autocomplete="off" placeholder="deepseek-flash">
+        </label>
+        <label class="settings-field">
+          <span data-i18n="settings.ai.key">API Key</span>
+          <input id="ai-api-key" type="password" autocomplete="new-password" placeholder="sk-...">
+        </label>
+        <div class="settings-actions">
+          <button id="ai-api-save" class="btn btn-primary" type="button" data-i18n="settings.ai.save">保存</button>
+          <button id="ai-api-test" class="btn btn-ghost" type="button" data-i18n="settings.ai.test">测试连接</button>
+        </div>
+        <p id="ai-api-status" class="settings-note"></p>
+        <p class="settings-note" data-i18n="settings.ai.note">Key 只保存在本机 WebView，不写入项目仓库。</p>
+      </section>
+
       <section class="settings-group settings-foot">
         <h3 class="settings-title" data-i18n="settings.links">相关链接</h3>
         <a class="settings-link" target="_blank" rel="noopener"
@@ -233,5 +292,6 @@
   <script src="js/i18n.js"></script>
   <script src="js/app.js"></script>
   <script src="js/mobile-chrome.js"></script>
+  <script src="js/mobile-ai.js"></script>
 </body>
 </html>

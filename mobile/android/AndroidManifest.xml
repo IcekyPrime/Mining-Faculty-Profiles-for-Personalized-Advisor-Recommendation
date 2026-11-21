@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jiaowodao.app"
-    android:versionCode="10"
-    android:versionName="1.9">
+    android:versionCode="16"
+    android:versionName="2.5">
 
     <!-- target 34：保留系统栏着色，避免 Android 15 强制 edge-to-edge 后内容被状态栏/导航栏遮挡 -->
     <uses-sdk android:minSdkVersion="23" android:targetSdkVersion="34" />

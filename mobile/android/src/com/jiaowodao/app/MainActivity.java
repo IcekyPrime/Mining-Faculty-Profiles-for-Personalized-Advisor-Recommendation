@@ -187,6 +187,7 @@ public class MainActivity extends Activity {
         if ("www/js/mobile-api.js".equals(path)) return R.raw.web_api;
         if ("www/js/mobile-chrome.js".equals(path)) return R.raw.web_chrome;
         if ("www/js/mobile-env.js".equals(path)) return R.raw.web_env;
+        if ("www/js/mobile-ai.js".equals(path)) return R.raw.web_ai;
         if ("www/img/campus.jpg".equals(path)) return R.raw.web_campus;
         if ("www/img/icon.png".equals(path)) return R.raw.web_icon;
         return 0;

@@ -27,8 +27,12 @@
   document.addEventListener("DOMContentLoaded", syncChrome);
   syncChrome();
 
-  /* Android 返回键：详情 -> 列表；设置 -> 关闭；概况/名录 -> 查询。 */
+  /* Android 返回键：AI 抽屉 -> 收起；详情 -> 列表；设置 -> 关闭；概况/名录 -> 查询。 */
   window.mobileBack = function () {
+    if (window.MobileAI && MobileAI.isOpen && MobileAI.isOpen()) {
+      MobileAI.close();
+      return true;
+    }
     var detail = document.getElementById("view-detail");
     if (detail && !detail.classList.contains("hidden")) {
       backToList();

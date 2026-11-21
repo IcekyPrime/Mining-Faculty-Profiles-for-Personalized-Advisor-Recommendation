@@ -128,6 +128,7 @@ function renderDynamic() {
   renderResults();
   renderDetail();
   renderInsights();
+  if (window.ChatUI && ChatUI.refresh) ChatUI.refresh();
 }
 
 /* ---------------------------------------------------------------- 标签页 */

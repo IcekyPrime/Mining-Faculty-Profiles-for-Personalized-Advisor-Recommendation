@@ -128,6 +128,7 @@ function renderDynamic() {
   renderResults();
   renderDetail();
   renderInsights();
+  if (window.MobileAI && MobileAI.refresh) MobileAI.refresh();
 }
 
 /* ---------------------------------------------------------------- 标签页 */

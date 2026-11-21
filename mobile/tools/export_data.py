@@ -10,9 +10,7 @@ import os
 import sys
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # mobile/
-PROJECT = os.path.join(HERE, "Project")
-if not os.path.isdir(PROJECT):
-    PROJECT = os.path.dirname(HERE)
+PROJECT = os.path.dirname(HERE)
 sys.path.insert(0, os.path.join(PROJECT, "app"))
 
 from app import app  # noqa: E402

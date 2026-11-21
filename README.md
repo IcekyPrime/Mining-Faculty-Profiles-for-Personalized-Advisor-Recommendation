@@ -1,98 +1,110 @@
 # Mining Faculty Profiles for Personalized Advisor Recommendation
 
-交我导是一个导师检索与比较工具。项目爬取上海交通大学五个学院的公开教师信息，使用数据挖掘课程中的方法处理数据，提供桌面端应用和 Android 手机端应用。
+Advisor Finder is a course project for the Data Mining course. The project collects public teacher pages from five schools of Shanghai Jiao Tong University, processes the data with data mining methods, and provides a desktop app and an Android app for searching and comparing advisors.
 
 <table>
 <tr>
-<td><img src="docs/system.png" width="620" alt="系统架构"></td>
+<td><img src="docs/system.png" width="620" alt="System architecture"></td>
 <td>
 
-数据层从学院官网、选课社区和学术 API 采集教师、论文、课程与评分数据，写入 SQLite。
+The data layer collects teachers, papers, courses, and course reviews from school websites, the course review site, and public academic APIs, then writes them to SQLite.
 
-处理层完成关键词抽取、相似检索、PageRank 与 HITS、Louvain 社区发现、K-means 聚类、Apriori 关联规则和综合评分。
+The processing layer runs keyword extraction, similarity search, PageRank and HITS, Louvain community detection, K-means clustering, Apriori association rules, and the final score.
 
-应用层使用 Flask 提供接口，前端使用原生 HTML/CSS/JS 和 ECharts。桌面端由 pywebview 打开窗口，手机端使用 Android WebView。
+The application layer serves the data with Flask. The front end uses plain HTML, CSS, JavaScript, and ECharts. The desktop app opens a pywebview window. The mobile app uses an Android WebView and bundled offline data.
 
 </td>
 </tr>
 </table>
 
-## 程序截图
+## Screenshots
 
-桌面端：
-
-<table>
-<tr>
-<td><img src="docs/front.png" alt="桌面端首页"></td>
-<td><img src="docs/result.png" alt="桌面端教师详情"></td>
-</tr>
-</table>
-
-手机端：
+Desktop app:
 
 <table>
 <tr>
-<td><img src="docs/mobile-home.png" width="260" alt="手机端首页"></td>
-<td><img src="docs/mobile-detail.png" width="260" alt="手机端教师详情"></td>
+<td><img src="docs/front.png" alt="Desktop home page"></td>
+<td><img src="docs/result.png" alt="Desktop teacher page"></td>
 </tr>
 </table>
 
-## 功能
+Mobile app:
 
-- 按姓名、拼音、研究方向、关键词检索教师。
-- 按学院筛选。
-- 四种排序：综合评分、学术能力、教学口碑、相关度。
-- 教师详情页包含研究方向、简介、评分构成、联系方式、能力雷达图、合作网络、相似导师、课程和代表论文。
-- 点击研究方向标签可以跳到相关教师。
-- 支持浅色和深色主题，支持中文和英文界面。
-- 手机端使用离线数据，不需要连接网络。
+<table>
+<tr>
+<td><img src="docs/mobile-home.png" width="260" alt="Mobile home page"></td>
+<td><img src="docs/mobile-detail.png" width="260" alt="Mobile teacher page"></td>
+</tr>
+</table>
 
-## 项目结构
+## Features
+
+- Search teachers by name, pinyin, research direction, or keyword.
+- Filter teachers by school.
+- Sort by overall score, academic score, teaching score, or relevance.
+- Teacher page with research directions, bio, score breakdown, contact, radar chart, collaboration network, similar advisors, courses, and papers.
+- Click a research direction tag to open a related search.
+- Light and dark themes, Chinese and English interface.
+- AI assistant drawer on the desktop app and the mobile app. The assistant uses the local database first and can call public academic sources.
+- The mobile app works offline. The AI service is optional.
+
+## Project structure
 
 ```
 Project/
-├─ app/                       应用层
-│  ├─ app.py                  Flask 接口
-│  ├─ templates/index.html    页面
-│  └─ static/                 样式、脚本、图片
-├─ crawler/                   数据层
-│  ├─ config.py               路径与规则
-│  ├─ cs_crawler.py           计算机学院
-│  ├─ college_crawler.py      其余四个学院
-│  ├─ faculty_crawler.py      导师筛选
-│  ├─ course_community.py     选课社区
-│  ├─ openalex_client.py      OpenAlex
-│  ├─ scholar_client.py       Semantic Scholar
-│  ├─ arxiv_client.py         arXiv 作者列表
-│  └─ crossref_client.py      Crossref 作者列表
-├─ processing/                处理层
-│  ├─ preprocess.py           清洗、拼音索引、合作网络
-│  ├─ keyword_extract.py      jieba + TF-IDF
-│  ├─ similarity_index.py     MinHash + LSH
-│  ├─ ranking.py              PageRank + HITS
-│  ├─ community.py            Louvain
-│  ├─ clustering.py           K-means
-│  ├─ association.py          Apriori
-│  └─ score.py                综合评分
-├─ mobile/                    手机端
-│  ├─ android/                Android WebView 工程
-│  ├─ tools/export_data.py    导出离线数据
-│  └─ build_apk.ps1           APK 构建脚本
+├─ app/                        Application layer
+│  ├─ app.py                   Flask routes
+│  ├─ templates/index.html     Page
+│  └─ static/                  CSS, JavaScript, images
+├─ assistant/                  AI assistant
+│  ├─ agent.py                 Intent planning, tool calls, answer
+│  ├─ api.py                   Chat endpoint and fallback
+│  ├─ rag.py                   BM25 index and graph expansion
+│  ├─ retrieval.py             Local teacher search
+│  ├─ nlu.py                   Question parsing
+│  ├─ answer.py                Rule-based answers
+│  ├─ tools.py                 arXiv, Crossref, Acemap, official pages
+│  ├─ llm.py                   OpenAI-compatible client
+│  └─ store.py                 Chat history and settings path
+├─ crawler/                    Data layer
+│  ├─ config.py                Paths and rules
+│  ├─ cs_crawler.py            School of Computer Science
+│  ├─ college_crawler.py       Other four schools
+│  ├─ faculty_crawler.py       Advisor filter
+│  ├─ course_community.py      Course review site
+│  ├─ scholar_client.py        Semantic Scholar
+│  ├─ arxiv_client.py          arXiv author lists
+│  ├─ crossref_client.py       Crossref author lists
+│  └─ openalex_client.py       OpenAlex (legacy cache)
+├─ processing/                 Processing layer
+│  ├─ preprocess.py            Cleaning, pinyin index, co-author network
+│  ├─ keyword_extract.py       jieba + TF-IDF
+│  ├─ similarity_index.py      MinHash + LSH
+│  ├─ ranking.py               PageRank + HITS
+│  ├─ community.py             Louvain
+│  ├─ clustering.py            K-means
+│  ├─ association.py           Apriori
+│  └─ score.py                 Overall score
+├─ mobile/                     Mobile app
+│  ├─ android/                 Android WebView project
+│  ├─ tools/export_data.py     Export offline data
+│  └─ build_apk.ps1            APK build script
+├─ scripts/fix_honors.py       One-time honor year repair
 ├─ data/
-│  ├─ db/mentor.db            SQLite 数据库
-│  └─ exports/                应用需要的导出文件
-├─ docs/                      截图和架构图
-├─ db.py                      数据库表结构
-├─ run_pipeline.py            数据层入口
-├─ launcher.py                桌面端入口
-└─ environment/environment.yml
+│  ├─ db/mentor.db             SQLite database
+│  └─ exports/                 Files used by the app
+├─ docs/                       Screenshots and architecture image
+├─ db.py                       Database schema
+├─ run_pipeline.py             Data layer entry
+├─ launcher.py                 Desktop entry
+└─ environment/environment.yml Python environment
 ```
 
-`data/raw/` 是爬取缓存，`.gitignore` 已忽略，克隆后不需要保留。
+`data/raw/` is the crawl cache. It is ignored by Git and is not needed after cloning.
 
-## 环境
+## Environment
 
-Python 3.11。
+Python 3.11.
 
 ```powershell
 conda create -n dm-mentor python=3.11 -y
@@ -100,37 +112,51 @@ conda activate dm-mentor
 pip install flask pywebview requests beautifulsoup4 lxml jieba pypinyin numpy pandas scikit-learn networkx mlxtend
 ```
 
-## 运行桌面端
+## Run the desktop app
 
-数据库和处理结果已经放在仓库中，可以直接运行。
+The database and processing results are already in the repository.
 
 ```powershell
 python launcher.py
 ```
 
-调试时可以使用浏览器访问：
+For browser debugging:
 
 ```powershell
 python app/app.py
 ```
 
-然后打开 http://127.0.0.1:8765
+Then open http://127.0.0.1:8765
 
-## 重新爬取和处理数据
+## AI assistant
+
+The assistant reads the question, calls local search tools, and then writes the answer. Teacher cards and source links come from the tool results.
+
+Local search uses a BM25 index and a graph step. The index covers research directions, keywords, honors, bio, paper titles, courses, institute, and school. Honors and research directions have higher weight. The graph step adds teachers who are close to the top lexical results through co-author edges and the same institute.
+
+The assistant can also call arXiv, Crossref, Acemap, and public university pages. It does not call OpenAlex.
+
+The API settings are in the settings panel of both apps. The endpoint, model, and key are set by the user.
+
+On Windows, the desktop settings and chat history are stored in `%LOCALAPPDATA%\JiaWoDao`, not in the repository. On other systems the folder is `~/.jiaowodao`. The mobile app stores its settings in the WebView local storage.
+
+When no key is set, the desktop app uses the rule-based answer path.
+
+## Rebuild the data
 
 ```powershell
 python run_pipeline.py
 python run_pipeline.py --limit 50
 ```
 
-选课社区需要账号，从环境变量读取，不要把账号写进代码：
+The course review site needs an account. Read it from environment variables and do not write it into the code.
 
 ```powershell
-$env:COURSE_COMMUNITY_EMAIL = "你的邮箱"
-$env:COURSE_COMMUNITY_PASSWORD = "你的密码"
+$env:COURSE_COMMUNITY_EMAIL = "your email"
+$env:COURSE_COMMUNITY_PASSWORD = "your password"
 ```
 
-处理层按以下顺序运行：
+Run the processing steps in this order:
 
 ```powershell
 cd processing
@@ -144,7 +170,7 @@ python association.py
 python score.py
 ```
 
-## 打包桌面端
+## Build the desktop app
 
 ```powershell
 pyinstaller --noconfirm --onefile --windowed --name 交我导 --icon app.ico `
@@ -157,9 +183,9 @@ pyinstaller --noconfirm --onefile --windowed --name 交我导 --icon app.ico `
   launcher.py
 ```
 
-生成文件为 `dist/交我导.exe`。
+The output is `dist/交我导.exe`.
 
-如果启动时出现 ssl 相关错误，在命令中追加运行环境里的 DLL：
+If the app shows an SSL error at startup, add the DLLs from the conda environment:
 
 ```powershell
   --add-binary "$env:CONDA_PREFIX\Library\bin\libssl-3-x64.dll;." `
@@ -170,89 +196,91 @@ pyinstaller --noconfirm --onefile --windowed --name 交我导 --icon app.ico `
   --add-binary "$env:CONDA_PREFIX\Library\bin\libbz2.dll;."
 ```
 
-## 手机端
+## Mobile app
 
-手机端复用桌面端页面，数据导出到 `data.js` 后放进 Android 工程，由 WebView 离线加载。
+The mobile app reuses the desktop pages. The data is exported to `data.js` and loaded by the WebView without a network connection.
 
-构建前设置 Android SDK 和 JDK：
+Set the Android SDK and JDK before the build:
 
 ```powershell
-$env:ANDROID_SDK_ROOT = "你的 Android SDK 路径"
-$env:JAVA_HOME = "你的 JDK 路径"
+$env:ANDROID_SDK_ROOT = "path to your Android SDK"
+$env:JAVA_HOME = "path to your JDK"
 ```
 
-导出数据并构建 APK：
+Export the data and build the APK:
 
 ```powershell
 python mobile/tools/export_data.py
 powershell -ExecutionPolicy Bypass -File mobile/build_apk.ps1
 ```
 
-生成文件为 `mobile/dist/jiaowodao-mobile.apk`。
+The output is `mobile/dist/jiaowodao-mobile.apk`.
 
-手机端使用 `https://appassets.androidplatform.net/assets/www/` 读取 APK 内的页面，读取顺序为 assets、res/raw、file://。状态栏和导航栏使用页面底色，顶部和底部保留空白。
+The mobile app loads pages from `https://appassets.androidplatform.net/assets/www/`. The lookup order is assets, res/raw, then file://.
 
-## 数据和算法
+## Data and methods
 
-数据来源：
+Data sources:
 
-- 上海交通大学五个学院的公开教师主页。
-- 选课社区的公开课程评价。
-- Semantic Scholar 和 OpenAlex 的论文与引用数据。
-- arXiv 和 Crossref 的论文作者列表。
+- Public teacher pages of five schools of Shanghai Jiao Tong University.
+- Public course reviews from the course review site.
+- Papers and citations from Semantic Scholar and OpenAlex.
+- Author lists from arXiv and Crossref.
 
-当前数据库包含 773 位教师、11093 篇论文、1663 门课程。
+The current database has 773 teachers, 11,093 papers, and 1,663 courses.
 
-| 模块 | 方法 | 课程知识点 |
+| Module | Method | Course topic |
 |---|---|---|
-| preprocess.py | 拼音索引、作者抽取、合作网络 | 数据清洗与集成 |
-| keyword_extract.py | jieba 分词 + TF-IDF | 文本特征抽取 |
-| similarity_index.py | Shingling + MinHash + LSH | 相似项检索 |
-| ranking.py | PageRank + HITS | 链接分析 |
-| community.py | Louvain | 社区发现 |
-| clustering.py | K-means | 聚类 |
-| association.py | Apriori | 关联规则 |
-| score.py | 多指标加权归一化 | 综合评分 |
+| preprocess.py | Pinyin index, author extraction, co-author network | Data cleaning and integration |
+| keyword_extract.py | jieba tokenizer + TF-IDF | Text feature extraction |
+| similarity_index.py | Shingling + MinHash + LSH | Similar item search |
+| ranking.py | PageRank + HITS | Link analysis |
+| community.py | Louvain | Community detection |
+| clustering.py | K-means | Clustering |
+| association.py | Apriori | Association rules |
+| score.py | Weighted normalization | Overall score |
 
-处理结果：
+Processing results:
 
-- 关键词抽取 773 人。
-- 相似导师 103 对。
-- 合作网络 2347 条边、676 位教师。
-- Louvain 20 个社区，模块度 0.678。
-- K-means 8 个主题簇。
-- 关联规则 11 条。
-- 综合评分覆盖 773 人。
+- Keywords for 773 teachers.
+- 103 similar advisor pairs.
+- Co-author network with 2,347 edges and 676 teachers.
+- 20 Louvain communities, modularity 0.678.
+- 8 K-means topic clusters.
+- 11 association rules.
+- Overall score for 773 teachers.
 
-## 综合评分
+## Overall score
 
 ```
-score = (0.10 × 论文 + 0.20 × 引用 + 0.35 × 荣誉 + 0.25 × 教学) × 100
+score = (0.10 * papers + 0.20 * citations + 0.35 * honors + 0.25 * teaching) * 100
 ```
 
-每项使用全库 5% 到 95% 分位归一化：
+Each term uses 5% to 95% quantile normalization over the whole database:
 
 ```
 norm(x) = clip((x - P5) / (P95 - P5), 0, 1)
 ```
 
-| 指标 | 权重 | 说明 |
+| Term | Weight | Input |
 |---|---|---|
-| 论文 | 0.10 | 教师论文数 |
-| 引用 | 0.20 | 教师总引用 |
-| 荣誉 | 0.35 | 人才称号加权和，加职称基准 |
-| 教学 | 0.25 | 课程评分按评分人数加权 |
+| Papers | 0.10 | Number of papers |
+| Citations | 0.20 | Total citations |
+| Honors | 0.35 | Weighted talent titles plus a title baseline |
+| Teaching | 0.25 | Course rating weighted by number of ratings |
 
-有课程评分的教师为 498 人，平均分为 3.616。没有课程评分的 275 位教师使用这个平均分参与评分计算，教学评分仍显示 0，评分构成中的教学贡献用红色显示。
+498 teachers have course ratings. The average is 3.616. The other 275 teachers use this average in the score, while their teaching score still shows 0 and the teaching part of the breakdown is shown in red.
 
-## 已知问题
+## Known issues
 
-- 研究方向缺 1 人，简介缺 14 人。
-- 研究所缺 163 人，个人主页缺 216 人。
-- 引用量缺 23 人，论文数缺 22 人，h 指数缺 5 人。
-- 跨学院合作网络依赖作者姓名匹配，同名作者可能无法区分。
-- 部分教师主页没有公开的获奖年份，荣誉只保留页面能确认的年份。
+- Research directions are missing for 1 teacher, and bio is missing for 14 teachers.
+- Institute is missing for 163 teachers, and a personal homepage is missing for 216 teachers.
+- Citation count is missing for 23 teachers, paper count for 22, and h-index for 5.
+- The cross-school co-author network matches authors by name. Authors with the same name may not be separated.
+- Some teacher pages do not list award years. Honors keep only the years that the page confirms.
 
-## 说明
+## Notes
 
-项目数据来自公开网页和公开学术接口，只用于课程学习。爬取时请控制请求频率。仓库不包含账号、密码、cookie 或访问令牌。Release 页面提供打包好的桌面端和手机端程序。
+The data comes from public web pages and public academic APIs and is used for course learning only. Keep the request rate low when crawling.
+
+The repository contains public faculty profile data, including names and public contact emails from official pages. It does not contain account passwords, cookies, API keys, or access tokens. API keys are entered by the user at runtime and stored outside the repository. The release page provides the packaged desktop app and mobile app.
