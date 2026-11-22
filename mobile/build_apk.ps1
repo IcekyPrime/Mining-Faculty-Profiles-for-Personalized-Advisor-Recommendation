@@ -67,8 +67,8 @@ Write-Host "== 2/6 链接资源与 assets =="
     --java "$BUILD\gen" `
     --min-sdk-version 23 `
     --target-sdk-version 34 `
-    --version-code 16 `
-    --version-name 2.5 `
+    --version-code 17 `
+    --version-name 2.6 `
     -0 html `
     -0 css `
     -0 js `

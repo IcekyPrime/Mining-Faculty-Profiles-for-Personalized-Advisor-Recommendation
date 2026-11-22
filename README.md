@@ -89,7 +89,9 @@ Project/
 │  ├─ android/                 Android WebView project
 │  ├─ tools/export_data.py     Export offline data
 │  └─ build_apk.ps1            APK build script
-├─ scripts/fix_honors.py       One-time honor year repair
+├─ scripts/                    Utility scripts
+│  ├─ fix_honors.py            One-time honor year repair
+│  └─ supplement_papers.py     Fill missing representative papers
 ├─ data/
 │  ├─ db/mentor.db             SQLite database
 │  └─ exports/                 Files used by the app
@@ -227,7 +229,9 @@ Data sources:
 - Papers and citations from Semantic Scholar and OpenAlex.
 - Author lists from arXiv and Crossref.
 
-The current database has 773 teachers, 11,093 papers, and 1,663 courses.
+Representative papers for teachers without paper records are filled by `scripts/supplement_papers.py`. The script reads the teacher name and research directions, searches OpenAlex, and keeps works where the author name matches, the author is affiliated with Shanghai Jiao Tong University, the field fits the school, and the title or topic matches the research directions. Crossref is used as a second source. Each record stores title, year, citation count, venue, DOI, and authors. The script also repairs two-digit years in older records.
+
+The current database has 773 teachers, 13,092 papers, and 1,663 courses. Paper records exist for 721 teachers. The other 52 teachers have no matched paper.
 
 | Module | Method | Course topic |
 |---|---|---|
@@ -278,6 +282,7 @@ norm(x) = clip((x - P5) / (P95 - P5), 0, 1)
 - Citation count is missing for 23 teachers, paper count for 22, and h-index for 5.
 - The cross-school co-author network matches authors by name. Authors with the same name may not be separated.
 - Some teacher pages do not list award years. Honors keep only the years that the page confirms.
+- 52 teachers still have no paper record after the supplement.
 
 ## Notes
 

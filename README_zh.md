@@ -89,7 +89,9 @@ Project/
 │  ├─ android/                 Android WebView 工程
 │  ├─ tools/export_data.py     导出离线数据
 │  └─ build_apk.ps1            APK 构建脚本
-├─ scripts/fix_honors.py       一次性荣誉年份修复
+├─ scripts/                    工具脚本
+│  ├─ fix_honors.py            一次性荣誉年份修复
+│  └─ supplement_papers.py     补充缺失的代表论文
 ├─ data/
 │  ├─ db/mentor.db             SQLite 数据库
 │  └─ exports/                 应用需要的导出文件
@@ -227,7 +229,9 @@ powershell -ExecutionPolicy Bypass -File mobile/build_apk.ps1
 - Semantic Scholar 和 OpenAlex 的论文与引用数据。
 - arXiv 和 Crossref 的作者列表。
 
-当前数据库包含 773 位教师、11093 篇论文、1663 门课程。
+没有论文记录的教师由 `scripts/supplement_papers.py` 补充代表论文。脚本读取教师姓名和研究方向，检索 OpenAlex，保留作者姓名一致、作者单位为上海交通大学、学科属于所在学院、标题或主题与研究方向相符的论文。Crossref 作为第二个来源。每条记录保存标题、年份、引用次数、发表场所、DOI 和作者。脚本同时修复旧记录中的两位年份。
+
+当前数据库包含 773 位教师、13092 篇论文、1663 门课程。721 位教师有论文记录，其余 52 位教师没有匹配到论文。
 
 | 模块 | 方法 | 课程知识点 |
 |---|---|---|
@@ -278,6 +282,7 @@ norm(x) = clip((x - P5) / (P95 - P5), 0, 1)
 - 引用量缺 23 人，论文数缺 22 人，h 指数缺 5 人。
 - 跨学院合作网络依赖作者姓名匹配，同名作者可能无法区分。
 - 部分教师主页没有公开的获奖年份，荣誉只保留页面能确认的年份。
+- 补充后仍有 52 位教师没有论文记录。
 
 ## 说明
 
