@@ -4,7 +4,7 @@ Advisor Finder is a course project for the Data Mining course. The project colle
 
 <table>
 <tr>
-<td><img src="docs/system.png" width="620" alt="System architecture"></td>
+<td><img src="docs/system.png" width="620" alt="System architecture with data, processing, application, and AI assistant layers"></td>
 <td>
 
 The data layer collects teachers, papers, courses, and course reviews from school websites, the course review site, and public academic APIs, then writes them to SQLite.
@@ -12,6 +12,8 @@ The data layer collects teachers, papers, courses, and course reviews from schoo
 The processing layer runs keyword extraction, similarity search, PageRank and HITS, Louvain community detection, K-means clustering, Apriori association rules, and the final score.
 
 The application layer serves the data with Flask. The front end uses plain HTML, CSS, JavaScript, and ECharts. The desktop app opens a pywebview window. The mobile app uses an Android WebView and bundled offline data.
+
+The AI assistant layer adds a chat drawer to both apps. The assistant plans the question, calls local search tools and public academic sources, then writes the answer. Local search uses a BM25 index for lexical RAG and a graph step over co-author and institute links for graph RAG.
 
 </td>
 </tr>

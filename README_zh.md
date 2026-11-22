@@ -4,7 +4,7 @@
 
 <table>
 <tr>
-<td><img src="docs/system.png" width="620" alt="系统架构"></td>
+<td><img src="docs/system.png" width="620" alt="包含数据层、处理层、应用层和 AI 助手层的系统架构"></td>
 <td>
 
 数据层从学院官网、选课社区和公开学术接口采集教师、论文、课程与评价数据，写入 SQLite。
@@ -12,6 +12,8 @@
 处理层完成关键词抽取、相似检索、PageRank 与 HITS、Louvain 社区发现、K-means 聚类、Apriori 关联规则和综合评分。
 
 应用层用 Flask 提供接口。前端使用原生 HTML、CSS、JavaScript 和 ECharts。桌面端由 pywebview 打开窗口。手机端使用 Android WebView 和随包离线数据。
+
+AI 助手层在两个应用中提供对话抽屉。助手先规划问题，调用本地检索工具和公开学术来源，再组织回答。本地检索使用 BM25 索引完成词法 RAG，并通过合作者和研究所关系完成图 RAG。
 
 </td>
 </tr>
