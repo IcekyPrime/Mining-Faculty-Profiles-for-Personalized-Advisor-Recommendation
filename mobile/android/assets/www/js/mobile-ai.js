@@ -82,7 +82,8 @@
   const LOOKUP = ["介绍", "是谁", "邮箱", "主页", "怎么样", "研究方向", "方向是什么",
                   "h指数", "h 指数", "职称", "哪个学院", "学院", "课程", "带哪些课",
                   "招生", "名额", "博士", "干什么", "做什么", "干嘛", "研究什么",
-                  "做什么的", "评价", "profile", "email", "homepage"];
+                  "做什么的", "评价", "profile", "email", "homepage",
+                  "introduce", "who is", "about"];
   const DEPTH = ["深耕", "擅长", "主要研究", "专注", "expert", "focus on"];
   const COLLEGE_SHORT = {
     "计算机学院": ["计算机学院", "计算机系"],
@@ -108,6 +109,16 @@
   const NAMES = TEACHERS.map(function (t) { return t.name; })
     .filter(Boolean)
     .sort(function (a, b) { return b.length - a.length; });
+  const NAME_KEYS = TEACHERS.map(function (t) {
+    const py = String(t.name_pinyin || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+    const parts = py ? py.split(/\s+/) : [];
+    const forms = [];
+    if (parts.length >= 2) {
+      forms.push(parts.join(" "));
+      forms.push(parts.slice().reverse().join(" "));
+    }
+    return { name: t.name, forms: forms };
+  }).filter(function (x) { return x.name && x.forms.length; });
   const COLLEGES = Array.from(new Set(TEACHERS.map(function (t) { return t.college; }).filter(Boolean)));
 
   /* ---------------------------------------------------------------- 工具 */
@@ -147,6 +158,11 @@
   }
 
   /* ---------------------------------------------------------------- 解析 */
+  function asciiTokens(text) {
+    return String(text || "").toLowerCase().replace(/[^a-z0-9]+/g, " ")
+      .trim().split(/\s+/).filter(Boolean);
+  }
+
   function findNames(text) {
     const out = [];
     NAMES.forEach(function (name) {
@@ -154,6 +170,25 @@
       if (text.indexOf(name) >= 0 && !out.some(function (x) { return x.indexOf(name) >= 0; })) {
         out.push(name);
       }
+    });
+    if (out.length) return out.slice(0, 3);
+
+    const tokens = asciiTokens(text);
+    if (tokens.length < 2) return out;
+    NAME_KEYS.forEach(function (item) {
+      if (out.indexOf(item.name) >= 0) return;
+      const hit = item.forms.some(function (form) {
+        const parts = form.split(" ");
+        for (let i = 0; i + parts.length <= tokens.length; i += 1) {
+          let same = true;
+          for (let j = 0; j < parts.length; j += 1) {
+            if (tokens[i + j] !== parts[j]) { same = false; break; }
+          }
+          if (same) return true;
+        }
+        return false;
+      });
+      if (hit) out.push(item.name);
     });
     return out.slice(0, 3);
   }
@@ -232,6 +267,7 @@
     if (intent === "compare" && names.length < 2) {
       names = lastCards().slice(0, 2).map(function (c) { return c.name; });
     }
+    if (intent === "recommend" && names.length && !terms.length) intent = "teacher";
     if (intent === "lab") terms = [];
     return { intent: intent, names: names, terms: terms, college: college, topK: 3, raw: raw };
   }

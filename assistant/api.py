@@ -51,6 +51,21 @@ def _handle_rules(message, lang, forced_online, context):
         retrieval.teacher_names(),
         context,
     )
+    # 中文姓名之外的输入：英文姓名、拼音（正反顺序）在规则模式下也定位到教师
+    if not slots["names"]:
+        found = retrieval.find_teacher_in_text(message)
+        if found:
+            low = message.lower()
+            cue = any(w in low for w in (
+                "introduce", "who is", "profile", "介绍", "是谁", "主页", "邮箱", "简历"
+            ))
+            zh = re.sub(r"[^\u4e00-\u9fff]", "", message)
+            if cue or len(message.strip()) <= 24 or (zh and len(zh) <= len(found["name"]) + 4):
+                slots["names"] = [found["name"]]
+                slots["intent"] = "teacher"
+                slots["terms"] = []
+    if slots["names"] and slots["intent"] in ("recommend", "search") and not slots["terms"]:
+        slots["intent"] = "teacher"
     intent = slots["intent"]
     data = {
         "intent": intent,

@@ -79,6 +79,7 @@ def _plan(question, lang, context):
         "last_college": (context.get("slots") or {}).get("college") or "",
         "last_cards": [c.get("name") for c in context.get("cards") or [] if c.get("name")],
         "force_online": bool(context.get("force_online")),
+        "resolved_teacher": context.get("resolved_teacher") or "",
     }
     ctx = json.dumps(compact, ensure_ascii=False)[:1500]
     system = (
@@ -99,6 +100,8 @@ def _plan(question, lang, context):
         "再推荐几位、还有别的、更多：terms 沿用 context.last_terms，"
         "exclude 填 context.last_cards 的姓名，limit 可设 6。"
         "如果上下文 context.force_online 为 true，优先调用 search_online。"
+        "如果 context.resolved_teacher 非空，且用户是在询问这个人，优先用 get_teacher，"
+        "name 填该中文姓名。用户直接写姓名、拼音或英文姓名时，也用 get_teacher。"
     )
     user = "可用工具：\n%s\n\n上下文：%s\n\n用户问题：%s" % (spec, ctx, question)
     raw = llm.chat([
@@ -367,12 +370,17 @@ def run(question, lang, context):
     if status.get("mode") != "api":
         return None
 
-    plan = _plan(question, lang, context)
+    resolved = retrieval.find_teacher_in_text(question)
+    plan_context = dict(context or {})
+    if resolved:
+        plan_context["resolved_teacher"] = resolved["name"]
+
+    plan = _plan(question, lang, plan_context)
     if not plan:
         return None
 
     intent = str(plan.get("intent") or "chat").strip()
-    calls = _apply_context(question, plan.get("tools") or [], context)
+    calls = _apply_context(question, plan.get("tools") or [], plan_context)
     results = []
     for call in calls:
         try:
@@ -381,6 +389,12 @@ def run(question, lang, context):
             executed = None
         if executed:
             results.append(executed)
+
+    if not results and resolved:
+        executed = _execute({"tool": "get_teacher", "args": {"name": resolved["name"]}})
+        if executed and executed.get("teacher"):
+            results.append(executed)
+            intent = "teacher"
 
     if not results:
         reply = str(plan.get("reply") or "").strip()

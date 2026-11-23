@@ -11,6 +11,7 @@ import os
 import re
 import sqlite3
 import sys
+import unicodedata
 
 from . import nlu
 
@@ -57,7 +58,7 @@ def _to_float(value):
 
 def _load_teachers(conn):
     sql = """
-        SELECT t.id, t.name, t.college, t.title, t.email,
+        SELECT t.id, t.name, t.name_pinyin, t.college, t.title, t.email,
                t.research_directions, t.bio, t.institute, t.honors,
                t.h_index, t.citation_count, t.paper_count,
                t.homepage_url, t.personal_homepage,
@@ -69,7 +70,7 @@ def _load_teachers(conn):
         rows = conn.execute(sql).fetchall()
     except sqlite3.Error:
         rows = conn.execute("""
-            SELECT id, name, college, title, email, research_directions, bio,
+            SELECT id, name, name_pinyin, college, title, email, research_directions, bio,
                    institute, honors, h_index, citation_count, paper_count,
                    homepage_url, personal_homepage
             FROM teachers
@@ -81,6 +82,7 @@ def _load_teachers(conn):
         out.append({
             "id": d.get("id"),
             "name": d.get("name") or "",
+            "name_pinyin": d.get("name_pinyin") or "",
             "college": d.get("college") or "",
             "title": d.get("title") or "",
             "email": d.get("email") or "",
@@ -279,11 +281,60 @@ def search(terms, college=None, limit=5, depth=False):
     return results[:limit]
 
 
-def by_name(name):
-    for t in teachers():
-        if t["name"] == name:
+def _ascii_tokens(text):
+    value = unicodedata.normalize("NFKD", text or "")
+    value = value.encode("ascii", "ignore").decode().lower()
+    value = re.sub(r"[^a-z0-9]+", " ", value)
+    return [x for x in value.split() if x]
+
+
+def _pinyin_forms(teacher):
+    tokens = _ascii_tokens(teacher.get("name_pinyin"))
+    if len(tokens) < 2:
+        return []
+    return [" ".join(tokens), " ".join(reversed(tokens))]
+
+
+def find_teacher_in_text(text):
+    """从中文姓名或英文拼音句子中定位教师。"""
+    raw = str(text or "")
+    for t in sorted(teachers(), key=lambda x: -len(x["name"])):
+        if len(t["name"]) >= 2 and t["name"] in raw:
             return t
+    tokens = _ascii_tokens(raw)
+    if len(tokens) < 2:
+        return None
+    for t in sorted(teachers(), key=lambda x: -len(x.get("name_pinyin") or "")):
+        for form in _pinyin_forms(t):
+            parts = form.split()
+            size = len(parts)
+            for i in range(len(tokens) - size + 1):
+                if tokens[i:i + size] == parts:
+                    return t
     return None
+
+
+def resolve_teacher(name):
+    """接受中文姓名、英文姓名或拼音，正反顺序均可。"""
+    text = str(name or "").strip()
+    if not text:
+        return None
+    for t in teachers():
+        if t["name"] == text:
+            return t
+    tokens = sorted(_ascii_tokens(text))
+    if len(tokens) >= 2:
+        matches = [
+            t for t in teachers()
+            if sorted(_ascii_tokens(t.get("name_pinyin"))) == tokens
+        ]
+        if matches:
+            return sorted(matches, key=lambda x: -(x.get("score") or 0))[0]
+    return find_teacher_in_text(text)
+
+
+def by_name(name):
+    return resolve_teacher(name)
 
 
 def profile(tid):
