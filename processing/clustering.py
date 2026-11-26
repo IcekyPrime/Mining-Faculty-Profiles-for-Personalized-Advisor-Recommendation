@@ -1,14 +1,22 @@
-"""处理层 · 研究方向聚类：TF-IDF 向量 + K-means，将导师聚为若干主题簇。"""
+"""处理层 · 研究方向聚类：TF-IDF 向量 + K-means，轮廓系数自动选择簇数。
+
+K 不再写死为 8：在 4–8 之间用轮廓系数选择，换一批规模/领域不同的数据
+也能得到一个相对合理的 K；上限可用 MENTOR_CLUSTER_MAX 调整。
+"""
 import json
 import os
 import sqlite3
+import sys
 
-from sklearn.cluster import KMeans
 from sklearn.feature_extraction.text import TfidfVectorizer
 from text_utils import clean_text, strip_career, tokenize
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DB = os.path.join(ROOT, 'data', 'db', 'mentor.db')
+sys.path.insert(0, ROOT)
+
+from app.mining import cluster_with_auto_k  # noqa: E402
+
+DB = os.environ.get('MENTOR_DB_PATH') or os.path.join(ROOT, 'data', 'db', 'mentor.db')
 EXP = os.path.join(ROOT, 'data', 'exports')
 MAX_TEXT = 240
 
@@ -31,26 +39,32 @@ def main():
     feat = vec.get_feature_names_out()
     print(f'聚类样本 {len(corpus)} 人，词表 {len(feat)}')
 
-    K = 8
-    km = KMeans(n_clusters=K, random_state=42, n_init=10)
-    labels = km.fit_predict(X)
+    # 轮廓系数在 4–8 簇中自动选择；数据量很小/特征很少时自动收缩范围。
+    k_max = int(os.environ.get("MENTOR_CLUSTER_MAX", "8"))
+    labels, K, silhouette = cluster_with_auto_k(X, k_min=4, k_max=max(2, k_max))
+    print(f'自动选 K={K}，轮廓系数={silhouette:.3f}')
     for tid, lab in zip(tids, labels, strict=True):
         conn.execute("UPDATE processing SET cluster=? WHERE teacher_id=?", (int(lab), tid))
     conn.commit()
 
-    # 每个簇的 top 关键词
-    centers = km.cluster_centers_
+    # 每个簇的 top 关键词：取簇内 TF-IDF 均值最高的词，而不是只看中心向量，
+    # 避免 K-means 中心受长文本影响。
     name_map = {r['id']: r['name'] for r in conn.execute("SELECT id, name FROM teachers").fetchall()}
-    print('\nK-means 聚类结果（8 簇）：')
+    print(f'\nK-means 聚类结果（{K} 簇，轮廓系数 {silhouette:.3f}）：')
     for k in range(K):
-        top = [feat[j] for j in centers[k].argsort()[::-1][:6]]
         members = [tids[i] for i in range(len(tids)) if labels[i] == k]
+        if not members:
+            continue
+        mean = X[[tids.index(t) for t in members]].mean(axis=0).A1
+        top = [feat[j] for j in mean.argsort()[::-1][:6]]
         sample = [name_map.get(t, '?') for t in members[:5]]
         print(f"  簇{k} ({len(members)}人) 关键词: {'/'.join(top)}")
         print(f"       代表: {', '.join(sample)}")
 
     with open(os.path.join(EXP, 'clusters.json'), 'w', encoding='utf-8') as f:
         json.dump({str(t): int(label) for t, label in zip(tids, labels, strict=True)}, f)
+    with open(os.path.join(EXP, 'cluster_meta.json'), 'w', encoding='utf-8') as f:
+        json.dump({"k": K, "silhouette": silhouette, "samples": len(corpus)}, f)
     conn.close()
 
 

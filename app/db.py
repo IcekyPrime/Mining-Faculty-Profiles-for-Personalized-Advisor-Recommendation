@@ -82,12 +82,25 @@ def init_db(path):
 
 
 def db_stamp(path):
-    """(路径, 修改时间, 大小) —— 作为缓存键，库被重写后缓存自动失效。"""
-    try:
-        st = os.stat(path)
-        return (path, st.st_mtime_ns, st.st_size)
-    except OSError:
-        return (path, 0, 0)
+    """(路径, 主库时间/大小, WAL 时间/大小, SHM 时间/大小)。
+
+    前两位保留为主库的 mtime/size，兼容已有把 ``stamp[1]`` 当更新时间
+    的调用；后四位让 WAL 增量写入也能使检索缓存失效。
+    """
+    main_mtime = main_size = wal_mtime = wal_size = shm_mtime = shm_size = 0
+    for suffix in ("", "-wal", "-shm"):
+        candidate = path + suffix
+        try:
+            st = os.stat(candidate)
+        except OSError:
+            continue
+        if suffix == "":
+            main_mtime, main_size = st.st_mtime_ns, st.st_size
+        elif suffix == "-wal":
+            wal_mtime, wal_size = st.st_mtime_ns, st.st_size
+        else:
+            shm_mtime, shm_size = st.st_mtime_ns, st.st_size
+    return (path, main_mtime, main_size, wal_mtime, wal_size, shm_mtime, shm_size)
 
 
 def file_stamp(path):

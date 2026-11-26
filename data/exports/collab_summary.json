@@ -1,0 +1,14 @@
+{
+ "title_edges": 167,
+ "author_edges": 799,
+ "arxiv_edges": 0,
+ "crossref_edges": 0,
+ "merged_edges": 2938,
+ "nodes": 729,
+ "author_teachers": 489,
+ "author_papers": 2012,
+ "arxiv_teachers": 0,
+ "arxiv_papers": 0,
+ "crossref_teachers": 0,
+ "crossref_papers": 0
+}

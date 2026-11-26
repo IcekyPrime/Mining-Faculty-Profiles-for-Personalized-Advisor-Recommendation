@@ -1,0 +1,165 @@
+  <div id="settings-backdrop" class="settings-backdrop hidden"></div>
+  <aside id="settings-drawer" class="settings-drawer hidden" role="dialog" aria-modal="true"
+         aria-labelledby="settings-title" aria-hidden="true">
+    <header class="settings-head">
+      <div>
+        <span class="section-kicker">SETTINGS</span>
+        <h2 id="settings-title">设置</h2>
+      </div>
+      <button id="settings-close" class="settings-close" type="button" aria-label="关闭设置">×</button>
+    </header>
+
+    <div class="settings-body">
+      <section class="settings-group ai-settings" id="ai-settings">
+        <div class="settings-title-row">
+          <h3 class="settings-title">AI 模型与联网检索</h3>
+          <span id="ai-config-badge" class="ai-config-badge">未配置</span>
+        </div>
+        <p class="settings-note">支持 OpenAI 兼容接口。密钥只保存在本机 <code>data/ai_config.json</code>，不会返回给浏览器；模型用于理解检索需求、抽取网页信息与生成推荐理由。</p>
+
+        <div class="ai-config-grid">
+          <label class="ai-field ai-span-2">
+            <span>API Base URL</span>
+            <input id="ai-api-base" type="url" autocomplete="off"
+                   placeholder="https://api.openai.com/v1">
+          </label>
+          <label class="ai-field">
+            <span>模型名称</span>
+            <input id="ai-model" type="text" autocomplete="off"
+                   placeholder="gpt-4o-mini / deepseek-chat">
+          </label>
+          <label class="ai-field">
+            <span>模型 API Key</span>
+            <input id="ai-api-key" type="password" autocomplete="new-password"
+                   placeholder="留空表示不修改">
+          </label>
+          <label class="ai-field">
+            <span>联网搜索</span>
+            <select id="ai-web-provider">
+              <option value="tavily">Tavily</option>
+              <option value="serper">Serper（Google）</option>
+              <option value="none">关闭联网</option>
+            </select>
+          </label>
+          <label class="ai-field">
+            <span>搜索 API Key</span>
+            <input id="ai-search-key" type="password" autocomplete="new-password"
+                   placeholder="留空表示不修改">
+          </label>
+          <label class="ai-field ai-field-narrow">
+            <span>每次网页结果数</span>
+            <input id="ai-search-max" type="number" min="1" max="10" step="1" value="5">
+          </label>
+        </div>
+
+        <div class="ai-switches">
+          <label><input id="ai-enabled" type="checkbox"> 启用 AI 查询</label>
+          <label><input id="ai-web-enabled" type="checkbox"> 启用联网补全</label>
+          <span id="ai-config-summary" class="ai-config-summary"></span>
+          <span id="ai-dirty" class="ai-dirty hidden" role="status">有未保存修改</span>
+        </div>
+
+        <div class="ai-config-actions">
+          <button id="ai-save" class="btn btn-primary" type="button">保存配置</button>
+          <button id="ai-test" class="btn btn-ghost" type="button">测试连接</button>
+          <span id="ai-config-status" class="ai-config-status" role="status" aria-live="polite"></span>
+        </div>
+        <p class="settings-note">联网补全默认只勾选原来为空的字段；已有字段必须手动确认，应用前会自动备份数据库并重跑处理层。</p>
+      </section>
+
+      <section class="settings-group">
+        <h3 class="settings-title">外观</h3>
+        <p class="settings-note">主题会同步顶栏按钮、导师档案图表与数据概况图表。</p>
+        <div class="theme-seg" role="group" aria-label="主题">
+          <button class="theme-choice" data-theme-choice="light" type="button" data-i18n="settings.theme.light">浅色</button>
+          <button class="theme-choice" data-theme-choice="dark" type="button" data-i18n="settings.theme.dark">深色</button>
+        </div>
+      </section>
+
+      <section class="settings-group">
+        <h3 class="settings-title" data-i18n="settings.language">语言 / Language</h3>
+        <p class="settings-note" data-i18n="settings.languageHint">切换后页面会重新加载，检索条件仍保留在 URL 中。</p>
+        <div class="theme-seg" role="group" aria-label="语言">
+          <button class="theme-choice" data-lang-choice="zh" type="button">中文</button>
+          <button class="theme-choice" data-lang-choice="en" type="button">English</button>
+        </div>
+      </section>
+
+      <section class="settings-group">
+        <h3 class="settings-title" data-i18n="nav.workspace">数据工坊</h3>
+        <p class="settings-note">手动导入 CSV / JSON / Excel，先规则清洗与质量检查，再按教师、论文、课程分类入库；可选 API 或本地 Qwen 复核。</p>
+        {% if current_page == "workspace" %}
+        <span class="btn btn-ghost settings-current-page" aria-current="page">当前页面</span>
+        {% else %}
+        <a class="btn btn-ghost" href="/workspace" data-i18n="nav.workspace">数据工坊</a>
+        {% endif %}
+      </section>
+
+      <section class="settings-group">
+        <h3 class="settings-title">移动端</h3>
+        <p class="settings-note">v2.7 的 Android WebView 离线版已随仓库提供，可先在这里预览同一套名录与档案界面。</p>
+        <a class="btn btn-ghost" href="/mobile/" target="_blank" rel="noopener">打开移动端预览</a>
+      </section>
+
+      <section class="settings-group">
+        <h3 class="settings-title">快捷键</h3>
+        <p class="settings-note"><kbd>Ctrl / Cmd + K</kbd> 打开命令面板；<kbd>/</kbd> 聚焦搜索框；<kbd>Esc</kbd> 关闭弹层。</p>
+      </section>
+
+      <section class="settings-group" id="about-settings">
+        <h3 class="settings-title">关于项目</h3>
+        <p class="settings-note">AI3602 数据挖掘课程项目：采集公开信息 → 处理层建模 → Web 应用呈现。</p>
+
+        <div class="about-grid">
+          <section class="panel">
+            <div class="section-title">数据从哪来</div>
+            <ul class="about-list">
+              <li>五个学院官网的公开教师主页：职称、研究所、邮箱、研究方向、荣誉、主页链接</li>
+              <li>选课社区的课程评价：课程名、课程号、评分与评分人数、开课学期</li>
+              <li>Semantic Scholar / AMiner 等学术数据库：h 指数、引用量、论文数、代表论文</li>
+            </ul>
+            <p class="chart-note">只采公开信息，控制请求频率；数据仅用于课程学习。</p>
+          </section>
+
+          <section class="panel">
+            <div class="section-title">两个评分并存</div>
+            <ul class="about-list">
+              <li><b>原始 v1</b>：论文 0.10 / 引用 0.20 / 荣誉 0.35 / 教学 0.25，5%–95% 截断；论文或引用缺失按 0 计，教学缺失用全库均值填充</li>
+              <li><b>改进 v2</b>：未知不参与计算、权重按可用维度归一、分位数排名、向中位数收缩</li>
+              <li>档案页会同时给出两个分数与五维分项，方便对照算法差异</li>
+            </ul>
+          </section>
+
+          <section class="panel">
+            <div class="section-title">处理层用了什么</div>
+            <table class="about-table">
+              <tbody>
+                <tr><td>文本</td><td>jieba 分词 + TF-IDF，领域词表与停用词统一口径</td></tr>
+                <tr><td>相似</td><td>Shingling + MinHash + LSH，Jaccard ≥ 0.25</td></tr>
+                <tr><td>链接分析</td><td>PageRank / HITS（合作网络）</td></tr>
+                <tr><td>社区发现</td><td>关键词 kNN 相似图 + Louvain，模块度 ≈ 0.683，23 个研究相似社区</td></tr>
+                <tr><td>聚类</td><td>SVD + K-means，轮廓系数自动选 K（当前 K=8，仅使用研究方向）</td></tr>
+                <tr><td>关联规则</td><td>Apriori，min_support 0.02 / min_conf 0.3</td></tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section class="panel">
+            <div class="section-title">已知限制</div>
+            <ul class="about-list">
+              <li>合作网络覆盖 729 人：其余教师论文只有作者缩写或无法实体对齐，合作边不代表完整合作关系</li>
+              <li>引用量 722 人、论文数 752 人有值，其余为未知（NULL），不参与 v2 评分</li>
+              <li>教学评分只统计有公开点评的课程，覆盖 498 人</li>
+              <li>排序结果只作检索辅助，不构成选导师建议</li>
+            </ul>
+          </section>
+        </div>
+
+        <p class="settings-credit">封面照片：上海交大闵行校区图书馆 ·
+          <a href="https://commons.wikimedia.org/wiki/File:%DA%A9%D8%AA%D8%A7%D8%A8%D8%AE%D8%A7%D9%86%D9%87_%D8%A7%D8%B5%D9%84%DB%8C_%D8%AF%D8%A7%D9%86%D8%B4%DA%AF%D8%A7%D9%87_%D8%AC%DB%8C%D8%A7%D8%A6%D9%88%D8%AA%D9%86%DA%AF_%D8%B4%D8%A7%D9%86%DA%AF%D9%87%D8%A7%DB%8C.jpg"
+            target="_blank" rel="noopener">Amin.sharafian / Wikimedia Commons</a> · CC BY-SA 4.0
+        </p>
+      </section>
+    </div>
+  </aside>
+

@@ -1,0 +1,49 @@
+{
+  "target": "D:\\homework\\data mining\\大作业\\Mining-Faculty-Profiles-for-Personalized-Advisor-Recommendation-副本\\data\\db\\mentor.db",
+  "created_at": "2026-11-26 17:11:18",
+  "updated_at": "2026-11-26 19:52:28",
+  "teachers": 773,
+  "papers": 15083,
+  "courses": 1663,
+  "teachers_with_papers": 721,
+  "authors_nonempty": 2013,
+  "papers_added_first_pass": 2544,
+  "papers_enriched": 1345,
+  "teachers_patched": 46,
+  "authors_normalized": 1998,
+  "collab_edges": 2938,
+  "pagerank_nonnull": 729,
+  "hits_nonnull": 729,
+  "clusters": {"k": 8, "silhouette": 0.0744},
+  "topics": {"k": 8, "document_count": 773, "vocabulary": 1254},
+  "communities": {"k": 23, "modularity": 0.6831, "edges": 2767},
+  "sources": {
+    "base": "改进版整合前主库",
+    "github": "D:\\homework\\data mining\\大作业\\Mining-Faculty-Profiles-for-Personalized-Advisor-Recommendation\\data\\db\\mentor.db",
+    "supplement": "D:\\homework\\data mining\\大作业\\导师信息补录_258-515_最终交付\\mentor-整合版.db"
+  },
+  "backup": "D:\\homework\\data mining\\大作业\\Mining-Faculty-Profiles-for-Personalized-Advisor-Recommendation-副本\\data\\db\\backup\\mentor_before_integrate_20261126_164825.db",
+  "audit_backup": "D:\\homework\\data mining\\大作业\\Mining-Faculty-Profiles-for-Personalized-Advisor-Recommendation-副本\\data\\db\\backup\\mentor_before_audit_repair_20261126_195010.db",
+  "audit_status_restored_at": "2026-11-26 19:50:10",
+  "paper_sources": {
+    "rows": 13040,
+    "matched": 9185,
+    "matched_enriched": 1311,
+    "doi_declared": 850,
+    "doi_verified_openalex": 9,
+    "source_declared": 1685
+  },
+  "verification": {
+    "teacher_pages_checked": 6,
+    "doi_records_checked": 5,
+    "note": "官网和 OpenAlex 仅做样例核验；2,544 条新增论文逐条带 paper_sources.verification_status，不宣称全部已联网核验。"
+  },
+  "artifacts": {
+    "database": "data/db/mentor.db",
+    "staging": "data/db/mentor_integrated.db",
+    "report_md": "docs/2026-11-26-数据整合与网络核验.md",
+    "data_quality_json": "data/exports/data_quality.json",
+    "mobile_data": "mobile/android/assets/www/data.js",
+    "repair_script": "scripts/repair_paper_source_status.py"
+  }
+}

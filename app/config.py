@@ -6,6 +6,7 @@
     MENTOR_HOST        监听地址（默认 127.0.0.1）
     MENTOR_PORT        监听端口（默认 8765）
     MENTOR_LOG_LEVEL   日志级别（默认 INFO）
+    MENTOR_AI_CONFIG   AI 模型/搜索配置文件（默认 data/ai_config.json）
 """
 import os
 import sys
@@ -26,18 +27,53 @@ def _env(name, default):
     return value if value not in (None, "") else default
 
 
+def _env_path(name, default):
+    return os.path.abspath(os.path.expanduser(_env(name, default)))
+
+
+def _env_int(name, default, minimum=0):
+    try:
+        return max(minimum, int(_env(name, str(default))))
+    except (TypeError, ValueError):
+        return default
+
+
 def default_config():
     return {
         "BASE_DIR": BASE,
-        "DB_PATH": _env("MENTOR_DB_PATH", os.path.join(BASE, "data", "db", "mentor.db")),
-        "COLLAB_CSV": os.path.join(BASE, "data", "exports", "collab_edges.csv"),
-        "SIMILAR_JSON": os.path.join(BASE, "data", "exports", "similar_pairs.json"),
+        "DB_PATH": _env_path("MENTOR_DB_PATH", os.path.join(BASE, "data", "db", "mentor.db")),
+        "AI_CONFIG_PATH": _env_path(
+            "MENTOR_AI_CONFIG",
+            os.path.join(BASE, "data", "ai_config.json"),
+        ),
+        "IMPORT_DIR": _env_path("MENTOR_IMPORT_DIR", os.path.join(BASE, "data", "imports")),
+        "IMPORT_BACKUP_DIR": _env_path(
+            "MENTOR_IMPORT_BACKUP_DIR", os.path.join(BASE, "data", "backup")
+        ),
+        "COLLAB_CSV": _env_path(
+            "MENTOR_COLLAB_CSV", os.path.join(BASE, "data", "exports", "collab_edges.csv")
+        ),
+        "SIMILAR_JSON": _env_path(
+            "MENTOR_SIMILAR_JSON", os.path.join(BASE, "data", "exports", "similar_pairs.json")
+        ),
+        "TOPICS_JSON": _env_path(
+            "MENTOR_TOPICS_JSON", os.path.join(BASE, "data", "exports", "topics.json")
+        ),
+        "MINING_LEXICON": _env_path(
+            "MENTOR_LEXICON_PATH", os.path.join(BASE, "data", "mining", "lexicon.json")
+        ),
         "HOST": _env("MENTOR_HOST", "127.0.0.1"),
-        "PORT": int(_env("MENTOR_PORT", "8765")),
+        "PORT": _env_int("MENTOR_PORT", 8765, 1),
         "LOG_LEVEL": _env("MENTOR_LOG_LEVEL", "INFO"),
-        "APP_VERSION": "1.1.0",
-        # 静态资源交给浏览器缓存一天；接口响应由 after_request 统一加 no-cache
-        "SEND_FILE_MAX_AGE_DEFAULT": 86400,
+        "APP_VERSION": _env("MENTOR_APP_VERSION", "2.7.0"),
+        "MAX_UPLOAD_BYTES": _env_int(
+            "MENTOR_MAX_UPLOAD_BYTES", 25 * 1024 * 1024, 1024
+        ),
+        "MAX_CONTENT_LENGTH": _env_int(
+            "MENTOR_MAX_UPLOAD_BYTES", 25 * 1024 * 1024, 1024
+        ),
+        "PIPELINE_TIMEOUT": _env_int("MENTOR_PIPELINE_TIMEOUT", 300, 10),
+        "STATIC_MAX_AGE": _env_int("MENTOR_STATIC_MAX_AGE", 0, 0),
         "JSON_SORT_KEYS": False,
-        "GZIP_MIN_BYTES": 800,
+        "GZIP_MIN_BYTES": _env_int("MENTOR_GZIP_MIN_BYTES", 800, 0),
     }

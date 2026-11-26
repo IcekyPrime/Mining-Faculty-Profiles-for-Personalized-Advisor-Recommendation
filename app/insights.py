@@ -54,19 +54,42 @@ def _parse_keywords(value):
     return [str(x) for x in items] if isinstance(items, list) else []
 
 
-def _sizes_and_members(groups, limit=6):
-    """把 {教师id: 组号} 聚合成 [{id, size, members}]，按人数倒序。"""
+def _communities(db, limit=6):
+    """社区摘要：同时提供新版 members 与移动端旧版 sample/keywords。"""
+    rows = db.execute(
+        """SELECT p.teacher_id, p.community, p.keywords, t.name
+           FROM processing p JOIN teachers t ON t.id = p.teacher_id
+           WHERE p.community IS NOT NULL"""
+    ).fetchall()
     buckets = defaultdict(list)
-    for tid, group in groups.items():
-        if group is None:
-            continue
-        buckets[int(group)].append(int(tid))
-    out = [
-        {"id": gid, "size": len(members), "members": [str(m) for m in members]}
-        for gid, members in buckets.items()
-    ]
+    for row in rows:
+        buckets[int(row["community"])].append(dict(row))
+    out = []
+    for cid, members in buckets.items():
+        words = Counter()
+        for member in members:
+            words.update(_parse_keywords(member["keywords"]))
+        names = [member["name"] for member in members]
+        out.append({
+            "id": cid,
+            "size": len(members),
+            "members": [str(member["teacher_id"]) for member in members],
+            "sample": names[:6],
+            "keywords": [w for w, _ in words.most_common(6)],
+        })
     out.sort(key=lambda item: (-item["size"], item["id"]))
     return out[:limit]
+
+
+def _legacy_top(db, limit=10):
+    rows = db.execute(
+        """SELECT t.id, t.name, t.college, p.score
+           FROM processing p JOIN teachers t ON t.id = p.teacher_id
+           WHERE p.score IS NOT NULL
+           ORDER BY p.score DESC LIMIT ?""",
+        (limit,),
+    ).fetchall()
+    return [dict(row) for row in rows]
 
 
 def _cluster_summaries(db, limit=8):
@@ -134,14 +157,18 @@ def _coverage(db):
     items = []
     for field, label in COVERAGE_FIELDS:
         have = db.execute(
-            f"SELECT COUNT(*) FROM teachers WHERE {field} IS NOT NULL AND TRIM({field}) <> ''"
+            f"SELECT COUNT(*) FROM teachers WHERE {field} IS NOT NULL AND TRIM({field}) <> '' "
+            f"AND TRIM({field}) <> '[]'"
         ).fetchone()[0]
+        pct = round(have / total * 100, 1) if total else 0.0
         items.append({
             "field": field,
             "label": label,
             "count": have,
+            "filled": have,
             "total": total,
             "ratio": round(have / total, 3) if total else 0.0,
+            "pct": pct,
         })
     return items
 
@@ -153,9 +180,29 @@ def _number_stats(db, column):
     return {"count": row["n"], "min": row["lo"], "max": row["hi"]}
 
 
+def _topics(limit=8):
+    payload = _load_json("topics.json", {})
+    topics = payload.get("topics") or []
+    return {
+        "method": payload.get("method", "未生成"),
+        "k": payload.get("k", 0),
+        "document_count": payload.get("document_count", 0),
+        "vocabulary": payload.get("vocabulary", 0),
+        "items": [
+            {
+                "id": item.get("id"),
+                "label": item.get("label"),
+                "terms": [term.get("term") for term in (item.get("terms") or [])[:6]],
+            }
+            for item in topics[:limit]
+        ],
+    }
+
+
 @bp.get("/insights")
 def insights():
     db = get_db()
+    total = db.execute("SELECT COUNT(*) FROM teachers").fetchone()[0]
     colleges = [
         {"name": r["college"], "count": r["n"]}
         for r in db.execute(
@@ -163,11 +210,7 @@ def insights():
             "WHERE college IS NOT NULL AND college <> '' GROUP BY college ORDER BY n DESC"
         )
     ]
-    communities = _sizes_and_members(
-        {r["teacher_id"]: r["community"] for r in
-         db.execute("SELECT teacher_id, community FROM processing")},
-        limit=6,
-    )
+    communities = _communities(db, limit=6)
     community_sizes = [
         {"id": r["community"], "size": r["n"]}
         for r in db.execute(
@@ -176,19 +219,34 @@ def insights():
         )
     ]
     rules = _load_json("association_rules.json", [])
+    histogram = _score_histogram(db)
+    teach = db.execute(
+        "SELECT COUNT(teaching_score) FROM processing WHERE teaching_score IS NOT NULL"
+    ).fetchone()[0]
     stamp = db_stamp(current_app.config["DB_PATH"])
     updated_at = None
     if stamp[1]:
         updated_at = datetime.fromtimestamp(stamp[1] / 1e9).isoformat(timespec="seconds")
     return jsonify({
+        # 兼容旧前端/移动端：total、teaching、coverage.filled/pct、
+        # histogram、top 与社区 keywords/sample 全部保留。
+        "total": total,
+        "teaching": {
+            "filled": teach,
+            "total": total,
+            "pct": round(teach / total * 100, 1) if total else 0.0,
+        },
         "colleges": colleges,
         "coverage": _coverage(db),
+        "histogram": {"bins": histogram["labels"], "counts": histogram["original"]},
+        "top": _legacy_top(db),
         "scores": {
-            "histogram": _score_histogram(db),
+            "histogram": histogram,
             "top_improved": _top_improved(db),
             "improved": _number_stats(db, "score_v2"),
         },
         "clusters": _cluster_summaries(db, limit=8),
+        "topics": _topics(),
         "community_count": len(community_sizes),
         "communities": communities,
         "rules": rules,

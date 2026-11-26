@@ -10,6 +10,36 @@
   const closeBtn = document.getElementById("settings-close");
   const themeChoices = Array.from(document.querySelectorAll("[data-theme-choice]"));
   let lastFocus = null;
+  if (drawer) {
+    drawer.inert = drawer.classList.contains("hidden");
+  }
+  const FOCUSABLE = "a[href], button:not([disabled]), input:not([disabled]), " +
+    "select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex='-1'])";
+
+  function focusableNodes() {
+    if (!drawer) return [];
+    return Array.from(drawer.querySelectorAll(FOCUSABLE)).filter(function (node) {
+      return node.getClientRects().length > 0 && node.getAttribute("aria-hidden") !== "true";
+    });
+  }
+
+  function trapFocus(event) {
+    if (!drawer || drawer.classList.contains("hidden") || event.key !== "Tab") return;
+    const nodes = focusableNodes();
+    if (!nodes.length) {
+      event.preventDefault();
+      return;
+    }
+    const first = nodes[0];
+    const last = nodes[nodes.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
 
   function currentTheme() {
     return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
@@ -26,29 +56,47 @@
 
   function openSettings() {
     if (!drawer || !backdrop) return;
+    if (!drawer.classList.contains("hidden")) return;
+    if (window.MentorAIConfig && !window.MentorAIConfig.isLoaded()) {
+      window.MentorAIConfig.load();
+    }
     lastFocus = document.activeElement;
     drawer.classList.remove("hidden");
     backdrop.classList.remove("hidden");
+    drawer.setAttribute("aria-hidden", "false");
+    drawer.inert = false;
+    if (openBtn) openBtn.setAttribute("aria-expanded", "true");
     document.body.classList.add("settings-open");
     syncTheme();
     if (closeBtn) closeBtn.focus();
   }
 
-  function closeSettings() {
-    if (!drawer || !backdrop) return;
+  function closeSettings(force) {
+    if (!drawer || !backdrop) return false;
+    if (!force && window.MentorAIConfig && window.MentorAIConfig.isDirty()) {
+      const ok = window.confirm("AI 配置还有未保存的修改，关闭会丢弃这些修改。继续吗？");
+      if (!ok) return false;
+      window.MentorAIConfig.reset();
+    }
     drawer.classList.add("hidden");
     backdrop.classList.add("hidden");
+    drawer.setAttribute("aria-hidden", "true");
+    drawer.inert = true;
+    if (openBtn) openBtn.setAttribute("aria-expanded", "false");
     document.body.classList.remove("settings-open");
     if (lastFocus && lastFocus.focus) lastFocus.focus();
+    return true;
   }
 
   if (openBtn) openBtn.addEventListener("click", openSettings);
-  if (closeBtn) closeBtn.addEventListener("click", closeSettings);
-  if (backdrop) backdrop.addEventListener("click", closeSettings);
+  if (closeBtn) closeBtn.addEventListener("click", function () { closeSettings(false); });
+  if (backdrop) backdrop.addEventListener("click", function () { closeSettings(false); });
   document.addEventListener("keydown", function (event) {
     if (event.key === "Escape" && drawer && !drawer.classList.contains("hidden")) {
-      closeSettings();
+      closeSettings(false);
+      return;
     }
+    trapFocus(event);
   });
 
   themeChoices.forEach(function (btn) {
@@ -106,7 +154,10 @@
     });
   }
 
-  window.MentorSettings = { open: openSettings, close: closeSettings };
+  window.MentorSettings = {
+    open: openSettings,
+    close: function () { return closeSettings(true); },
+  };
 
   // ?view=settings 或旧链接 ?view=about 直接打开设置
   const view = new URLSearchParams(window.location.search).get("view");

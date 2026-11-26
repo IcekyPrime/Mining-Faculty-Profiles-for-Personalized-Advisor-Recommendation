@@ -1,0 +1,7 @@
+{
+ "source": "lexicon",
+ "items": 53,
+ "transactions": 588,
+ "min_support": 0.02,
+ "rules": 7
+}

@@ -69,6 +69,9 @@
     Object.keys(panes).forEach(function (key) {
       setHidden(key, key !== name);
     });
+    if (window.MentorApp && window.MentorApp.syncSortForView) {
+      window.MentorApp.syncSortForView(name);
+    }
     if (!(options && options.fromInit)) syncUrl(name);
     if (name === "insights" && window.MentorInsights) {
       window.MentorInsights.render();

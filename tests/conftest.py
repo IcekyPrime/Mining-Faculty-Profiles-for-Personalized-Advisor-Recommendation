@@ -15,6 +15,16 @@ from app import create_app  # noqa: E402
 SOURCE_DB = os.path.join(ROOT, "data", "db", "mentor.db")
 
 
+@pytest.fixture(autouse=True)
+def isolate_chat_store(tmp_path, monkeypatch):
+    """聊天历史写到临时目录，避免测试污染真实用户目录。"""
+    monkeypatch.setenv("JIAOWODAO_HOME", str(tmp_path / "chat"))
+    from assistant import store
+    store._db_path = None
+    yield
+    store._db_path = None
+
+
 @pytest.fixture(scope="session")
 def db_path(tmp_path_factory):
     if not os.path.exists(SOURCE_DB):
@@ -25,9 +35,12 @@ def db_path(tmp_path_factory):
 
 
 @pytest.fixture()
-def app(db_path):
+def app(db_path, tmp_path):
     return create_app({
         "DB_PATH": db_path,
+        "AI_CONFIG_PATH": str(tmp_path / "ai_config.json"),
+        "IMPORT_DIR": str(tmp_path / "imports"),
+        "IMPORT_BACKUP_DIR": str(tmp_path / "backup"),
         "TESTING": True,
         "LOG_LEVEL": "WARNING",
     })

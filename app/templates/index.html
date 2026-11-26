@@ -5,12 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light dark">
   <title>交大导师 · 导师选择系统</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="/static/css/style.css?v=20261118c">
   <link rel="stylesheet" href="/static/css/app-tabs.css?v=20261118c">
-  <link rel="stylesheet" href="/static/css/app-shell.css?v=20261118c">
-  <link rel="stylesheet" href="/static/css/hero-cover.css?v=20261118c">
+  <link rel="stylesheet" href="/static/css/app-shell.css?v=20261126a">
+  <link rel="stylesheet" href="/static/css/hero-cover.css?v=20261121c">
   <link rel="stylesheet" href="/static/css/search-progress.css?v=20261118c">
   <link rel="stylesheet" href="/static/css/app-features.css?v=20261118h">
+  <link rel="stylesheet" href="/static/css/ai-features.css?v=20261119a">
+  <link rel="stylesheet" href="/static/css/chat.css?v=20261123v27">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到主要内容</a>
@@ -20,12 +23,13 @@
       <a class="brand" href="/" aria-label="返回首页">
         <span class="brand-mark">导</span>
         <span class="brand-text">
-          <span class="brand-name">交大导师</span>
-          <span class="brand-sub">Advisor Finder</span>
+          <span class="brand-name" data-i18n="brand.name">交大导师</span>
+          <span class="brand-sub" data-i18n="brand.sub">Advisor Finder</span>
         </span>
       </a>
       <nav class="topnav" aria-label="页面导航">
-        <a href="#results">导师名录</a>
+        <a href="#results" data-i18n="nav.directory">导师名录</a>
+        <a href="/workspace" data-i18n="nav.workspace">数据工坊</a>
         <button id="command-trigger" class="command-trigger" type="button"
                 aria-label="打开命令面板（Ctrl 或 Cmd 加 K）">⌘K</button>
         <button id="shortlist-btn" class="settings-btn shortlist-btn" type="button"
@@ -33,16 +37,16 @@
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M6.5 4.5h11v16l-5.5-3.4L6.5 20.5z"></path>
           </svg>
-          <span>收藏</span>
+          <span data-i18n="nav.shortlist">收藏</span>
           <b id="shortlist-count" class="count-badge hidden">0</b>
         </button>
         <button id="theme-toggle" class="theme-toggle" type="button" aria-label="切换深浅色">深色</button>
-        <button id="settings-btn" class="settings-btn" type="button" aria-label="打开设置" aria-haspopup="dialog">
+        <button id="settings-btn" class="settings-btn" type="button" aria-label="打开设置" aria-haspopup="dialog" aria-controls="settings-drawer" aria-expanded="false">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="12" cy="12" r="3.2"></circle>
             <path d="M12 3.5v2.4M12 18.1v2.4M3.5 12h2.4M18.1 12h2.4M6 6l1.7 1.7M16.3 16.3l1.7 1.7M18 6l-1.7 1.7M7.7 16.3l-1.7 1.7"></path>
           </svg>
-          <span>设置</span>
+          <span data-i18n="nav.settings">设置</span>
         </button>
       </nav>
     </div>
@@ -52,20 +56,20 @@
     <section id="view-search" class="view">
       <nav class="view-tabs" id="view-tabs" role="tablist" aria-label="页面分区">
         <button class="view-tab active" data-view="search" role="tab" aria-selected="true" type="button">
-          AI 查询<span class="view-tab-sub">Search</span>
+          <span data-i18n="tabs.ai">AI 查询</span><span class="view-tab-sub" data-i18n="tabs.sub.ai">Search</span>
         </button>
         <button class="view-tab" data-view="directory" role="tab" aria-selected="false" type="button">
-          导师名录<span class="view-tab-sub">Directory</span>
+          <span data-i18n="tabs.directory">导师名录</span><span class="view-tab-sub" data-i18n="tabs.sub.directory">Directory</span>
         </button>
         <button class="view-tab" data-view="insights" role="tab" aria-selected="false" type="button">
-          数据概况<span class="view-tab-sub">Overview</span>
+          <span data-i18n="tabs.overview">数据概况</span><span class="view-tab-sub" data-i18n="tabs.sub.overview">Overview</span>
         </button>
       </nav>
 
       <section class="hero" data-pane="search">
         <div class="hero-copy">
           <span class="eyebrow">AI3602 · DATA MINING · SJTU</span>
-          <h1 class="hero-title">找到适合你的<br><span class="accent">那位导师</span></h1>
+          <h1 class="hero-title"><span data-i18n="hero.title1">找到适合你的</span><br><span class="accent" data-i18n="hero.title2">那位导师</span></h1>
           <p class="hero-desc">检索上海交大五个学院的教师，按综合评分、学术能力与教学口碑比较，找到研究方向真正匹配的人。</p>
           <div class="hero-notes" aria-label="数据范围">
             <span>5 个学院</span>
@@ -99,7 +103,7 @@
 
       <section class="search-panel" aria-label="搜索与筛选" data-pane="search">
         <div class="query-chips" id="query-chips" role="group" aria-label="常用检索">
-          <span class="query-chips-label">常用检索</span>
+          <span class="query-chips-label" data-i18n="search.chips">常用检索</span>
           <button class="query-chip" data-q="芯片" type="button">芯片</button>
           <button class="query-chip" data-q="人工智能" type="button">人工智能</button>
           <button class="query-chip" data-q="机器人" type="button">机器人</button>
@@ -107,6 +111,24 @@
           <button class="query-chip" data-q="计算机网络" type="button">计算机网络</button>
           <button class="query-chip" data-q="电力系统" type="button">电力系统</button>
         </div>
+        <section class="ai-query-card" id="ai-query-card" data-pane="search" aria-label="AI 自然语言检索">
+          <div class="ai-query-head">
+            <span class="ai-mark">AI</span>
+            <div>
+              <strong data-i18n="ai.title">用一句话描述你想找的导师</strong>
+              <span id="ai-query-hint" data-i18n="ai.hint">模型先理解需求，再在本地 773 份档案中检索；结果会附推荐理由。</span>
+            </div>
+          </div>
+          <div class="ai-query-form">
+            <input id="ai-query-input" type="text" autocomplete="off"
+                   placeholder="例如：想做医学图像、讲课口碑好的博导"
+                   data-i18n-placeholder="ai.placeholder"
+                   aria-label="AI 自然语言检索需求">
+            <button id="ai-query-btn" class="btn btn-primary" type="button" data-i18n="ai.button">AI 解析并检索</button>
+          </div>
+          <div id="ai-query-status" class="ai-query-status" role="status" aria-live="polite"></div>
+        </section>
+
         <div class="search-field">
           <form id="search-form" class="search-bar" role="search">
             <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -115,11 +137,12 @@
             </svg>
             <input id="search-input" class="search-input" type="search"
                    placeholder="输入姓名、研究方向或关键词"
+                   data-i18n-placeholder="search.placeholder"
                    aria-label="输入姓名、研究方向或关键词" autocomplete="off"
                    role="combobox" aria-expanded="false" aria-controls="search-suggest">
-            <button id="clear-btn" class="clear-btn" type="button" hidden>清除</button>
+            <button id="clear-btn" class="clear-btn" type="button" hidden data-i18n="search.clear">清除</button>
             <span class="key-hint" aria-hidden="true">Enter</span>
-            <button class="btn btn-primary" type="submit">搜索</button>
+            <button class="btn btn-primary" type="submit" data-i18n="search.button">搜索</button>
           </form>
           <div id="search-suggest" class="search-suggest hidden" role="listbox"
                aria-label="搜索建议"></div>
@@ -128,13 +151,15 @@
         <div class="filters">
           <div id="college-pills" class="college-pills" role="group" aria-label="学院筛选"></div>
           <div class="sort-wrap">
-            <span class="sort-label">排序</span>
+            <span class="sort-label" data-i18n="search.sort">排序</span>
             <div id="sort-group" class="sort-group" role="group" aria-label="排序方式">
-              <button class="sort-btn active" data-sort="score" type="button">综合评分</button>
-              <button class="sort-btn" data-sort="score2" type="button">改进评分</button>
-              <button class="sort-btn" data-sort="academic" type="button">学术能力</button>
-              <button class="sort-btn" data-sort="teaching" type="button">教学口碑</button>
-              <button class="sort-btn" data-sort="relevance" type="button">相关度</button>
+              <button class="sort-btn active" data-sort="score" type="button" data-i18n="sort.score">综合评分</button>
+              <button class="sort-btn" data-sort="score2" type="button" data-i18n="sort.score2">改进评分</button>
+              <button class="sort-btn" data-sort="academic" type="button" data-i18n="sort.academic">学术能力</button>
+              <button class="sort-btn" data-sort="teaching" type="button" data-i18n="sort.teaching">教学口碑</button>
+              <button class="sort-btn" data-sort="relevance" type="button" data-i18n="sort.relevance">相关度</button>
+              <button class="sort-btn" data-sort="bm25" type="button" data-i18n="sort.bm25">BM25</button>
+              <button class="sort-btn" data-sort="topic" type="button" data-i18n="sort.topic">主题相关度</button>
             </div>
           </div>
         </div>
@@ -156,13 +181,14 @@
             <li>生成结果列表</li>
           </ol>
         </div>
+        <div id="ai-summary" class="ai-summary hidden" role="status" aria-live="polite"></div>
         <div class="results-head">
           <div>
             <span class="section-kicker">DIRECTORY</span>
-            <h2 class="results-title">导师名录</h2>
+            <h2 class="results-title" data-i18n="dir.title">导师名录</h2>
           </div>
           <div class="results-tools">
-            <button id="edit-query" class="ghost-link" type="button">修改检索条件</button>
+            <button id="edit-query" class="ghost-link" type="button" data-i18n="dir.editQuery">修改检索条件</button>
             <span id="results-count" class="results-count" aria-live="polite"></span>
           </div>
         </div>
@@ -170,11 +196,13 @@
           <div class="sort-wrap">
             <span class="sort-label">SORT</span>
             <div id="results-sort" class="sort-group list-sort" role="group" aria-label="名录排序方式">
-              <button class="sort-btn active" data-sort="score" type="button" aria-pressed="true">综合评分</button>
-              <button class="sort-btn" data-sort="score2" type="button" aria-pressed="false">改进评分</button>
-              <button class="sort-btn" data-sort="academic" type="button" aria-pressed="false">学术能力</button>
-              <button class="sort-btn" data-sort="teaching" type="button" aria-pressed="false">教学口碑</button>
-              <button class="sort-btn" data-sort="relevance" type="button" aria-pressed="false">相关度</button>
+              <button class="sort-btn active" data-sort="score" type="button" aria-pressed="true" data-i18n="sort.score">综合评分</button>
+              <button class="sort-btn" data-sort="score2" type="button" aria-pressed="false" data-i18n="sort.score2">改进评分</button>
+              <button class="sort-btn" data-sort="academic" type="button" aria-pressed="false" data-i18n="sort.academic">学术能力</button>
+              <button class="sort-btn" data-sort="teaching" type="button" aria-pressed="false" data-i18n="sort.teaching">教学口碑</button>
+              <button class="sort-btn" data-sort="relevance" type="button" aria-pressed="false" data-i18n="sort.relevance">相关度</button>
+              <button class="sort-btn" data-sort="bm25" type="button" aria-pressed="false" data-i18n="sort.bm25">BM25</button>
+              <button class="sort-btn" data-sort="topic" type="button" aria-pressed="false" data-i18n="sort.topic">主题相关度</button>
             </div>
           </div>
           <span class="list-toolbar-note">切换后立即重排当前列表</span>
@@ -206,7 +234,7 @@
         <header class="pane-head">
           <span class="section-kicker">OVERVIEW</span>
           <h2 class="pane-title">数据概况</h2>
-          <p class="pane-desc">把处理层的结果摊开看：学院分布、字段覆盖率、两套评分的分布、研究方向聚类、合作社区与关联规则。</p>
+          <p class="pane-desc">把处理层的结果摊开看：学院分布、字段覆盖率、两套评分的分布、研究方向聚类、研究相似社区与关联规则。</p>
         </header>
 
         <div class="insight-grid">
@@ -228,14 +256,19 @@
           </section>
 
           <section class="panel insight-panel wide">
-            <div class="section-title">研究方向聚类 · K-means</div>
+            <div class="section-title">研究方向聚类 · K-means（轮廓系数自动选 K）</div>
             <div id="insight-clusters" class="cluster-grid">
               <div class="skeleton-card" style="height:120px"></div>
             </div>
           </section>
 
+          <section class="panel insight-panel wide">
+            <div class="section-title">主题模型 · TF-IDF + NMF</div>
+            <div id="insight-topics" class="cluster-grid"></div>
+          </section>
+
           <section class="panel insight-panel">
-            <div class="section-title">合作社区 · Louvain</div>
+            <div class="section-title">研究相似社区 · Louvain（关键词相似图）</div>
             <div id="insight-communities" class="community-list"></div>
           </section>
 
@@ -253,88 +286,43 @@
     </section>
   </main>
 
-  <div id="settings-backdrop" class="settings-backdrop hidden"></div>
-  <aside id="settings-drawer" class="settings-drawer hidden" role="dialog" aria-modal="true"
-         aria-labelledby="settings-title">
-    <header class="settings-head">
-      <div>
-        <span class="section-kicker">SETTINGS</span>
-        <h2 id="settings-title">设置</h2>
+  <!-- v2.7 AI 对话抽屉：新增独立区域，不改动原三功能区 -->
+  <section id="ai-sheet" class="ai-sheet" data-state="peek" aria-label="AI 导师助手">
+    <header id="ai-handle" class="ai-handle">
+      <button id="ai-tri" class="ai-tri" type="button" aria-label="展开 AI 对话" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14.5l6-6 6 6"></path></svg>
+      </button>
+      <div class="ai-handle-copy">
+        <span class="ai-handle-title" data-i18n="chat.title">AI 导师助手</span>
       </div>
-      <button id="settings-close" class="settings-close" type="button" aria-label="关闭设置">×</button>
+      <span id="ai-engine" class="ai-engine" data-i18n="chat.engine.rule">本地规则引擎</span>
     </header>
 
-    <div class="settings-body">
-      <section class="settings-group">
-        <h3 class="settings-title">外观</h3>
-        <p class="settings-note">主题会同步顶栏按钮、导师档案图表与数据概况图表。</p>
-        <div class="theme-seg" role="group" aria-label="主题">
-          <button class="theme-choice" data-theme-choice="light" type="button">浅色</button>
-          <button class="theme-choice" data-theme-choice="dark" type="button">深色</button>
+    <div class="ai-body">
+      <div id="ai-messages" class="ai-messages" role="log" aria-live="polite"></div>
+      <div class="ai-composer-wrap">
+        <div id="ai-suggest" class="ai-suggest"></div>
+        <form id="ai-form" class="ai-composer">
+          <textarea id="ai-input" class="ai-input" rows="1" maxlength="800"
+                    placeholder="直接说出你的需求，例如：我喜欢数据挖掘，推荐几位导师"
+                    data-i18n-placeholder="chat.placeholder"></textarea>
+          <div class="ai-composer-side">
+            <label class="ai-online">
+              <input id="ai-online" type="checkbox">
+              <span data-i18n="chat.online">联网补充</span>
+            </label>
+            <button id="ai-send" class="btn btn-primary ai-send" type="submit" data-i18n="chat.send">发送</button>
+          </div>
+        </form>
+        <div class="ai-foot">
+          <span data-i18n="chat.disclaimer">回答基于本地教师库与公开学术来源，仅供检索参考。</span>
+          <button id="ai-clear" class="ai-clear" type="button" data-i18n="chat.clear">清空对话</button>
         </div>
-      </section>
-
-      <section class="settings-group">
-        <h3 class="settings-title">快捷键</h3>
-        <p class="settings-note"><kbd>Ctrl / Cmd + K</kbd> 打开命令面板；<kbd>/</kbd> 聚焦搜索框；<kbd>Esc</kbd> 关闭弹层。</p>
-      </section>
-
-      <section class="settings-group" id="about-settings">
-        <h3 class="settings-title">关于项目</h3>
-        <p class="settings-note">AI3602 数据挖掘课程项目：采集公开信息 → 处理层建模 → Web 应用呈现。</p>
-
-        <div class="about-grid">
-          <section class="panel">
-            <div class="section-title">数据从哪来</div>
-            <ul class="about-list">
-              <li>五个学院官网的公开教师主页：职称、研究所、邮箱、研究方向、荣誉、主页链接</li>
-              <li>选课社区的课程评价：课程名、课程号、评分与评分人数、开课学期</li>
-              <li>Semantic Scholar / AMiner 等学术数据库：h 指数、引用量、论文数、代表论文</li>
-            </ul>
-            <p class="chart-note">只采公开信息，控制请求频率；数据仅用于课程学习。</p>
-          </section>
-
-          <section class="panel">
-            <div class="section-title">两个评分并存</div>
-            <ul class="about-list">
-              <li><b>原始 v1</b>：论文 / 引用 / 荣誉 / 教学四等权，5%–95% 截断，未知按 0 计</li>
-              <li><b>改进 v2</b>：未知不参与计算、权重按可用维度归一、分位数排名、向中位数收缩</li>
-              <li>档案页会同时给出两个分数与五维分项，方便对照算法差异</li>
-            </ul>
-          </section>
-
-          <section class="panel">
-            <div class="section-title">处理层用了什么</div>
-            <table class="about-table">
-              <tbody>
-                <tr><td>文本</td><td>jieba 分词 + TF-IDF，领域词表与停用词统一口径</td></tr>
-                <tr><td>相似</td><td>Shingling + MinHash + LSH，Jaccard ≥ 0.25</td></tr>
-                <tr><td>链接分析</td><td>PageRank / HITS（合作网络）</td></tr>
-                <tr><td>社区发现</td><td>kNN 相似图 + Louvain，模块度 ≈ 0.69</td></tr>
-                <tr><td>聚类</td><td>K-means，K=8，仅使用研究方向</td></tr>
-                <tr><td>关联规则</td><td>Apriori，min_support 0.02 / min_conf 0.3</td></tr>
-              </tbody>
-            </table>
-          </section>
-
-          <section class="panel">
-            <div class="section-title">已知限制</div>
-            <ul class="about-list">
-              <li>合作网络只覆盖计算机学院 127 人：其余学院论文只给作者缩写，实体对齐风险高</li>
-              <li>引用量 528 人、论文数 501 人有值，其余为未知（NULL），不参与 v2 评分</li>
-              <li>教学评分只统计有公开点评的课程，覆盖 498 人</li>
-              <li>排序结果只作检索辅助，不构成选导师建议</li>
-            </ul>
-          </section>
-        </div>
-
-        <p class="settings-credit">封面照片：上海交大闵行校区图书馆 ·
-          <a href="https://commons.wikimedia.org/wiki/File:%DA%A9%D8%AA%D8%A7%D8%A8%D8%AE%D8%A7%D9%86%D9%87_%D8%A7%D8%B5%D9%84%DB%8C_%D8%AF%D8%A7%D9%86%D8%B4%DA%AF%D8%A7%D9%87_%D8%AC%DB%8C%D8%A7%D8%A6%D9%88%D8%AA%D9%86%DA%AF_%D8%B4%D8%A7%D9%86%DA%AF%D9%87%D8%A7%DB%8C.jpg"
-            target="_blank" rel="noopener">Amin.sharafian / Wikimedia Commons</a> · CC BY-SA 4.0
-        </p>
-      </section>
+      </div>
     </div>
-  </aside>
+  </section>
+
+  {% include "_settings_drawer.html" %}
 
   <div id="shortlist-backdrop" class="settings-backdrop hidden"></div>
   <aside id="shortlist-drawer" class="settings-drawer shortlist-drawer hidden"
@@ -373,6 +361,29 @@
     <p class="compare-note">数据来自本地导师库；缺失指标显示为“—”，不代表导师能力为零。</p>
   </div>
 
+  <div id="ai-enrich-backdrop" class="compare-backdrop hidden"></div>
+  <div id="ai-enrich-modal" class="ai-enrich-modal hidden" role="dialog" aria-modal="true"
+       aria-labelledby="ai-enrich-title">
+    <header class="compare-head">
+      <div>
+        <span class="section-kicker">AI WEB ENRICHMENT</span>
+        <h2 id="ai-enrich-title">联网补全预览</h2>
+      </div>
+      <button id="ai-enrich-close" class="settings-close" type="button" aria-label="关闭联网补全">×</button>
+    </header>
+    <div id="ai-enrich-body" class="ai-enrich-body">
+      <div class="skeleton-card" style="height:180px"></div>
+    </div>
+    <footer class="ai-enrich-foot">
+      <p id="ai-enrich-note" class="ai-enrich-note">先预览再写入。应用前会自动备份数据库，并重跑关键词、相似、聚类、评分等处理脚本。</p>
+      <div class="ai-enrich-actions">
+        <button id="ai-enrich-apply" class="btn btn-primary" type="button" disabled>应用选中字段并更新</button>
+        <button id="ai-enrich-cancel" class="btn btn-ghost" type="button">取消</button>
+      </div>
+      <div id="ai-enrich-status" class="ai-enrich-status" role="status" aria-live="polite"></div>
+    </footer>
+  </div>
+
   <div id="command-backdrop" class="command-backdrop hidden"></div>
   <div id="command-palette" class="command-palette hidden" role="dialog" aria-modal="true"
        aria-label="快捷命令面板">
@@ -390,12 +401,17 @@
   </div>
 
   <script src="/static/js/echarts.min.js"></script>
+  <script src="/static/js/i18n.js?v=20261126c"></script>
   <script src="/static/js/search-progress.js?v=20261118h"></script>
-  <script src="/static/js/app.js?v=20261118h"></script>
+  <script src="/static/js/app.js?v=20261121d"></script>
+  <script src="/static/js/ai-settings.js?v=20261126a"></script>
+  <script src="/static/js/ai-search.js?v=20261121c"></script>
+  <script src="/static/js/ai-enrich.js?v=20261119a"></script>
+  <script src="/static/js/chat.js?v=20261123v27"></script>
   <script src="/static/js/insights.js?v=20261118c"></script>
-  <script src="/static/js/app-tabs.js?v=20261118c"></script>
-  <script src="/static/js/app-shell.js?v=20261118c"></script>
-  <script src="/static/js/directory-sort.js?v=20261118c"></script>
+  <script src="/static/js/app-tabs.js?v=20261121b"></script>
+  <script src="/static/js/app-shell.js?v=20261126a"></script>
+  <script src="/static/js/directory-sort.js?v=20261121b"></script>
   <script src="/static/js/detail-tabs.js?v=20261118c"></script>
   <script src="/static/js/search-suggest.js?v=20261118h"></script>
   <script src="/static/js/highlight-hits.js?v=20261118h"></script>

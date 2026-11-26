@@ -10,12 +10,16 @@
 """
 import contextlib
 import csv
+import datetime
 import json
+import re
 from bisect import bisect_right
 from collections import defaultdict
 from functools import lru_cache
 
 from .db import connect
+from .mining import topic_scores as mining_topic_scores
+from .retrieval import build_index
 
 SORTS = {
     "score": "综合评分",
@@ -23,6 +27,8 @@ SORTS = {
     "academic": "学术能力",
     "teaching": "教学口碑",
     "relevance": "相关度",
+    "bm25": "BM25 检索",
+    "topic": "主题相关度",
 }
 
 RADAR_FIELDS = ("论文产出", "引用影响", "学术声誉", "荣誉头衔", "教学口碑")
@@ -48,6 +54,91 @@ def to_float(value, default=None):
         return default
 
 
+HONOR_YEAR_RE = re.compile(r"(?:19|20)\d{2}")
+# 抓取页面里的“国内奖励：/论文奖励：……”等是分区标题，不是荣誉条目。
+HONOR_SECTION_HEADERS = {
+    "国内奖励", "论文奖励", "竞赛奖励", "学生奖励", "指导学生获奖",
+    "学术兼职", "访问人数", "近年来主要科研及教学获奖", "科研奖励",
+    "教学奖励", "获奖情况", "荣誉奖励", "主要获奖", "获奖",
+}
+
+HONOR_CATEGORY_RULES = (
+    ("talent", ("院士", "杰青", "杰出青年", "优青", "优秀青年", "长江学者",
+                "万人计划", "青年拔尖", "Fellow", "人才称号", "国家级人才")),
+    ("paper", ("最佳论文", "论文奖", "杰出论文", "Paper Award", "Test-of-Time")),
+    ("teaching", ("教学成果", "教学奖", "教材", "精品课程", "教学名师")),
+    ("competition", ("竞赛", "挑战赛", "比赛", "冠军", "亚军", "季军", "金奖", "银奖")),
+    ("student", ("指导学生", "学生获奖", "优秀指导教师", "优秀导师")),
+    ("research_award", ("科技进步", "自然科学奖", "技术发明", "科学技术奖",
+                        "科研成果", "科研奖")),
+)
+
+
+def honor_category(value):
+    text = str(value or "")
+    for category, keywords in HONOR_CATEGORY_RULES:
+        if any(keyword in text for keyword in keywords):
+            return category
+    return "other"
+
+
+def honor_stats(values):
+    """荣誉时间线特征：数量、有年份比例、最新年份、近五年数量与类别分布。"""
+    years = [honor_year(item) for item in values]
+    dated = [year for year in years if year]
+    current_year = datetime.date.today().year
+    categories = {}
+    for item in values:
+        category = honor_category(item)
+        categories[category] = categories.get(category, 0) + 1
+    return {
+        "count": len(values),
+        "dated": len(dated),
+        "dated_ratio": round(len(dated) / len(values), 3) if values else 0.0,
+        "latest_year": max(dated) if dated else None,
+        "recent_5y": sum(1 for year in dated if year >= current_year - 4),
+        "categories": categories,
+    }
+
+
+def honor_year(value):
+    """取荣誉文本里的第一个年份；没有年份返回 None。"""
+    match = HONOR_YEAR_RE.search(str(value or ""))
+    return int(match.group()) if match else None
+
+
+def clean_honor(value):
+    """去掉列表编号/首尾标点，过滤纯分区标题，保留年份和奖项正文。"""
+    item = re.sub(
+        r"^\s*(?:[\[\(（【]\s*(?:\d+|[一二三四五六七八九十]+)\s*[\]\)）】]"
+        r"|(?:\d{1,2}|[一二三四五六七八九十]+)[\.、,，:：](?!\d))\s*",
+        "",
+        str(value or "").strip(),
+    )
+    item = item.strip().strip("。.,，;；")
+    key = item.rstrip("：:").strip()
+    if key in HONOR_SECTION_HEADERS:
+        return ""
+    return item
+
+
+def normalize_honors(value):
+    """统一荣誉列表：清理分区标题、去重，并按年份倒序（无年份的排在后面）。"""
+    items = as_json(value, [])
+    if not isinstance(items, list):
+        return []
+    cleaned = []
+    for raw in items:
+        item = clean_honor(raw)
+        if item:
+            cleaned.append(item)
+    unique = list(dict.fromkeys(cleaned))
+    return sorted(
+        unique,
+        key=lambda item: (-(honor_year(item) or 0), item),
+    )
+
+
 def build_summary(row, processing):
     """列表页用的精简教师对象。"""
     t = dict(row)
@@ -68,11 +159,16 @@ def build_summary(row, processing):
         "h_index": t.get("h_index"),
         "citation_count": t.get("citation_count"),
         "paper_count": t.get("paper_count"),
-        "honors": as_json(t.get("honors"), []),
+        "honors": normalize_honors(t.get("honors")),
         "rating": {"avg": to_float(ts), "count": tc},
         "score": processing["score"] if processing else None,
         "score_v2": (processing.get("score_v2") if processing else None),
         "score_coverage": processing["score_coverage"] if processing else None,
+        "topic_primary": (processing.get("topic_primary") if processing else None),
+        "topic_label": (processing.get("topic_label") if processing else ""),
+        "topic_distribution": as_json(
+            processing.get("topic_distribution") if processing else None, []
+        ),
     }
 
 
@@ -107,6 +203,38 @@ def search_corpus(stamp):
             "title_lower": (item["title"] or "").lower(),
         })
     return tuple(records)
+
+
+@lru_cache(maxsize=4)
+def bm25_index(stamp):
+    """按数据库时间戳缓存 BM25 索引；库被补录脚本重写后自动失效。"""
+    return build_index(search_corpus(stamp))
+
+
+def bm25_scores(stamp, query):
+    if not query:
+        return {}
+    return bm25_index(stamp).scores(query)
+
+
+@lru_cache(maxsize=4)
+def topics_payload(stamp):
+    """按 topics.json 文件时间戳缓存主题模型；换数据后重跑处理层即可失效。"""
+    path = stamp[0]
+    try:
+        with open(path, encoding="utf-8") as handle:
+            payload = json.load(handle)
+    except (OSError, ValueError, TypeError):
+        return {"method": "未生成", "k": 0, "topics": [], "doc_topics": {}}
+    return payload if isinstance(payload, dict) else {
+        "method": "未生成", "k": 0, "topics": [], "doc_topics": {}
+    }
+
+
+def topic_query_scores(stamp, query):
+    if not query:
+        return {}
+    return mining_topic_scores(topics_payload(stamp), query)
 
 
 @lru_cache(maxsize=8)
@@ -168,7 +296,7 @@ def percentile_data(stamp):
             if r["h_index"] is not None:
                 with contextlib.suppress(TypeError, ValueError):
                     h_values.append(int(r["h_index"]))
-            honors.append(len(as_json(r["honors"], [])))
+            honors.append(len(normalize_honors(r["honors"])))
         for r in conn.execute(
             "SELECT teaching_score FROM processing WHERE teaching_score IS NOT NULL"
         ):
@@ -353,6 +481,7 @@ def build_detail(conn, tid, collab_stamp, similar_stamp, db_stamp):
     item["paper_total"] = conn.execute(
         "SELECT COUNT(*) FROM papers WHERE teacher_id = ?", (tid,)
     ).fetchone()[0]
+    item["honor_stats"] = honor_stats(item.get("honors", []))
 
     if processing:
         item["cluster"] = processing.get("cluster")

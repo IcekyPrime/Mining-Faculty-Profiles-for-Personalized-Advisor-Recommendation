@@ -82,7 +82,19 @@ def main():
     papers = conn.execute("SELECT COUNT(*) FROM papers").fetchone()[0]
     papers_year = conn.execute("SELECT COUNT(*) FROM papers WHERE year IS NOT NULL").fetchone()[0]
     papers_cite = conn.execute("SELECT COUNT(*) FROM papers WHERE citation_count IS NOT NULL").fetchone()[0]
-    report["论文"] = {"总数": papers, "有年份": papers_year, "有引用量": papers_cite}
+    papers_doi = conn.execute(
+        "SELECT COUNT(*) FROM papers WHERE COALESCE(doi, '') <> ''"
+    ).fetchone()[0]
+    papers_venue = conn.execute(
+        "SELECT COUNT(*) FROM papers WHERE COALESCE(venue, '') <> ''"
+    ).fetchone()[0]
+    report["论文"] = {
+        "总数": papers,
+        "有年份": papers_year,
+        "有引用量": papers_cite,
+        "有 DOI": papers_doi,
+        "有会议/期刊": papers_venue,
+    }
 
     # 异常检查
     anomalies = {}
@@ -98,6 +110,20 @@ def main():
         ).values() if v > 1
     )
     anomalies["论文年份缺失"] = papers - papers_year
+    anomalies["论文 DOI 缺失"] = papers - papers_doi
+    anomalies["论文会议/期刊缺失"] = papers - papers_venue
+    anomalies["有论文数但无论文记录"] = conn.execute(
+        "SELECT COUNT(*) FROM teachers t LEFT JOIN papers p ON p.teacher_id=t.id "
+        "WHERE p.id IS NULL AND COALESCE(t.paper_count, 0) > 0"
+    ).fetchone()[0]
+    anomalies["有论文记录但论文数为 0"] = conn.execute(
+        "SELECT COUNT(*) FROM teachers t WHERE EXISTS("
+        "SELECT 1 FROM papers p WHERE p.teacher_id=t.id"
+        ") AND COALESCE(t.paper_count, 0) = 0"
+    ).fetchone()[0]
+    anomalies["课程无评分"] = conn.execute(
+        "SELECT COUNT(*) FROM courses WHERE COALESCE(rating_count, 0) = 0"
+    ).fetchone()[0]
     report["异常"] = anomalies
 
     scores = [r["score"] for r in conn.execute("SELECT score FROM processing WHERE score IS NOT NULL ORDER BY score")]
@@ -132,7 +158,8 @@ def main():
 
     lines = ["# 数据质量报告", "", "> 由 `scripts/data_quality_report.py` 自动生成，随数据库更新重跑。", ""]
     lines.append(f"- 教师总人数：**{total}**")
-    lines.append(f"- 论文记录：**{papers}**（有年份 {papers_year}，有引用量 {papers_cite}）")
+    lines.append(f"- 论文记录：**{papers}**（有年份 {papers_year}，有引用量 {papers_cite}，"
+                 f"有 DOI {papers_doi}，有会议/期刊 {papers_venue}）")
     lines.append("")
     lines.append("## 学院分布")
     lines.append("")

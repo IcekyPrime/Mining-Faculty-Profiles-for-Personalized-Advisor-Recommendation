@@ -3,6 +3,7 @@
 
 启动内置 Flask 服务，并打开原生窗口。
 """
+import os
 import threading
 import time
 import urllib.request
@@ -13,7 +14,8 @@ from app.app import app
 
 HOST = "127.0.0.1"
 PORT = 8765
-URL = "http://%s:%d/" % (HOST, PORT)
+URL = f"http://{HOST}:{PORT}/"
+ICON = os.path.join(os.path.dirname(os.path.abspath(__file__)), "app.ico")
 
 
 def run_server():
@@ -43,7 +45,7 @@ def main():
         height=780,
         min_size=(900, 640),
     )
-    webview.start()
+    webview.start(icon=ICON if os.path.exists(ICON) else None)
 
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """处理层 · 改进版综合评分（v2，新增脚本）。
 
-原始 `score.py` 的 0.25/0.25/0.25/0.25 + 5%–95% 截断算法保持不变，继续写
+原始 `score.py` 的论文 0.10 / 引用 0.20 / 荣誉 0.35 / 教学 0.25 + 5%–95% 截断算法保持不变，继续写
 `processing.score`；本脚本只**新增**三列：`score_v2`（改进分）、
 `score_parts`（五维分项）、`score_coverage`（数据完整度），不改动原列。
 
@@ -15,14 +15,18 @@
 4. 每个维度都落库（score_parts），应用层可以直接展示「这个分怎么来的」。
 5. 覆盖度低时向中位数收缩（类似贝叶斯收缩）：只有一个维度有值的教师，
    不会因为「该项恰好排第一」就拿到接近满分的分数。
+6. 荣誉时效：能解析出年份的称号按「0.75 下限 + 10 年半衰期」温和衰减；
+   无年份的条目不衰减，避免把资料缺失误判成荣誉陈旧。
 """
+import datetime
 import json
 import os
+import re
 import sqlite3
 from bisect import bisect_right
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DB = os.path.join(ROOT, 'data', 'db', 'mentor.db')
+DB = os.environ.get('MENTOR_DB_PATH') or os.path.join(ROOT, 'data', 'db', 'mentor.db')
 EXP = os.path.join(ROOT, 'data', 'exports')
 
 PROCESSING_SCHEMA = """CREATE TABLE IF NOT EXISTS processing (
@@ -65,26 +69,62 @@ HONOR_RULES = [
 
 SPECIFIC_FELLOWS = ('IEEE Fellow', 'ACM Fellow', 'CCF Fellow')
 
+# 荣誉时效：参考 AVRD 等工作的“时间衰减”思路，只对**已解析出年份**的称号生效。
+# 采用温和衰减（0.75 下限 + 半衰期 10 年），避免把早年杰青/院士直接判为无效。
+HONOR_YEAR_RE = re.compile(r'(?:19|20)\d{2}')
+HONOR_RECENCY_HALF_LIFE = 10.0
+HONOR_RECENCY_FLOOR = 0.75
+CURRENT_YEAR = int(os.environ.get('MENTOR_SCORE_YEAR') or datetime.date.today().year)
 
-def honor_points(honors_json):
-    """把荣誉数组映射成可加的分值；同一荣誉称号重复出现只计一次。"""
+
+def honor_year(value):
+    """取荣誉文本里的第一个年份；用于时效特征，找不到返回 None。"""
+    match = HONOR_YEAR_RE.search(str(value or ''))
+    return int(match.group()) if match else None
+
+
+def honor_recency_weight(year, current_year=None):
+    """年份越新权重越接近 1；无年份时由调用方按 1.0 处理。"""
+    if year is None:
+        return 1.0
+    age = max(0, int(current_year or CURRENT_YEAR) - int(year))
+    return round(
+        HONOR_RECENCY_FLOOR
+        + (1.0 - HONOR_RECENCY_FLOOR) * (0.5 ** (age / HONOR_RECENCY_HALF_LIFE)),
+        3,
+    )
+
+
+def _honor_items(honors_json):
     try:
         items = json.loads(honors_json or '[]')
     except (ValueError, TypeError):
         items = []
     if not isinstance(items, list):
         items = [str(items)]
+    return [str(x) for x in items]
 
-    text = ' | '.join(str(x) for x in items)
+
+def honor_points(honors_json, current_year=None):
+    """把荣誉数组映射成可加的分值；同一荣誉称号重复出现只计一次。
+
+    若某条称号带年份，按年份给一个温和的时效系数；没有年份的条目保持原权重，
+    避免把「资料没写年份」误判成「荣誉很旧」。
+    """
+    items = _honor_items(honors_json)
     points, hits = 0.0, []
     for label, keywords, weight in HONOR_RULES:
         # 通用「Fellow」不再对 IEEE/ACM/CCF Fellow 重复计分
         if label == 'Fellow' and any(h in SPECIFIC_FELLOWS for h in hits):
             continue
-        if any(k in text for k in keywords):
-            points += weight
+        matched = [item for item in items if any(k in item for k in keywords)]
+        if matched:
+            years = [honor_year(item) for item in matched]
+            years = [year for year in years if year]
+            factor = honor_recency_weight(max(years), current_year) if years else 1.0
+            points += weight * factor
             hits.append(label)
-    return points, hits
+    return round(points, 3), hits
 
 
 def percentile_ranker(values):
@@ -147,7 +187,11 @@ def main():
             points += 5
         elif '教授' in title and '副' not in title:
             points += 1.0
-        honor_detail[r['id']] = (points, hits)
+        years = [honor_year(item) for item in _honor_items(r['honors'])]
+        latest_year = max((year for year in years if year), default=None)
+        honor_detail[r['id']] = {
+            'points': points, 'labels': hits, 'latest_year': latest_year,
+        }
         raw['honors'].append(points)
 
     teach = teaching_scores(conn, ids)
@@ -175,7 +219,8 @@ def main():
         if total_w:
             score = round((total + PRIOR_W * PRIOR_SCORE) / (total_w + PRIOR_W), 1)
         if tid in honor_detail:
-            parts['honors']['labels'] = honor_detail[tid][1]
+            parts['honors']['labels'] = honor_detail[tid]['labels']
+            parts['honors']['latest_year'] = honor_detail[tid]['latest_year']
         results[tid] = (score, round(total_w, 2), parts)
 
     for tid, (score, coverage, parts) in results.items():

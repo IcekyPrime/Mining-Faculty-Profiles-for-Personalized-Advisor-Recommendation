@@ -6,7 +6,7 @@ import sqlite3
 import networkx as nx
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DB = os.path.join(ROOT, 'data', 'db', 'mentor.db')
+DB = os.environ.get('MENTOR_DB_PATH') or os.path.join(ROOT, 'data', 'db', 'mentor.db')
 EXP = os.path.join(ROOT, 'data', 'exports')
 
 

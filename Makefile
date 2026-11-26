@@ -5,13 +5,14 @@ ifeq ($(OS),Windows_NT)
 PY := $(VENV)/Scripts/python.exe
 endif
 
-.PHONY: help venv install pipeline data quality serve test lint format clean
+.PHONY: help venv install pipeline data quality serve test lint format clean eval
 
 help:
 	@echo "make install   创建 venv 并安装依赖"
 	@echo "make pipeline  重跑处理层（关键词/相似/社区/聚类/关联/评分）"
 	@echo "make data      把补录整合版并入数据库并重跑处理层"
 	@echo "make quality   生成数据质量报告"
+	@echo "make eval      运行 BM25 与规则相关度的离线评估"
 	@echo "make serve     启动 Web 服务（默认 127.0.0.1:8765）"
 	@echo "make test      运行 pytest"
 	@echo "make lint      ruff 检查"
@@ -40,6 +41,9 @@ data:
 
 quality:
 	$(PY) scripts/data_quality_report.py
+
+eval:
+	$(PY) scripts/evaluate_retrieval.py
 
 serve:
 	$(PY) -m app.app

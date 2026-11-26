@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "description": "可配置领域词典。aliases 用于查询扩展；areas 用于关联规则项集。换学科时可直接替换本文件，不需要改代码。",
+  "aliases": {
+    "ml": ["机器学习", "machine learning"],
+    "machine learning": ["机器学习", "ml"],
+    "ai": ["人工智能", "artificial intelligence"],
+    "artificial intelligence": ["人工智能", "ai"],
+    "nlp": ["自然语言处理", "natural language processing"],
+    "natural language processing": ["自然语言处理", "nlp"],
+    "cv": ["计算机视觉", "computer vision"],
+    "computer vision": ["计算机视觉", "cv"],
+    "rl": ["强化学习", "reinforcement learning"],
+    "reinforcement learning": ["强化学习", "rl"],
+    "kg": ["知识图谱", "knowledge graph"],
+    "knowledge graph": ["知识图谱", "kg"],
+    "llm": ["大模型", "大语言模型", "large language model"],
+    "large language model": ["大模型", "大语言模型", "llm"],
+    "gnn": ["图神经网络", "graph neural network"],
+    "graph neural network": ["图神经网络", "gnn"],
+    "fl": ["联邦学习", "federated learning"],
+    "federated learning": ["联邦学习", "fl"],
+    "ir": ["信息检索", "information retrieval"],
+    "information retrieval": ["信息检索", "ir"],
+    "db": ["数据库", "database"],
+    "database": ["数据库", "db"],
+    "os": ["操作系统", "operating system"],
+    "operating system": ["操作系统", "os"],
+    "医学影像": ["医学图像"],
+    "集成电路": ["芯片设计"]
+  },
+  "areas": [
+    "操作系统", "分布式系统", "体系结构", "编译优化", "存储系统", "系统软件", "虚拟化",
+    "计算机视觉", "自然语言处理", "机器学习", "深度学习", "强化学习", "知识图谱", "大语言模型",
+    "数据挖掘", "数据库", "计算机网络", "网络安全", "信息安全", "密码学", "隐私计算",
+    "集成电路", "芯片设计", "微电子", "半导体", "射频", "模拟电路",
+    "控制理论", "机器人", "智能控制", "模式识别", "信号处理", "图像处理", "多智能体",
+    "电力系统", "电力电子", "电机", "新能源", "智能电网", "高电压",
+    "人工智能", "边缘计算", "物联网", "云计算", "区块链", "联邦学习", "图神经网络",
+    "脑机接口", "语音识别", "无人系统", "传感器", "信息融合", "医学影像"
+  ]
+}

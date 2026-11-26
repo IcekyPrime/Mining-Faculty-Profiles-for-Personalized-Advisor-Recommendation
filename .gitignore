@@ -24,6 +24,11 @@ data/sparse_teachers.csv
 # 本地配置
 .env
 .env.*
+data/ai_config.json
+data/app.out.log
+data/app.err.log
+server.out.log
+server.err.log
 
 # 本地任务说明
 Instruction.md

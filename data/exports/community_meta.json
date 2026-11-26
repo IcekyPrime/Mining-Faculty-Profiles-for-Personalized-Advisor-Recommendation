@@ -1,0 +1,8 @@
+{
+ "method": "关键词 Jaccard kNN 相似图 + Louvain",
+ "nodes": 773,
+ "edges": 2767,
+ "k": 23,
+ "modularity": 0.6831,
+ "knn": 5
+}

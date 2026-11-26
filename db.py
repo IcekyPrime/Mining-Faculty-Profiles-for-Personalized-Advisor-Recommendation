@@ -72,7 +72,10 @@ CREATE TABLE IF NOT EXISTS processing (
     teaching_count INTEGER,
     score_v2 REAL,
     score_coverage REAL,
-    score_parts TEXT
+    score_parts TEXT,
+    topic_primary INTEGER,
+    topic_distribution TEXT,
+    topic_label TEXT
 );
 
 CREATE INDEX IF NOT EXISTS idx_teachers_college ON teachers(college);

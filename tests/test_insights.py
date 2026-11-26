@@ -36,6 +36,10 @@ def test_insights_scores_and_rules(client):
     top = data["scores"]["top_improved"]
     assert top and top[0]["score_v2"] >= top[-1]["score_v2"]
     assert data["rules"], "应导出关联规则"
+    topics = data["topics"]
+    assert topics["method"] == "TF-IDF + NMF"
+    assert topics["k"] >= 1
+    assert topics["items"]
 
 
 def test_teacher_not_found_returns_json_404(client):

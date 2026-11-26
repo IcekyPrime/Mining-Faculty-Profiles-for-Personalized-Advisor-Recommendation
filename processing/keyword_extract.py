@@ -7,7 +7,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from text_utils import clean_text, strip_career, tokenize
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DB = os.path.join(ROOT, 'data', 'db', 'mentor.db')
+DB = os.environ.get('MENTOR_DB_PATH') or os.path.join(ROOT, 'data', 'db', 'mentor.db')
 EXP = os.path.join(ROOT, 'data', 'exports')
 MAX_TEXT = 240   # 简介常含整段履历/获奖清单，截断后研究方向权重才不会被稀释
 

@@ -151,6 +151,29 @@
     }).join("");
   }
 
+  function renderTopics(data) {
+    const node = document.getElementById("insight-topics");
+    if (!node) return;
+    const items = data.items || [];
+    if (!items.length) {
+      node.innerHTML = '<p class="muted-note">暂无主题模型结果；运行 processing/topic_model.py 后生成。</p>';
+      return;
+    }
+    const note = '<p class="chart-note">' + esc(data.method || "TF-IDF + NMF") +
+      ' · K=' + esc(data.k || 0) + ' · 文档 ' + esc(data.document_count || 0) +
+      ' · 词表 ' + esc(data.vocabulary || 0) + '</p>';
+    node.innerHTML = note + items.map(function (topic) {
+      const tags = (topic.terms || []).map(function (word) {
+        return '<span class="mini-tag">' + esc(word) + '</span>';
+      }).join("");
+      return '<article class="cluster-card">' +
+        '<div class="cluster-head"><span class="cluster-id">主题 ' + esc(topic.id) + '</span>' +
+        '<strong>' + esc(topic.label || "") + '</strong></div>' +
+        '<div class="mini-tags">' + tags + '</div>' +
+        '</article>';
+    }).join("");
+  }
+
   function renderCommunities(count, items) {
     const node = document.getElementById("insight-communities");
     if (!node) return;
@@ -199,6 +222,7 @@
     renderCoverage(data.coverage || []);
     renderScores(data.scores || { histogram: { labels: [], original: [], improved: [] } });
     renderClusters(data.clusters || []);
+    renderTopics(data.topics || {});
     renderCommunities(data.community_count || 0, data.communities || []);
     renderRules(data.rules || []);
     bindLinks();

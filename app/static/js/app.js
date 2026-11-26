@@ -26,6 +26,7 @@ const state = {
   query: "",
   college: "",
   sort: "score",
+  sorts: { search: "score", directory: "score" },
   page: 1,
   size: 20,
   total: 0,
@@ -34,9 +35,10 @@ const state = {
   detail: null,
   controller: null,
   requestId: 0,
+  aiMode: false,
 };
 
-const SORTS = ["score", "score2", "academic", "teaching", "relevance"];
+const SORTS = ["score", "score2", "academic", "teaching", "relevance", "bm25", "topic"];
 
 /* 把当前检索条件写回 URL，刷新/分享后仍能恢复。只改 q/college/sort/page，
    保留 view、teacher、theme 与 #/teacher/<id> 等既有参数。 */
@@ -50,8 +52,12 @@ function syncSearchUrl() {
   else url.searchParams.delete("q");
   if (state.college) url.searchParams.set("college", state.college);
   else url.searchParams.delete("college");
-  if (state.sort && state.sort !== "score") url.searchParams.set("sort", state.sort);
+  const qsort = state.sorts.search;
+  const dsort = state.sorts.directory;
+  if (qsort && qsort !== "score") url.searchParams.set("sort", qsort);
   else url.searchParams.delete("sort");
+  if (dsort && dsort !== "score") url.searchParams.set("dsort", dsort);
+  else url.searchParams.delete("dsort");
   if (state.page > 1) url.searchParams.set("page", String(state.page));
   else url.searchParams.delete("page");
   if (url.href !== window.location.href) {
@@ -70,15 +76,27 @@ function readInitialSearch() {
   const college = params.get("college") || "";
   if (college) state.college = college;
   const sort = params.get("sort") || "";
-  if (SORTS.includes(sort)) state.sort = sort;
+  const dsort = params.get("dsort") || sort || "";
+  if (SORTS.includes(sort)) {
+    state.sorts.search = sort;
+    state.sort = sort;
+  }
+  if (SORTS.includes(dsort)) state.sorts.directory = dsort;
+  if (params.get("view") === "directory") state.sort = state.sorts.directory;
   const page = Number.parseInt(params.get("page") || "1", 10);
   return Number.isFinite(page) && page > 1 ? Math.min(page, 30) : 1;
 }
 
 function markInitialFilters() {
   els.sortGroup.querySelectorAll(".sort-btn").forEach((button) => {
-    button.classList.toggle("active", button.dataset.sort === state.sort);
+    button.classList.toggle("active", button.dataset.sort === state.sorts.search);
   });
+  const dirGroup = document.getElementById("results-sort");
+  if (dirGroup) {
+    dirGroup.querySelectorAll(".sort-btn").forEach((button) => {
+      button.classList.toggle("active", button.dataset.sort === state.sorts.directory);
+    });
+  }
   const pills = Array.from(els.collegePills.querySelectorAll(".pill"));
   const target = pills.find((pill) => (pill.dataset.college || "") === state.college);
   if (target) {
@@ -115,6 +133,14 @@ function esc(value) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
+}
+
+function tr(key, fallback) {
+  if (window.MentorI18n && window.MentorI18n.t) {
+    const text = window.MentorI18n.t(key);
+    if (text !== key) return text;
+  }
+  return fallback == null ? key : fallback;
 }
 
 function safeUrl(value) {
@@ -195,10 +221,10 @@ async function loadStats() {
     const data = await fetchJSON("/api/stats");
     state.stats = data;
     const cards = [
-      { value: fmt(data.total_teachers), label: "导师总数", note: "五个学院" },
-      { value: fmt(data.colleges.length), label: "覆盖学院", note: "跨院检索" },
-      { value: fmt(data.total_papers, true), label: "收录论文", note: "公开主页" },
-      { value: fmt(data.total_courses, true), label: "课程记录", note: "选课社区" },
+      { value: fmt(data.total_teachers), label: tr("stat.teachers", "导师总数"), note: tr("stat.note.teachers", "五个学院") },
+      { value: fmt(data.colleges.length), label: tr("stat.colleges", "覆盖学院"), note: tr("stat.note.colleges", "跨院检索") },
+      { value: fmt(data.total_papers, true), label: tr("stat.papers", "收录论文"), note: tr("stat.note.papers", "公开主页") },
+      { value: fmt(data.total_courses, true), label: tr("stat.courses", "课程记录"), note: tr("stat.note.courses", "选课社区") },
     ];
     els.stats.innerHTML = cards.map((card, index) => `
       <div class="stat-card">
@@ -217,7 +243,7 @@ async function loadColleges() {
   try {
     const colleges = await fetchJSON("/api/colleges");
     const total = colleges.reduce((sum, item) => sum + Number(item.count || 0), 0);
-    const all = `<button class="pill active" data-college="" type="button">全部<span>${total}</span></button>`;
+    const all = `<button class="pill active" data-college="" type="button">${tr("filter.allShort", "全部")}<span>${total}</span></button>`;
     const rest = colleges.map((item) => {
       const meta = collegeMeta(item.name);
       return `<button class="pill" data-college="${esc(item.name)}" type="button">${esc(meta.short)}<span>${esc(item.count)}</span></button>`;
@@ -244,7 +270,7 @@ function skeleton() {
 
 function renderSkeleton() {
   els.resultsList.innerHTML = skeleton();
-  els.resultsCount.textContent = "正在检索…";
+  els.resultsCount.textContent = tr("search.loading", "正在检索…");
   els.empty.classList.add("hidden");
   els.pagination.classList.add("hidden");
 }
@@ -255,14 +281,14 @@ function cardHtml(teacher) {
     .map((honor) => `<span class="badge">${esc(honor)}</span>`).join("");
   const keywords = (teacher.keywords || []).slice(0, 5)
     .map((keyword) => `<span class="tag" data-kw="${esc(keyword)}">${esc(keyword)}</span>`).join("");
-  const phd = teacher.is_phd_advisor ? '<span class="badge badge-phd">博导</span>' : "";
+  const phd = teacher.is_phd_advisor ? `<span class="badge badge-phd">${tr("card.phd", "博导")}</span>` : "";
   const rating = teacher.rating && teacher.rating.avg != null
-    ? `<span class="metric star">评分 <b>${Number(teacher.rating.avg).toFixed(1)}</b><span>(${teacher.rating.count || 0})</span></span>`
-    : '<span class="metric">暂无评分</span>';
+    ? `<span class="metric star">${tr("card.rating", "评分")} <b>${Number(teacher.rating.avg).toFixed(1)}</b><span>(${teacher.rating.count || 0})</span></span>`
+    : `<span class="metric">${tr("card.noRating", "暂无评分")}</span>`;
   const metrics = [
-    teacher.h_index != null ? `<span class="metric">H 指数 <b>${fmt(teacher.h_index)}</b></span>` : "",
+    teacher.h_index != null ? `<span class="metric">${tr("card.hIndex", "H 指数")} <b>${fmt(teacher.h_index)}</b></span>` : "",
     rating,
-    teacher.score != null ? `<span class="metric">综合 <b>${fmtScore(teacher.score)}</b></span>` : "",
+    teacher.score != null ? `<span class="metric">${tr("card.composite", "综合")} <b>${fmtScore(teacher.score)}</b></span>` : "",
   ].join("");
   const direction = teacher.research_directions ? esc(teacher.research_directions) : "研究方向暂未收录";
   const institute = teacher.institute ? ` · ${esc(teacher.institute)}` : "";
@@ -284,12 +310,13 @@ function cardHtml(teacher) {
         </div>
         <p class="tc-dir" title="${direction}">${direction}</p>
         <div class="tc-tags">${honors}${keywords}</div>
+        ${teacher.ai_reason ? `<div class="tc-ai-reason"><b>AI</b><span>${esc(teacher.ai_reason)}</span></div>` : ""}
       </div>
       <div class="tc-side">
-        <div class="tc-score"><span>综合评分</span><b>${fmtScore(teacher.score)}</b></div>
-        ${teacher.score_v2 != null ? `<div class="tc-score-v2">改进 v2 <b>${fmtScore(teacher.score_v2)}</b></div>` : ""}
+        <div class="tc-score"><span>${tr("card.score", "综合评分")}</span><b>${fmtScore(teacher.score)}</b></div>
+        ${teacher.score_v2 != null ? `<div class="tc-score-v2">${tr("card.scoreV2", "改进 v2")} <b>${fmtScore(teacher.score_v2)}</b></div>` : ""}
         <div class="tc-metrics">${metrics}</div>
-        <span class="tc-arrow">查看档案 →</span>
+        <span class="tc-arrow">${tr("card.view", "查看档案")} →</span>
       </div>
     </article>`;
 }
@@ -303,11 +330,57 @@ function renderResults() {
     return;
   }
   els.empty.classList.add("hidden");
-  els.resultsCount.textContent = `共 ${state.total} 位教师 · 第 ${state.page} 页`;
+  els.resultsCount.textContent = tr("dir.countPage", `共 ${state.total} 位教师 · 第 ${state.page} 页`)
+    .replace("{n}", state.total).replace("{p}", state.page);
   els.resultsList.innerHTML = state.items.map(cardHtml).join("");
   const hasMore = state.page * state.size < state.total;
-  els.pagination.classList.toggle("hidden", !hasMore);
+  els.pagination.classList.toggle("hidden", state.aiMode || !hasMore);
 }
+
+function clearAISummary() {
+  const node = document.getElementById("ai-summary");
+  if (node) {
+    node.innerHTML = "";
+    node.classList.add("hidden");
+  }
+}
+
+function summaryChips(ai) {
+  const chips = [];
+  (ai.keywords || []).forEach((keyword) => chips.push(`关键词：${esc(keyword)}`));
+  if (ai.filters && ai.filters.college) chips.push(`学院：${esc(ai.filters.college)}`);
+  if (ai.filters && ai.filters.title) chips.push(`职称：${esc(ai.filters.title)}`);
+  if (ai.filters && ai.filters.phd_only) chips.push("只看博导");
+  if (ai.filters && ai.filters.sort) {
+    const label = { score: "综合评分", score2: "改进评分", academic: "学术能力", bm25: "BM25",
+      teaching: "教学口碑", relevance: "相关度", topic: "主题相关度" }[ai.filters.sort] || ai.filters.sort;
+    chips.push(`排序：${esc(label)}`);
+  }
+  return chips.map((text) => `<span class="ai-summary-chip">${text}</span>`).join("");
+}
+
+function renderAIResults(data) {
+  state.aiMode = true;
+  state.items = data.items || [];
+  state.total = data.total || 0;
+  state.page = 1;
+  renderResults();
+  const node = document.getElementById("ai-summary");
+  const ai = data.ai || {};
+  if (!node) return;
+  node.innerHTML = `
+    <div class="ai-summary-top">
+      <span class="ai-summary-label">AI 解析 · ${esc(ai.model || "MODEL")}</span>
+      <span class="ai-summary-model">${esc(ai.intent_summary || "")}</span>
+    </div>
+    <p class="ai-summary-text">${esc(ai.summary || "已完成检索。")}</p>
+    ${ai.note ? `<p class="ai-summary-note">${esc(ai.note)}</p>` : ""}
+    ${ai.reason_error ? `<p class="ai-summary-note">推荐理由生成失败：${esc(ai.reason_error)}</p>` : ""}
+    <div class="ai-summary-chips">${summaryChips(ai)}</div>`;
+  node.classList.remove("hidden");
+}
+
+window.MentorAIResults = { render: renderAIResults, clear: clearAISummary };
 
 async function search(reset) {
   if (state.controller) state.controller.abort();
@@ -317,6 +390,8 @@ async function search(reset) {
   if (reset) {
     state.page = 1;
     state.items = [];
+    state.aiMode = false;
+    clearAISummary();
     renderSkeleton();
   }
 
@@ -386,14 +461,34 @@ els.clearBtn.addEventListener("click", () => {
   search(true);
 });
 
+function setSort(sort, scope) {
+  if (!SORTS.includes(sort)) return;
+  const group = scope === "directory" ? document.getElementById("results-sort") : els.sortGroup;
+  state.sorts[scope === "directory" ? "directory" : "search"] = sort;
+  state.sort = sort;
+  if (group) {
+    group.querySelectorAll(".sort-btn").forEach((item) => {
+      const on = item.dataset.sort === sort;
+      item.classList.toggle("active", on);
+      item.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+  }
+  search(true);
+}
+
+function syncSortForView(view) {
+  if (!view || view === "insights") return;
+  const scope = view === "directory" ? "directory" : "search";
+  state.sort = state.sorts[scope];
+}
+
 els.sortGroup.addEventListener("click", (event) => {
   const button = event.target.closest(".sort-btn");
   if (!button) return;
-  els.sortGroup.querySelectorAll(".sort-btn").forEach((item) => item.classList.remove("active"));
-  button.classList.add("active");
-  state.sort = button.dataset.sort;
-  search(true);
+  setSort(button.dataset.sort, "search");
 });
+
+window.MentorApp = { setSort, syncSortForView, state };
 
 els.loadMore.addEventListener("click", () => {
   state.page += 1;
@@ -568,7 +663,7 @@ function renderDetail(data) {
 
   const miniStats = [];
   if (data.cluster != null) miniStats.push(`<div class="mini-stat"><b>${esc(data.cluster)}</b><span>研究方向簇</span></div>`);
-  if (data.community != null) miniStats.push(`<div class="mini-stat"><b>${esc(data.community)}</b><span>合作社区</span></div>`);
+  if (data.community != null) miniStats.push(`<div class="mini-stat"><b>${esc(data.community)}</b><span>研究相似社区</span></div>`);
   if (data.pagerank != null) miniStats.push(`<div class="mini-stat"><b>${Number(data.pagerank).toFixed(3)}</b><span>PageRank</span></div>`);
   if (data.hits_authority != null) miniStats.push(`<div class="mini-stat"><b>${Number(data.hits_authority).toFixed(3)}</b><span>HITS 权威度</span></div>`);
 
@@ -612,6 +707,17 @@ function renderDetail(data) {
         ${coverage != null ? `<i class="coverage-note">数据完整度 ${coverage}%</i>` : ""}
       </div>
     </section>
+
+    <div class="detail-ai-bar" id="detail-ai-bar">
+      <div class="detail-ai-copy">
+        <span class="ai-mark">AI</span>
+        <div>
+          <strong>联网补全这份档案</strong>
+          <span>检索公开主页与学院页面，先预览差异；确认后才写库并重跑处理层。</span>
+        </div>
+      </div>
+      <button id="ai-enrich-btn" class="btn btn-ghost" type="button">联网检索并预览</button>
+    </div>
 
     <div class="detail-metrics">${metrics}</div>
     ${scorePartsHtml}
@@ -665,6 +771,9 @@ function renderDetail(data) {
   els.detailRoot.querySelectorAll(".similar-pill[data-id]").forEach((element) => {
     element.addEventListener("click", () => openDetail(element.dataset.id));
   });
+  if (window.MentorAIEnrich) {
+    window.MentorAIEnrich.mount(data, document.getElementById("ai-enrich-btn"));
+  }
 
   requestAnimationFrame(() => {
     renderRadar(data.radar || {});
@@ -820,6 +929,7 @@ window.addEventListener("resize", () => {
 });
 
 /* ---------------------------------------------------------------- 初始化 */
+window.MentorApp = Object.assign(window.MentorApp || {}, { openDetail: openDetail, backToList: backToList });
 initTheme();
 (async function init() {
   await Promise.allSettled([loadStats(), loadColleges()]);

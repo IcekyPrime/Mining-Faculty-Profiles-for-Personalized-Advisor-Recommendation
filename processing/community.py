@@ -6,7 +6,7 @@ import sqlite3
 import networkx as nx
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DB = os.path.join(ROOT, 'data', 'db', 'mentor.db')
+DB = os.environ.get('MENTOR_DB_PATH') or os.path.join(ROOT, 'data', 'db', 'mentor.db')
 EXP = os.path.join(ROOT, 'data', 'exports')
 KNN = 5
 
@@ -63,6 +63,15 @@ def main():
 
     with open(os.path.join(EXP, 'communities.json'), 'w', encoding='utf-8') as f:
         json.dump({str(k): v for k, v in partition.items()}, f)
+    with open(os.path.join(EXP, 'community_meta.json'), 'w', encoding='utf-8') as f:
+        json.dump({
+            "method": "关键词 Jaccard kNN 相似图 + Louvain",
+            "nodes": G.number_of_nodes(),
+            "edges": G.number_of_edges(),
+            "k": n_comm,
+            "modularity": round(mod, 4),
+            "knn": KNN,
+        }, f, ensure_ascii=False, indent=1)
     conn.close()
 
 

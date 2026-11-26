@@ -15,7 +15,7 @@ import score_v2 as score  # noqa: E402  —— 新增的改进评分，只写 sc
 
 
 def test_original_scoring_kept_unchanged():
-    """原 score.py 的四等权与 5%–95% 截断必须原样保留，供 v2 对照。"""
+    """原 score.py 的固定权重与 5%–95% 截断必须原样保留，供 v2 对照。"""
     assert legacy.HONOR_W["杰青"] == 4.0
     out = legacy.normalize([0, 1, 2, 3, 100])
     assert out[0] == 0 and out[-1] == 1
@@ -37,6 +37,17 @@ def test_honor_points_dedup_by_dimension():
 def test_honor_points_handles_bad_json():
     assert score.honor_points(None) == (0.0, [])
     assert score.honor_points("not-json") == (0.0, [])
+
+
+def test_honor_points_uses_mild_recency_weight():
+    old = json.dumps(["2010年获国家杰出青年科学基金"], ensure_ascii=False)
+    recent = json.dumps(["2025年获国家杰出青年科学基金"], ensure_ascii=False)
+    old_points, _ = score.honor_points(old, current_year=2026)
+    recent_points, _ = score.honor_points(recent, current_year=2026)
+    assert old_points < recent_points
+    assert old_points >= 4.0 * score.HONOR_RECENCY_FLOOR
+    # 没有年份时不做时效惩罚，保持原权重
+    assert score.honor_points(json.dumps(["杰青"], ensure_ascii=False), current_year=2026)[0] == 4.0
 
 
 def test_percentile_ranker_ignores_missing():

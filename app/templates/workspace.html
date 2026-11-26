@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-page-title="workspace.pageTitle">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>数据工坊 · 交我导</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/static/css/style.css?v=20261118c">
+  <link rel="stylesheet" href="/static/css/app-shell.css?v=20261126b">
+  <link rel="stylesheet" href="/static/css/ai-features.css?v=20261119a">
+  <link rel="stylesheet" href="/static/css/workspace.css?v=20261126a">
+</head>
+<body class="workspace-body">
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/" aria-label="返回首页">
+        <span class="brand-mark">导</span>
+        <span class="brand-text">
+          <span class="brand-name" data-i18n="brand.name">交我导</span>
+          <span class="brand-sub" data-i18n="brand.sub">ADVISOR FINDER</span>
+        </span>
+      </a>
+      <nav class="topnav" aria-label="页面导航">
+        <a href="/" data-i18n="workspace.back">返回检索</a>
+        <a href="/workspace" class="active" data-i18n="nav.workspace">数据工坊</a>
+        <div class="ws-lang" role="group" aria-label="语言">
+          <button type="button" data-lang-choice="zh">中</button>
+          <button type="button" data-lang-choice="en">EN</button>
+        </div>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="切换深浅色">深色</button>
+        <button id="settings-btn" class="settings-btn" type="button" aria-label="打开设置" aria-haspopup="dialog" aria-controls="settings-drawer" aria-expanded="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="3.2"></circle>
+            <path d="M12 3.5v2.4M12 18.1v2.4M3.5 12h2.4M18.1 12h2.4M6 6l1.7 1.7M16.3 16.3l1.7 1.7M18 6l-1.7 1.7M7.7 16.3l-1.7 1.7"></path>
+          </svg>
+          <span data-i18n="nav.settings">设置</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="ws-shell">
+    <section class="ws-hero">
+      <div>
+        <span class="eyebrow" data-i18n="workspace.kicker">DATA WORKSHOP · IMPORT &amp; CLEAN</span>
+        <h1 class="ws-title" data-i18n="workspace.title">导入 · 清洗 · 分类入库</h1>
+        <p class="ws-subtitle" data-i18n="workspace.subtitle">把散落的 CSV、JSON、Excel 教师资料变成可检索的档案：先规则清洗与质量检查，再按教师、论文、课程分类，预览确认后事务入库。AI/本地 Qwen 只是可选复核。</p>
+      </div>
+      <div class="ws-steps" aria-label="导入流程">
+        <span><b>01</b><i data-i18n="workspace.step1">上传文件</i></span>
+        <span><b>02</b><i data-i18n="workspace.step2">规则清洗</i></span>
+        <span><b>03</b><i data-i18n="workspace.step3">AI 复核（可选）</i></span>
+        <span><b>04</b><i data-i18n="workspace.step4">确认入库</i></span>
+      </div>
+    </section>
+
+    <section class="ws-card ws-upload" id="upload-card">
+      <div class="ws-card-head">
+        <div>
+          <h2 data-i18n="workspace.upload">① 上传文件</h2>
+          <p data-i18n="workspace.uploadHint">支持 CSV / TSV / JSON / XLSX，单文件不超过 25 MB、2 万行。可以直接拖入。</p>
+        </div>
+        <div class="ws-template-links">
+          <span data-i18n="workspace.templates">下载模板</span>
+          <a href="/api/import/template?type=teacher" download data-i18n="workspace.mode.teacher">教师</a>
+          <a href="/api/import/template?type=paper" download data-i18n="workspace.mode.paper">论文</a>
+          <a href="/api/import/template?type=course" download data-i18n="workspace.mode.course">课程</a>
+        </div>
+      </div>
+
+      <div class="ws-drop" id="drop-zone" tabindex="0" role="button" aria-label="选择或拖入导入文件">
+        <input id="file-input" type="file" accept=".csv,.tsv,.txt,.json,.jsonl,.xlsx,.xlsm" hidden>
+        <span class="ws-drop-icon" aria-hidden="true">⇪</span>
+        <strong id="drop-title" data-i18n="workspace.drop">拖入文件，或点击选择</strong>
+        <small id="file-meta" data-i18n="workspace.fileMeta">CSV / JSON / XLSX · UTF-8 优先</small>
+      </div>
+
+      <div class="ws-options">
+        <label class="ws-field">
+          <span data-i18n="workspace.mode">实体类型</span>
+          <select id="mode-select">
+            <option value="auto" data-i18n="workspace.mode.auto">自动识别</option>
+            <option value="teacher" data-i18n="workspace.mode.teacher">教师</option>
+            <option value="paper" data-i18n="workspace.mode.paper">论文</option>
+            <option value="course" data-i18n="workspace.mode.course">课程</option>
+          </select>
+        </label>
+        <label class="ws-field">
+          <span data-i18n="workspace.conflict">重复处理</span>
+          <select id="conflict-select">
+            <option value="skip" data-i18n="workspace.conflict.skip">跳过重复</option>
+            <option value="update_empty" data-i18n="workspace.conflict.update_empty">仅补空字段</option>
+            <option value="update_all" data-i18n="workspace.conflict.update_all">覆盖更新</option>
+          </select>
+        </label>
+        <label class="ws-ai-switch">
+          <input id="ai-toggle" type="checkbox">
+          <span>
+            <strong data-i18n="workspace.aiToggle">使用 AI / 本地 Qwen 辅助复核</strong>
+            <small id="ai-status" data-i18n="workspace.aiHint">未配置时仍可完整使用规则清洗。模型只做分类与文本规范化，不生成邮箱、姓名、URL 等事实。</small>
+          </span>
+        </label>
+      </div>
+
+      <div class="ws-actions">
+        <button id="preview-btn" class="btn btn-primary" type="button" disabled data-i18n="workspace.preview">开始清洗预览</button>
+        <span id="preview-status" class="ws-inline-status" role="status" aria-live="polite"></span>
+      </div>
+    </section>
+
+    <section class="ws-card hidden" id="report-card">
+      <div class="ws-card-head">
+        <div>
+          <h2 data-i18n="workspace.summary">② 清洗与质量报告</h2>
+          <p id="report-file"></p>
+        </div>
+        <span id="report-status" class="ws-report-status" role="status"></span>
+        <div class="ws-report-actions">
+          <button id="ai-review-btn" class="btn btn-ghost" type="button" data-i18n="workspace.aiReview">AI 复核当前预览</button>
+          <a id="export-link" class="btn btn-ghost" href="#" data-i18n="workspace.export">导出清洗结果</a>
+        </div>
+      </div>
+
+      <div class="ws-metrics" id="metrics"></div>
+
+      <div class="ws-quality-grid">
+        <div class="ws-quality-panel">
+          <h3 data-i18n="workspace.entities">实体分类</h3>
+          <div id="entity-bars" class="ws-bars"></div>
+        </div>
+        <div class="ws-quality-panel">
+          <h3 data-i18n="workspace.missing">字段缺失率</h3>
+          <div id="missing-bars" class="ws-bars"></div>
+        </div>
+        <div class="ws-quality-panel">
+          <h3 data-i18n="workspace.issues">高频问题</h3>
+          <ul id="issue-list" class="ws-issue-list"></ul>
+        </div>
+      </div>
+
+      <div class="ws-table-head">
+        <div>
+          <h2 data-i18n="workspace.rows">行级预览</h2>
+          <span id="table-count" class="ws-muted"></span>
+        </div>
+        <div class="ws-table-tools">
+          <div class="ws-filter" id="row-filter" role="group" aria-label="行状态筛选">
+            <button class="active" data-status="all" type="button" data-i18n="workspace.filterAll">全部</button>
+            <button data-status="ready" type="button" data-i18n="workspace.filterReady">可入库</button>
+            <button data-status="warning" type="button" data-i18n="workspace.filterWarning">警告</button>
+            <button data-status="error" type="button" data-i18n="workspace.filterError">错误</button>
+            <button data-status="duplicate" type="button" data-i18n="workspace.filterDuplicate">重复</button>
+          </div>
+          <input id="row-search" class="ws-search" type="search" placeholder="搜索行内容" data-i18n-placeholder="workspace.searchRows" aria-label="搜索行内容">
+        </div>
+      </div>
+
+      <div class="ws-table-wrap">
+        <table class="ws-table">
+          <thead>
+            <tr>
+              <th data-i18n="workspace.row">行</th>
+              <th data-i18n="workspace.type">类型</th>
+              <th data-i18n="workspace.status">状态</th>
+              <th data-i18n="workspace.content">主要内容</th>
+              <th data-i18n="workspace.rowQuality">质量</th>
+              <th data-i18n="workspace.rowIssues">问题</th>
+            </tr>
+          </thead>
+          <tbody id="rows-body"></tbody>
+        </table>
+      </div>
+
+      <div class="ws-apply">
+        <div>
+          <label class="ws-check">
+            <input id="refresh-toggle" type="checkbox" checked>
+            <span data-i18n="workspace.refresh">入库后刷新关键词/相似度/评分</span>
+          </label>
+          <p data-i18n="workspace.applyHint">应用前会自动备份数据库；入库后可选后台重跑 8 步处理层。</p>
+          <div id="pipeline-box" class="ws-pipeline hidden"></div>
+        </div>
+        <button id="apply-btn" class="btn btn-primary" type="button" data-i18n="workspace.apply">确认入库</button>
+      </div>
+    </section>
+
+    <section class="ws-card">
+      <div class="ws-card-head">
+        <div>
+          <h2 data-i18n="workspace.history">导入历史</h2>
+        </div>
+      </div>
+      <div id="history-list" class="ws-history">
+        <p class="ws-muted" data-i18n="workspace.historyEmpty">还没有导入记录。</p>
+      </div>
+    </section>
+  </main>
+
+  {% include "_settings_drawer.html" %}
+
+  <div id="row-drawer" class="ws-drawer hidden" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+    <div class="ws-drawer-backdrop" data-close-drawer></div>
+    <aside class="ws-drawer-panel">
+      <div class="ws-drawer-head">
+        <div>
+          <span class="eyebrow">ROW DETAIL</span>
+          <h2 id="drawer-title" data-i18n="workspace.detailTitle">行详情</h2>
+        </div>
+        <button class="ws-icon-btn" type="button" aria-label="关闭" data-close-drawer>×</button>
+      </div>
+      <div id="drawer-content" class="ws-drawer-content"></div>
+    </aside>
+  </div>
+
+  <script src="/static/js/i18n.js?v=20261126c"></script>
+  <script src="/static/js/app-shell.js?v=20261126a"></script>
+  <script src="/static/js/ai-settings.js?v=20261126a"></script>
+  <script src="/static/js/workspace.js?v=20261126a"></script>
+</body>
+</html>

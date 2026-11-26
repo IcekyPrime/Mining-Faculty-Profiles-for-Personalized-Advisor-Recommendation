@@ -1,49 +1,91 @@
-"""处理层 · 关联规则：以规范研究方向为项集，挖掘研究方向共现规则（Apriori）。"""
+"""处理层 · 关联规则：以研究文本中的多项共现为事务，挖掘 Apriori 规则。
+
+项集不再写死在脚本里：
+- 优先读取 `data/mining/lexicon.json` 的 `areas`，可在不改代码的情况下换领域；
+- 没有配置项集时，用当前语料的 TF-IDF 高频词自动生成项集；
+- 支持度阈值可用 `MENTOR_RULE_SUPPORT` 覆盖，适配大小不同的数据集。
+"""
 import json
 import os
 import sqlite3
+import sys
 
 import pandas as pd
 from mlxtend.frequent_patterns import apriori, association_rules
+from sklearn.feature_extraction.text import TfidfVectorizer
+from text_utils import tokenize
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DB = os.path.join(ROOT, 'data', 'db', 'mentor.db')
-EXP = os.path.join(ROOT, 'data', 'exports')
+sys.path.insert(0, ROOT)
 
-# 规范研究方向（作为项集）
-AREAS = [
-    "操作系统", "分布式系统", "体系结构", "编译优化", "存储系统", "系统软件", "虚拟化",
-    "计算机视觉", "自然语言处理", "机器学习", "深度学习", "强化学习", "知识图谱", "大语言模型",
-    "数据挖掘", "数据库", "计算机网络", "网络安全", "信息安全", "密码学", "隐私计算",
-    "集成电路", "芯片设计", "微电子", "半导体", "射频", "模拟电路",
-    "控制理论", "机器人", "智能控制", "模式识别", "信号处理", "图像处理", "多智能体",
-    "电力系统", "电力电子", "电机", "新能源", "智能电网", "高电压",
-    "人工智能", "边缘计算", "物联网", "云计算", "区块链", "联邦学习", "图神经网络",
-    "脑机接口", "语音识别", "无人系统", "传感器", "信息融合", "医学影像",
-]
+from app.mining import load_lexicon, normalise  # noqa: E402
+
+DB = os.environ.get('MENTOR_DB_PATH') or os.path.join(ROOT, 'data', 'db', 'mentor.db')
+EXP = os.path.join(ROOT, 'data', 'exports')
+MAX_TEXT = 400
+
+
+def configured_areas():
+    return load_lexicon().get('areas') or []
+
+
+def mined_areas(texts, top_n=60):
+    """无配置词典时，从语料中挖掘高频词作为项集，保证换数据仍能跑。"""
+    if not texts:
+        return []
+    vectorizer = TfidfVectorizer(
+        tokenizer=tokenize, lowercase=False, min_df=1 if len(texts) < 20 else 2,
+        max_df=0.7, max_features=top_n,
+    )
+    matrix = vectorizer.fit_transform(texts)
+    names = vectorizer.get_feature_names_out()
+    mean = matrix.mean(axis=0).A1
+    return [str(names[idx]) for idx in mean.argsort()[::-1] if mean[idx] > 0]
 
 
 def main():
     conn = sqlite3.connect(DB)
     conn.row_factory = sqlite3.Row
-    rows = conn.execute("SELECT id, research_directions, bio FROM teachers").fetchall()
+    rows = conn.execute("SELECT id, research_directions, research_topics, bio FROM teachers").fetchall()
     print(f'教师数 {len(rows)}')
 
-    transactions = []
+    texts = []
     for r in rows:
-        text = (r['research_directions'] or '') + ' ' + (r['bio'] or '')
-        items = {a for a in AREAS if a in text}
+        raw = " ".join([
+            str(r['research_directions'] or ''),
+            str(r['research_topics'] or ''),
+            str(r['bio'] or ''),
+        ])
+        text = normalise(raw)[:MAX_TEXT]
+        if text:
+            texts.append(text)
+    areas = configured_areas()
+    source = "lexicon"
+    if not areas:
+        areas = mined_areas(texts)
+        source = "corpus-tfidf"
+    areas = list(dict.fromkeys(areas))
+    print(f'项集来源={source}，项数={len(areas)}')
+
+    transactions = []
+    for text in texts:
+        items = {a for a in areas if a in text}
         if items:
             transactions.append(items)
     print(f'有研究方向的教师 {len(transactions)} 人')
+    if not transactions or not areas:
+        print('没有可用事务，跳过关联规则')
+        conn.close()
+        return
 
-    oh = pd.DataFrame([{a: (a in t) for a in AREAS} for t in transactions], dtype=bool)
-    freq = apriori(oh, min_support=0.02, use_colnames=True)
+    support = float(os.environ.get("MENTOR_RULE_SUPPORT") or max(0.02, 3 / len(transactions)))
+    oh = pd.DataFrame([{a: (a in t) for a in areas} for t in transactions], dtype=bool)
+    freq = apriori(oh, min_support=support, use_colnames=True)
     freq2 = freq[freq['itemsets'].map(len) >= 2]
-    print(f'频繁项集（≥2项）{len(freq2)} 个')
+    print(f'频繁项集（≥2项）{len(freq2)} 个（min_support={support:.3f}）')
 
     if len(freq2) == 0:
-        print('无 2 项频繁项集，降低 min_support')
+        print('无 2 项频繁项集，可降低 MENTOR_RULE_SUPPORT')
         conn.close()
         return
     # 需传入完整频繁项集（含单项集）以计算支持度
@@ -64,6 +106,9 @@ def main():
 
     with open(os.path.join(EXP, 'association_rules.json'), 'w', encoding='utf-8') as f:
         json.dump(out, f, ensure_ascii=False, indent=1)
+    with open(os.path.join(EXP, 'association_meta.json'), 'w', encoding='utf-8') as f:
+        json.dump({"source": source, "items": len(areas), "transactions": len(transactions),
+                   "min_support": round(support, 4), "rules": len(out)}, f, ensure_ascii=False, indent=1)
     conn.close()
 
 

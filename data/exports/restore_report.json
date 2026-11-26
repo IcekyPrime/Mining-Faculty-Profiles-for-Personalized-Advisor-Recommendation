@@ -1,0 +1,16 @@
+{
+  "source": "D:\\homework\\data mining\\大作业\\Mining-Faculty-Profiles-for-Personalized-Advisor-Recommendation\\data\\db\\mentor.db",
+  "target": "D:\\homework\\data mining\\大作业\\Mining-Faculty-Profiles-for-Personalized-Advisor-Recommendation-副本\\data\\db\\mentor.db",
+  "backup": "D:\\homework\\data mining\\大作业\\Mining-Faculty-Profiles-for-Personalized-Advisor-Recommendation-副本\\data\\db\\backup\\mentor_before_restore_20261126_131649.db",
+  "teacher_rows_patched": 0,
+  "papers_restored": 13092,
+  "papers_after_dedupe": 12539,
+  "teachers": 773,
+  "papers": 12539,
+  "teachers_with_papers": 721,
+  "authors_nonempty": 2013,
+  "bio_nonempty": 759,
+  "citation_count_nonnull": 721,
+  "paper_count_nonnull": 751,
+  "finished_at": "2026-11-26 13:16:49"
+}

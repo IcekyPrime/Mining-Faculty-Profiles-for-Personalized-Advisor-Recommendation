@@ -108,6 +108,22 @@
   stroke-width: 1.6;
   stroke-linecap: round;
 }
+.settings-current-page {
+  opacity: 0.62;
+  cursor: default;
+  pointer-events: none;
+}
+
+.ai-dirty {
+  color: var(--gold);
+  font-size: 11px;
+}
+.ai-dirty.hidden { display: none; }
+.ai-field.is-invalid input,
+.ai-field.is-invalid select {
+  border-color: var(--danger, #b3261e);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--danger, #b3261e) 16%, transparent);
+}
 
 /* ---------------------------------------------------------------- 设置抽屉 */
 .settings-backdrop {

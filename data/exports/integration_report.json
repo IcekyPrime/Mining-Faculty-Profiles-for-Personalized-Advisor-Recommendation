@@ -1,0 +1,33 @@
+{
+  "run_id": "integrate_20261126_195227",
+  "created_at": "2026-11-26 19:52:28",
+  "backup": "D:\\homework\\data mining\\大作业\\Mining-Faculty-Profiles-for-Personalized-Advisor-Recommendation-副本\\data\\db\\backup\\mentor_before_integrate_20261126_195227.db",
+  "staging": "D:\\homework\\data mining\\大作业\\Mining-Faculty-Profiles-for-Personalized-Advisor-Recommendation-副本\\data\\db\\mentor_integrated.db",
+  "target": "D:\\homework\\data mining\\大作业\\Mining-Faculty-Profiles-for-Personalized-Advisor-Recommendation-副本\\data\\db\\mentor.db",
+  "before": {
+    "teachers": 773,
+    "papers": 15083,
+    "courses": 1663,
+    "teachers_with_papers": 721,
+    "authors_nonempty": 2013
+  },
+  "after": {
+    "teachers": 773,
+    "papers": 15083,
+    "courses": 1663,
+    "teachers_with_papers": 721,
+    "authors_nonempty": 2013
+  },
+  "papers_added": 0,
+  "papers_enriched": 0,
+  "teachers_patched": 0,
+  "authors_normalized": 0,
+  "source_github": "D:\\homework\\data mining\\大作业\\Mining-Faculty-Profiles-for-Personalized-Advisor-Recommendation\\data\\db\\mentor.db",
+  "source_supplement": "D:\\homework\\data mining\\大作业\\导师信息补录_258-515_最终交付\\mentor-整合版.db",
+  "source_base": "D:\\homework\\data mining\\大作业\\Mining-Faculty-Profiles-for-Personalized-Advisor-Recommendation-副本\\data\\db\\mentor.db",
+  "verification": {
+    "teacher_pages": 6,
+    "doi_records": 5,
+    "note": "官网与 OpenAlex 仅做样例核验；新增论文逐条带 verification_status，不把未核验 DOI 标成已核验。"
+  }
+}

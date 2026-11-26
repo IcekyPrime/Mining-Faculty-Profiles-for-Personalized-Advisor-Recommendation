@@ -71,16 +71,17 @@ html[data-theme="dark"] .hero::before {
 @media (max-width: 1020px) {
   .hero::before {
     inset: -10px -14px 0;
-    opacity: 0.18;
+    opacity: 0.32;
+    background-position: center 46%;
   }
-  html[data-theme="dark"] .hero::before { opacity: 0.26; }
+  html[data-theme="dark"] .hero::before { opacity: 0.38; }
   .hero-credit { max-width: 90%; }
 }
 
 @media (max-width: 560px) {
   .hero::before {
     inset: -6px -8px 0;
-    opacity: 0.14;
+    opacity: 0.26;
   }
-  html[data-theme="dark"] .hero::before { opacity: 0.2; }
+  html[data-theme="dark"] .hero::before { opacity: 0.3; }
 }
