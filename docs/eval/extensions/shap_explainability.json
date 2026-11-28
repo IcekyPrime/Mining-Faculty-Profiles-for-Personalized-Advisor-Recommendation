@@ -1,0 +1,384 @@
+{
+  "expected_value": -6.2067,
+  "feature_importance": [
+    {
+      "feature": "token_overlap",
+      "mean_abs_shap": 3.4723
+    },
+    {
+      "feature": "bm25_score",
+      "mean_abs_shap": 0.9137
+    },
+    {
+      "feature": "bm25_rank_inv",
+      "mean_abs_shap": 0.9088
+    },
+    {
+      "feature": "citation_norm",
+      "mean_abs_shap": 0.4707
+    },
+    {
+      "feature": "paper_count_norm",
+      "mean_abs_shap": 0.3749
+    },
+    {
+      "feature": "h_index_norm",
+      "mean_abs_shap": 0.2705
+    },
+    {
+      "feature": "token_overlap_kw",
+      "mean_abs_shap": 0.2293
+    },
+    {
+      "feature": "teaching_norm",
+      "mean_abs_shap": 0.2018
+    },
+    {
+      "feature": "honor_count",
+      "mean_abs_shap": 0.1576
+    },
+    {
+      "feature": "processing_score_norm",
+      "mean_abs_shap": 0.1195
+    },
+    {
+      "feature": "token_overlap_institute",
+      "mean_abs_shap": 0.0421
+    },
+    {
+      "feature": "is_phd_advisor",
+      "mean_abs_shap": 0.0328
+    },
+    {
+      "feature": "title_match",
+      "mean_abs_shap": 0.0
+    },
+    {
+      "feature": "name_match",
+      "mean_abs_shap": 0.0
+    }
+  ],
+  "n_samples": 1514,
+  "local_explanations": [
+    {
+      "query": "计算机视觉",
+      "teacher_id": 166,
+      "prediction": 6.6859,
+      "base_value": -6.2067,
+      "contributions": [
+        {
+          "feature": "bm25_score",
+          "shap": 1.9628
+        },
+        {
+          "feature": "bm25_rank_inv",
+          "shap": 1.6299
+        },
+        {
+          "feature": "token_overlap",
+          "shap": 7.5366
+        },
+        {
+          "feature": "token_overlap_kw",
+          "shap": -0.1609
+        },
+        {
+          "feature": "token_overlap_institute",
+          "shap": -0.0216
+        },
+        {
+          "feature": "title_match",
+          "shap": 0.0
+        },
+        {
+          "feature": "name_match",
+          "shap": 0.0
+        },
+        {
+          "feature": "h_index_norm",
+          "shap": 0.762
+        },
+        {
+          "feature": "citation_norm",
+          "shap": 0.639
+        },
+        {
+          "feature": "paper_count_norm",
+          "shap": 0.5204
+        },
+        {
+          "feature": "processing_score_norm",
+          "shap": 0.0343
+        },
+        {
+          "feature": "teaching_norm",
+          "shap": -0.3926
+        },
+        {
+          "feature": "is_phd_advisor",
+          "shap": 0.2145
+        },
+        {
+          "feature": "honor_count",
+          "shap": 0.1681
+        }
+      ]
+    },
+    {
+      "query": "操作系统",
+      "teacher_id": 8,
+      "prediction": 9.3091,
+      "base_value": -6.2067,
+      "contributions": [
+        {
+          "feature": "bm25_score",
+          "shap": 2.1171
+        },
+        {
+          "feature": "bm25_rank_inv",
+          "shap": 1.772
+        },
+        {
+          "feature": "token_overlap",
+          "shap": 7.989
+        },
+        {
+          "feature": "token_overlap_kw",
+          "shap": -0.2689
+        },
+        {
+          "feature": "token_overlap_institute",
+          "shap": 0.0972
+        },
+        {
+          "feature": "title_match",
+          "shap": 0.0
+        },
+        {
+          "feature": "name_match",
+          "shap": 0.0
+        },
+        {
+          "feature": "h_index_norm",
+          "shap": 1.0395
+        },
+        {
+          "feature": "citation_norm",
+          "shap": 0.8974
+        },
+        {
+          "feature": "paper_count_norm",
+          "shap": 0.7697
+        },
+        {
+          "feature": "processing_score_norm",
+          "shap": 0.0948
+        },
+        {
+          "feature": "teaching_norm",
+          "shap": 0.955
+        },
+        {
+          "feature": "is_phd_advisor",
+          "shap": 0.1652
+        },
+        {
+          "feature": "honor_count",
+          "shap": -0.1122
+        }
+      ]
+    },
+    {
+      "query": "强化学习",
+      "teacher_id": 28,
+      "prediction": 5.367,
+      "base_value": -6.2067,
+      "contributions": [
+        {
+          "feature": "bm25_score",
+          "shap": 1.8946
+        },
+        {
+          "feature": "bm25_rank_inv",
+          "shap": 1.956
+        },
+        {
+          "feature": "token_overlap",
+          "shap": 6.9224
+        },
+        {
+          "feature": "token_overlap_kw",
+          "shap": -0.4453
+        },
+        {
+          "feature": "token_overlap_institute",
+          "shap": -0.0791
+        },
+        {
+          "feature": "title_match",
+          "shap": 0.0
+        },
+        {
+          "feature": "name_match",
+          "shap": 0.0
+        },
+        {
+          "feature": "h_index_norm",
+          "shap": 0.3777
+        },
+        {
+          "feature": "citation_norm",
+          "shap": 0.0019
+        },
+        {
+          "feature": "paper_count_norm",
+          "shap": -0.4249
+        },
+        {
+          "feature": "processing_score_norm",
+          "shap": 0.1889
+        },
+        {
+          "feature": "teaching_norm",
+          "shap": 0.6286
+        },
+        {
+          "feature": "is_phd_advisor",
+          "shap": 0.2908
+        },
+        {
+          "feature": "honor_count",
+          "shap": 0.2621
+        }
+      ]
+    },
+    {
+      "query": "自然语言处理",
+      "teacher_id": 99,
+      "prediction": 6.3782,
+      "base_value": -6.2067,
+      "contributions": [
+        {
+          "feature": "bm25_score",
+          "shap": 2.409
+        },
+        {
+          "feature": "bm25_rank_inv",
+          "shap": 1.9161
+        },
+        {
+          "feature": "token_overlap",
+          "shap": 7.1503
+        },
+        {
+          "feature": "token_overlap_kw",
+          "shap": 0.3231
+        },
+        {
+          "feature": "token_overlap_institute",
+          "shap": -0.0527
+        },
+        {
+          "feature": "title_match",
+          "shap": 0.0
+        },
+        {
+          "feature": "name_match",
+          "shap": 0.0
+        },
+        {
+          "feature": "h_index_norm",
+          "shap": 0.4658
+        },
+        {
+          "feature": "citation_norm",
+          "shap": 0.1967
+        },
+        {
+          "feature": "paper_count_norm",
+          "shap": -0.6194
+        },
+        {
+          "feature": "processing_score_norm",
+          "shap": 0.0524
+        },
+        {
+          "feature": "teaching_norm",
+          "shap": 0.5447
+        },
+        {
+          "feature": "is_phd_advisor",
+          "shap": -0.0416
+        },
+        {
+          "feature": "honor_count",
+          "shap": 0.2403
+        }
+      ]
+    },
+    {
+      "query": "芯片设计",
+      "teacher_id": 39,
+      "prediction": 7.4924,
+      "base_value": -6.2067,
+      "contributions": [
+        {
+          "feature": "bm25_score",
+          "shap": 2.707
+        },
+        {
+          "feature": "bm25_rank_inv",
+          "shap": 1.664
+        },
+        {
+          "feature": "token_overlap",
+          "shap": 7.5028
+        },
+        {
+          "feature": "token_overlap_kw",
+          "shap": -0.2937
+        },
+        {
+          "feature": "token_overlap_institute",
+          "shap": -0.0103
+        },
+        {
+          "feature": "title_match",
+          "shap": 0.0
+        },
+        {
+          "feature": "name_match",
+          "shap": 0.0
+        },
+        {
+          "feature": "h_index_norm",
+          "shap": 0.9088
+        },
+        {
+          "feature": "citation_norm",
+          "shap": 0.7134
+        },
+        {
+          "feature": "paper_count_norm",
+          "shap": 0.4433
+        },
+        {
+          "feature": "processing_score_norm",
+          "shap": 0.0116
+        },
+        {
+          "feature": "teaching_norm",
+          "shap": 0.3427
+        },
+        {
+          "feature": "is_phd_advisor",
+          "shap": -0.0683
+        },
+        {
+          "feature": "honor_count",
+          "shap": -0.2223
+        }
+      ]
+    }
+  ]
+}

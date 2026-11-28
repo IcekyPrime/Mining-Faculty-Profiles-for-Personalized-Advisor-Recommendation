@@ -1,0 +1,1833 @@
+{
+  "计算机视觉": [
+    {
+      "teacher_id": 166,
+      "bm25_score": 26.8142,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 949,
+      "bm25_score": 26.6798,
+      "pseudo_label": 0.9169
+    },
+    {
+      "teacher_id": 19,
+      "bm25_score": 25.9013,
+      "pseudo_label": 0.4356
+    },
+    {
+      "teacher_id": 27,
+      "bm25_score": 25.6102,
+      "pseudo_label": 0.2557
+    },
+    {
+      "teacher_id": 522,
+      "bm25_score": 25.5901,
+      "pseudo_label": 0.2433
+    },
+    {
+      "teacher_id": 283,
+      "bm25_score": 25.5901,
+      "pseudo_label": 0.2433
+    },
+    {
+      "teacher_id": 287,
+      "bm25_score": 25.4749,
+      "pseudo_label": 0.172
+    },
+    {
+      "teacher_id": 168,
+      "bm25_score": 25.3767,
+      "pseudo_label": 0.1113
+    },
+    {
+      "teacher_id": 171,
+      "bm25_score": 25.2863,
+      "pseudo_label": 0.0555
+    },
+    {
+      "teacher_id": 492,
+      "bm25_score": 25.1966,
+      "pseudo_label": 0.0
+    }
+  ],
+  "操作系统": [
+    {
+      "teacher_id": 153,
+      "bm25_score": 24.4709,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 8,
+      "bm25_score": 24.3259,
+      "pseudo_label": 0.8568
+    },
+    {
+      "teacher_id": 240,
+      "bm25_score": 24.0669,
+      "pseudo_label": 0.6011
+    },
+    {
+      "teacher_id": 11,
+      "bm25_score": 23.9255,
+      "pseudo_label": 0.4615
+    },
+    {
+      "teacher_id": 4,
+      "bm25_score": 23.9224,
+      "pseudo_label": 0.4585
+    },
+    {
+      "teacher_id": 14,
+      "bm25_score": 23.8072,
+      "pseudo_label": 0.3448
+    },
+    {
+      "teacher_id": 2,
+      "bm25_score": 23.721,
+      "pseudo_label": 0.2597
+    },
+    {
+      "teacher_id": 6,
+      "bm25_score": 23.6179,
+      "pseudo_label": 0.1579
+    },
+    {
+      "teacher_id": 7,
+      "bm25_score": 23.586,
+      "pseudo_label": 0.1264
+    },
+    {
+      "teacher_id": 994,
+      "bm25_score": 23.458,
+      "pseudo_label": 0.0
+    }
+  ],
+  "强化学习": [
+    {
+      "teacher_id": 961,
+      "bm25_score": 26.4321,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 964,
+      "bm25_score": 26.2093,
+      "pseudo_label": 0.914
+    },
+    {
+      "teacher_id": 28,
+      "bm25_score": 26.0524,
+      "pseudo_label": 0.8534
+    },
+    {
+      "teacher_id": 194,
+      "bm25_score": 26.0524,
+      "pseudo_label": 0.8534
+    },
+    {
+      "teacher_id": 29,
+      "bm25_score": 25.7205,
+      "pseudo_label": 0.7252
+    },
+    {
+      "teacher_id": 1011,
+      "bm25_score": 25.3863,
+      "pseudo_label": 0.5961
+    },
+    {
+      "teacher_id": 338,
+      "bm25_score": 24.9762,
+      "pseudo_label": 0.4377
+    },
+    {
+      "teacher_id": 576,
+      "bm25_score": 24.9601,
+      "pseudo_label": 0.4315
+    },
+    {
+      "teacher_id": 270,
+      "bm25_score": 24.9476,
+      "pseudo_label": 0.4267
+    },
+    {
+      "teacher_id": 469,
+      "bm25_score": 23.8427,
+      "pseudo_label": 0.0
+    }
+  ],
+  "自然语言处理": [
+    {
+      "teacher_id": 99,
+      "bm25_score": 45.0123,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 941,
+      "bm25_score": 44.4259,
+      "pseudo_label": 0.9295
+    },
+    {
+      "teacher_id": 91,
+      "bm25_score": 44.1584,
+      "pseudo_label": 0.8974
+    },
+    {
+      "teacher_id": 951,
+      "bm25_score": 43.8942,
+      "pseudo_label": 0.8656
+    },
+    {
+      "teacher_id": 78,
+      "bm25_score": 43.5411,
+      "pseudo_label": 0.8232
+    },
+    {
+      "teacher_id": 42,
+      "bm25_score": 40.8188,
+      "pseudo_label": 0.496
+    },
+    {
+      "teacher_id": 15,
+      "bm25_score": 39.8672,
+      "pseudo_label": 0.3817
+    },
+    {
+      "teacher_id": 548,
+      "bm25_score": 37.5172,
+      "pseudo_label": 0.0992
+    },
+    {
+      "teacher_id": 21,
+      "bm25_score": 37.0997,
+      "pseudo_label": 0.0491
+    },
+    {
+      "teacher_id": 75,
+      "bm25_score": 36.6914,
+      "pseudo_label": 0.0
+    }
+  ],
+  "芯片设计": [
+    {
+      "teacher_id": 755,
+      "bm25_score": 22.8384,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 39,
+      "bm25_score": 22.0327,
+      "pseudo_label": 0.8336
+    },
+    {
+      "teacher_id": 730,
+      "bm25_score": 22.0207,
+      "pseudo_label": 0.8311
+    },
+    {
+      "teacher_id": 579,
+      "bm25_score": 21.7907,
+      "pseudo_label": 0.7836
+    },
+    {
+      "teacher_id": 549,
+      "bm25_score": 21.6336,
+      "pseudo_label": 0.7511
+    },
+    {
+      "teacher_id": 639,
+      "bm25_score": 21.4357,
+      "pseudo_label": 0.7102
+    },
+    {
+      "teacher_id": 746,
+      "bm25_score": 20.7388,
+      "pseudo_label": 0.5663
+    },
+    {
+      "teacher_id": 623,
+      "bm25_score": 20.6868,
+      "pseudo_label": 0.5555
+    },
+    {
+      "teacher_id": 541,
+      "bm25_score": 20.2374,
+      "pseudo_label": 0.4627
+    },
+    {
+      "teacher_id": 547,
+      "bm25_score": 17.9974,
+      "pseudo_label": 0.0
+    }
+  ],
+  "医学图像": [
+    {
+      "teacher_id": 290,
+      "bm25_score": 20.8297,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 168,
+      "bm25_score": 20.0147,
+      "pseudo_label": 0.9389
+    },
+    {
+      "teacher_id": 711,
+      "bm25_score": 19.4985,
+      "pseudo_label": 0.9002
+    },
+    {
+      "teacher_id": 457,
+      "bm25_score": 19.4245,
+      "pseudo_label": 0.8947
+    },
+    {
+      "teacher_id": 94,
+      "bm25_score": 18.7498,
+      "pseudo_label": 0.8441
+    },
+    {
+      "teacher_id": 440,
+      "bm25_score": 18.4351,
+      "pseudo_label": 0.8205
+    },
+    {
+      "teacher_id": 174,
+      "bm25_score": 17.5426,
+      "pseudo_label": 0.7536
+    },
+    {
+      "teacher_id": 425,
+      "bm25_score": 13.9609,
+      "pseudo_label": 0.4852
+    },
+    {
+      "teacher_id": 370,
+      "bm25_score": 8.8996,
+      "pseudo_label": 0.1058
+    },
+    {
+      "teacher_id": 322,
+      "bm25_score": 7.4882,
+      "pseudo_label": 0.0
+    }
+  ],
+  "分布式系统": [
+    {
+      "teacher_id": 9,
+      "bm25_score": 28.9088,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 2,
+      "bm25_score": 28.571,
+      "pseudo_label": 0.9676
+    },
+    {
+      "teacher_id": 10,
+      "bm25_score": 28.5326,
+      "pseudo_label": 0.964
+    },
+    {
+      "teacher_id": 229,
+      "bm25_score": 28.357,
+      "pseudo_label": 0.9471
+    },
+    {
+      "teacher_id": 175,
+      "bm25_score": 26.4022,
+      "pseudo_label": 0.7598
+    },
+    {
+      "teacher_id": 3,
+      "bm25_score": 26.3588,
+      "pseudo_label": 0.7557
+    },
+    {
+      "teacher_id": 491,
+      "bm25_score": 24.0254,
+      "pseudo_label": 0.5321
+    },
+    {
+      "teacher_id": 8,
+      "bm25_score": 19.5766,
+      "pseudo_label": 0.1058
+    },
+    {
+      "teacher_id": 11,
+      "bm25_score": 18.7719,
+      "pseudo_label": 0.0287
+    },
+    {
+      "teacher_id": 14,
+      "bm25_score": 18.4721,
+      "pseudo_label": 0.0
+    }
+  ],
+  "知识图谱": [
+    {
+      "teacher_id": 180,
+      "bm25_score": 41.7322,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 61,
+      "bm25_score": 41.5549,
+      "pseudo_label": 0.9952
+    },
+    {
+      "teacher_id": 548,
+      "bm25_score": 35.4753,
+      "pseudo_label": 0.831
+    },
+    {
+      "teacher_id": 270,
+      "bm25_score": 9.2165,
+      "pseudo_label": 0.1219
+    },
+    {
+      "teacher_id": 207,
+      "bm25_score": 9.1399,
+      "pseudo_label": 0.1198
+    },
+    {
+      "teacher_id": 63,
+      "bm25_score": 9.1399,
+      "pseudo_label": 0.1198
+    },
+    {
+      "teacher_id": 352,
+      "bm25_score": 8.5092,
+      "pseudo_label": 0.1028
+    },
+    {
+      "teacher_id": 202,
+      "bm25_score": 8.326,
+      "pseudo_label": 0.0978
+    },
+    {
+      "teacher_id": 414,
+      "bm25_score": 6.5845,
+      "pseudo_label": 0.0508
+    },
+    {
+      "teacher_id": 343,
+      "bm25_score": 4.7043,
+      "pseudo_label": 0.0
+    }
+  ],
+  "机器人": [
+    {
+      "teacher_id": 298,
+      "bm25_score": 15.8792,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 347,
+      "bm25_score": 15.2051,
+      "pseudo_label": 0.4509
+    },
+    {
+      "teacher_id": 603,
+      "bm25_score": 15.1659,
+      "pseudo_label": 0.4189
+    },
+    {
+      "teacher_id": 949,
+      "bm25_score": 15.1021,
+      "pseudo_label": 0.367
+    },
+    {
+      "teacher_id": 300,
+      "bm25_score": 15.0188,
+      "pseudo_label": 0.2991
+    },
+    {
+      "teacher_id": 478,
+      "bm25_score": 14.9952,
+      "pseudo_label": 0.2799
+    },
+    {
+      "teacher_id": 950,
+      "bm25_score": 14.9597,
+      "pseudo_label": 0.251
+    },
+    {
+      "teacher_id": 162,
+      "bm25_score": 14.8054,
+      "pseudo_label": 0.1253
+    },
+    {
+      "teacher_id": 367,
+      "bm25_score": 14.7216,
+      "pseudo_label": 0.057
+    },
+    {
+      "teacher_id": 938,
+      "bm25_score": 14.6516,
+      "pseudo_label": 0.0
+    }
+  ],
+  "联邦学习": [
+    {
+      "teacher_id": 46,
+      "bm25_score": 34.7099,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 251,
+      "bm25_score": 33.1998,
+      "pseudo_label": 0.9499
+    },
+    {
+      "teacher_id": 318,
+      "bm25_score": 26.3549,
+      "pseudo_label": 0.7227
+    },
+    {
+      "teacher_id": 368,
+      "bm25_score": 8.5008,
+      "pseudo_label": 0.1303
+    },
+    {
+      "teacher_id": 336,
+      "bm25_score": 4.7124,
+      "pseudo_label": 0.0045
+    },
+    {
+      "teacher_id": 1011,
+      "bm25_score": 4.7109,
+      "pseudo_label": 0.0045
+    },
+    {
+      "teacher_id": 576,
+      "bm25_score": 4.6755,
+      "pseudo_label": 0.0033
+    },
+    {
+      "teacher_id": 945,
+      "bm25_score": 4.6347,
+      "pseudo_label": 0.002
+    },
+    {
+      "teacher_id": 95,
+      "bm25_score": 4.5984,
+      "pseudo_label": 0.0008
+    },
+    {
+      "teacher_id": 750,
+      "bm25_score": 4.5756,
+      "pseudo_label": 0.0
+    }
+  ],
+  "电力市场": [
+    {
+      "teacher_id": 859,
+      "bm25_score": 21.9478,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 895,
+      "bm25_score": 21.8209,
+      "pseudo_label": 0.9276
+    },
+    {
+      "teacher_id": 779,
+      "bm25_score": 20.7324,
+      "pseudo_label": 0.3063
+    },
+    {
+      "teacher_id": 784,
+      "bm25_score": 20.7156,
+      "pseudo_label": 0.2967
+    },
+    {
+      "teacher_id": 799,
+      "bm25_score": 20.6629,
+      "pseudo_label": 0.2666
+    },
+    {
+      "teacher_id": 871,
+      "bm25_score": 20.6043,
+      "pseudo_label": 0.2332
+    },
+    {
+      "teacher_id": 805,
+      "bm25_score": 20.6043,
+      "pseudo_label": 0.2332
+    },
+    {
+      "teacher_id": 864,
+      "bm25_score": 20.5777,
+      "pseudo_label": 0.218
+    },
+    {
+      "teacher_id": 906,
+      "bm25_score": 20.3809,
+      "pseudo_label": 0.1057
+    },
+    {
+      "teacher_id": 894,
+      "bm25_score": 20.1958,
+      "pseudo_label": 0.0
+    }
+  ],
+  "云计算": [
+    {
+      "teacher_id": 153,
+      "bm25_score": 19.9672,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 146,
+      "bm25_score": 19.2536,
+      "pseudo_label": 0.3561
+    },
+    {
+      "teacher_id": 40,
+      "bm25_score": 19.146,
+      "pseudo_label": 0.259
+    },
+    {
+      "teacher_id": 158,
+      "bm25_score": 19.146,
+      "pseudo_label": 0.259
+    },
+    {
+      "teacher_id": 1002,
+      "bm25_score": 19.0745,
+      "pseudo_label": 0.1945
+    },
+    {
+      "teacher_id": 235,
+      "bm25_score": 19.0622,
+      "pseudo_label": 0.1834
+    },
+    {
+      "teacher_id": 265,
+      "bm25_score": 19.01,
+      "pseudo_label": 0.1363
+    },
+    {
+      "teacher_id": 47,
+      "bm25_score": 18.9942,
+      "pseudo_label": 0.122
+    },
+    {
+      "teacher_id": 46,
+      "bm25_score": 18.9316,
+      "pseudo_label": 0.0655
+    },
+    {
+      "teacher_id": 1008,
+      "bm25_score": 18.859,
+      "pseudo_label": 0.0
+    }
+  ],
+  "人工智能安全": [
+    {
+      "teacher_id": 125,
+      "bm25_score": 22.8708,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 138,
+      "bm25_score": 22.7904,
+      "pseudo_label": 0.9707
+    },
+    {
+      "teacher_id": 104,
+      "bm25_score": 22.6379,
+      "pseudo_label": 0.915
+    },
+    {
+      "teacher_id": 85,
+      "bm25_score": 22.1466,
+      "pseudo_label": 0.7357
+    },
+    {
+      "teacher_id": 154,
+      "bm25_score": 22.0809,
+      "pseudo_label": 0.7117
+    },
+    {
+      "teacher_id": 119,
+      "bm25_score": 22.0799,
+      "pseudo_label": 0.7113
+    },
+    {
+      "teacher_id": 117,
+      "bm25_score": 21.8923,
+      "pseudo_label": 0.6428
+    },
+    {
+      "teacher_id": 80,
+      "bm25_score": 21.3186,
+      "pseudo_label": 0.4334
+    },
+    {
+      "teacher_id": 114,
+      "bm25_score": 21.1057,
+      "pseudo_label": 0.3557
+    },
+    {
+      "teacher_id": 1000,
+      "bm25_score": 20.1312,
+      "pseudo_label": 0.0
+    }
+  ],
+  "多模态大模型": [
+    {
+      "teacher_id": 941,
+      "bm25_score": 28.5987,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 974,
+      "bm25_score": 27.8423,
+      "pseudo_label": 0.8903
+    },
+    {
+      "teacher_id": 498,
+      "bm25_score": 27.0163,
+      "pseudo_label": 0.7705
+    },
+    {
+      "teacher_id": 615,
+      "bm25_score": 25.896,
+      "pseudo_label": 0.6081
+    },
+    {
+      "teacher_id": 271,
+      "bm25_score": 23.4145,
+      "pseudo_label": 0.2482
+    },
+    {
+      "teacher_id": 75,
+      "bm25_score": 23.3559,
+      "pseudo_label": 0.2397
+    },
+    {
+      "teacher_id": 595,
+      "bm25_score": 23.2939,
+      "pseudo_label": 0.2307
+    },
+    {
+      "teacher_id": 48,
+      "bm25_score": 23.2341,
+      "pseudo_label": 0.222
+    },
+    {
+      "teacher_id": 277,
+      "bm25_score": 21.73,
+      "pseudo_label": 0.0039
+    },
+    {
+      "teacher_id": 92,
+      "bm25_score": 21.7031,
+      "pseudo_label": 0.0
+    }
+  ],
+  "智能电网": [
+    {
+      "teacher_id": 810,
+      "bm25_score": 23.8018,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 782,
+      "bm25_score": 23.1261,
+      "pseudo_label": 0.832
+    },
+    {
+      "teacher_id": 825,
+      "bm25_score": 23.0567,
+      "pseudo_label": 0.8148
+    },
+    {
+      "teacher_id": 777,
+      "bm25_score": 23.0443,
+      "pseudo_label": 0.8117
+    },
+    {
+      "teacher_id": 864,
+      "bm25_score": 22.9362,
+      "pseudo_label": 0.7848
+    },
+    {
+      "teacher_id": 906,
+      "bm25_score": 22.6178,
+      "pseudo_label": 0.7057
+    },
+    {
+      "teacher_id": 1014,
+      "bm25_score": 21.9515,
+      "pseudo_label": 0.54
+    },
+    {
+      "teacher_id": 795,
+      "bm25_score": 21.0213,
+      "pseudo_label": 0.3088
+    },
+    {
+      "teacher_id": 862,
+      "bm25_score": 20.9683,
+      "pseudo_label": 0.2956
+    },
+    {
+      "teacher_id": 308,
+      "bm25_score": 19.7792,
+      "pseudo_label": 0.0
+    }
+  ],
+  "NeurIPS": [
+    {
+      "teacher_id": 966,
+      "bm25_score": 8.0623,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 965,
+      "bm25_score": 8.045,
+      "pseudo_label": 0.9945
+    },
+    {
+      "teacher_id": 271,
+      "bm25_score": 7.9934,
+      "pseudo_label": 0.9781
+    },
+    {
+      "teacher_id": 48,
+      "bm25_score": 7.9424,
+      "pseudo_label": 0.9619
+    },
+    {
+      "teacher_id": 184,
+      "bm25_score": 7.721,
+      "pseudo_label": 0.8915
+    },
+    {
+      "teacher_id": 17,
+      "bm25_score": 7.5955,
+      "pseudo_label": 0.8516
+    },
+    {
+      "teacher_id": 279,
+      "bm25_score": 7.489,
+      "pseudo_label": 0.8177
+    },
+    {
+      "teacher_id": 973,
+      "bm25_score": 7.4443,
+      "pseudo_label": 0.8035
+    },
+    {
+      "teacher_id": 343,
+      "bm25_score": 4.9178,
+      "pseudo_label": 0.0
+    }
+  ],
+  "区块链": [
+    {
+      "teacher_id": 218,
+      "bm25_score": 24.9452,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 208,
+      "bm25_score": 24.7954,
+      "pseudo_label": 0.9037
+    },
+    {
+      "teacher_id": 232,
+      "bm25_score": 24.7656,
+      "pseudo_label": 0.8845
+    },
+    {
+      "teacher_id": 109,
+      "bm25_score": 24.7359,
+      "pseudo_label": 0.8654
+    },
+    {
+      "teacher_id": 779,
+      "bm25_score": 24.501,
+      "pseudo_label": 0.7143
+    },
+    {
+      "teacher_id": 183,
+      "bm25_score": 24.4141,
+      "pseudo_label": 0.6584
+    },
+    {
+      "teacher_id": 154,
+      "bm25_score": 24.3278,
+      "pseudo_label": 0.6029
+    },
+    {
+      "teacher_id": 137,
+      "bm25_score": 24.1287,
+      "pseudo_label": 0.4749
+    },
+    {
+      "teacher_id": 230,
+      "bm25_score": 23.8775,
+      "pseudo_label": 0.3133
+    },
+    {
+      "teacher_id": 249,
+      "bm25_score": 23.3904,
+      "pseudo_label": 0.0
+    }
+  ],
+  "CVPR": [
+    {
+      "teacher_id": 939,
+      "bm25_score": 8.6068,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 977,
+      "bm25_score": 8.588,
+      "pseudo_label": 0.987
+    },
+    {
+      "teacher_id": 966,
+      "bm25_score": 8.4954,
+      "pseudo_label": 0.9229
+    },
+    {
+      "teacher_id": 965,
+      "bm25_score": 8.4772,
+      "pseudo_label": 0.9103
+    },
+    {
+      "teacher_id": 271,
+      "bm25_score": 8.4228,
+      "pseudo_label": 0.8726
+    },
+    {
+      "teacher_id": 48,
+      "bm25_score": 8.3691,
+      "pseudo_label": 0.8355
+    },
+    {
+      "teacher_id": 343,
+      "bm25_score": 7.1622,
+      "pseudo_label": 0.0
+    }
+  ],
+  "ICML": [
+    {
+      "teacher_id": 965,
+      "bm25_score": 8.2483,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 271,
+      "bm25_score": 8.1954,
+      "pseudo_label": 0.9904
+    },
+    {
+      "teacher_id": 48,
+      "bm25_score": 8.1432,
+      "pseudo_label": 0.981
+    },
+    {
+      "teacher_id": 184,
+      "bm25_score": 7.9162,
+      "pseudo_label": 0.9398
+    },
+    {
+      "teacher_id": 188,
+      "bm25_score": 7.8836,
+      "pseudo_label": 0.9339
+    },
+    {
+      "teacher_id": 17,
+      "bm25_score": 7.7875,
+      "pseudo_label": 0.9165
+    },
+    {
+      "teacher_id": 973,
+      "bm25_score": 7.6324,
+      "pseudo_label": 0.8884
+    },
+    {
+      "teacher_id": 329,
+      "bm25_score": 2.7278,
+      "pseudo_label": 0.0
+    }
+  ],
+  "多智能体系统": [
+    {
+      "teacher_id": 426,
+      "bm25_score": 30.5923,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 956,
+      "bm25_score": 30.3331,
+      "pseudo_label": 0.9743
+    },
+    {
+      "teacher_id": 964,
+      "bm25_score": 30.2077,
+      "pseudo_label": 0.9619
+    },
+    {
+      "teacher_id": 961,
+      "bm25_score": 29.9781,
+      "pseudo_label": 0.9392
+    },
+    {
+      "teacher_id": 469,
+      "bm25_score": 29.529,
+      "pseudo_label": 0.8947
+    },
+    {
+      "teacher_id": 439,
+      "bm25_score": 27.9453,
+      "pseudo_label": 0.7378
+    },
+    {
+      "teacher_id": 354,
+      "bm25_score": 23.1899,
+      "pseudo_label": 0.2667
+    },
+    {
+      "teacher_id": 367,
+      "bm25_score": 21.0129,
+      "pseudo_label": 0.051
+    },
+    {
+      "teacher_id": 280,
+      "bm25_score": 20.7088,
+      "pseudo_label": 0.0209
+    },
+    {
+      "teacher_id": 161,
+      "bm25_score": 20.4976,
+      "pseudo_label": 0.0
+    }
+  ],
+  "计算机图形学": [
+    {
+      "teacher_id": 36,
+      "bm25_score": 48.308,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 33,
+      "bm25_score": 47.8292,
+      "pseudo_label": 0.9862
+    },
+    {
+      "teacher_id": 35,
+      "bm25_score": 47.3983,
+      "pseudo_label": 0.9737
+    },
+    {
+      "teacher_id": 27,
+      "bm25_score": 46.9428,
+      "pseudo_label": 0.9605
+    },
+    {
+      "teacher_id": 52,
+      "bm25_score": 45.2675,
+      "pseudo_label": 0.9121
+    },
+    {
+      "teacher_id": 966,
+      "bm25_score": 43.1856,
+      "pseudo_label": 0.8519
+    },
+    {
+      "teacher_id": 32,
+      "bm25_score": 41.9628,
+      "pseudo_label": 0.8165
+    },
+    {
+      "teacher_id": 59,
+      "bm25_score": 27.6253,
+      "pseudo_label": 0.4018
+    },
+    {
+      "teacher_id": 51,
+      "bm25_score": 25.7449,
+      "pseudo_label": 0.3475
+    },
+    {
+      "teacher_id": 43,
+      "bm25_score": 13.7305,
+      "pseudo_label": 0.0
+    }
+  ],
+  "ECCV": [
+    {
+      "teacher_id": 966,
+      "bm25_score": 10.8852,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 965,
+      "bm25_score": 10.8716,
+      "pseudo_label": 0.9911
+    },
+    {
+      "teacher_id": 977,
+      "bm25_score": 9.5342,
+      "pseudo_label": 0.1196
+    },
+    {
+      "teacher_id": 271,
+      "bm25_score": 9.3507,
+      "pseudo_label": 0.0
+    }
+  ],
+  "ICLR": [
+    {
+      "teacher_id": 184,
+      "bm25_score": 10.2006,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 966,
+      "bm25_score": 9.0637,
+      "pseudo_label": 0.3793
+    },
+    {
+      "teacher_id": 271,
+      "bm25_score": 8.9862,
+      "pseudo_label": 0.337
+    },
+    {
+      "teacher_id": 279,
+      "bm25_score": 8.4192,
+      "pseudo_label": 0.0275
+    },
+    {
+      "teacher_id": 973,
+      "bm25_score": 8.3689,
+      "pseudo_label": 0.0
+    }
+  ],
+  "信息安全": [
+    {
+      "teacher_id": 132,
+      "bm25_score": 21.9261,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 218,
+      "bm25_score": 21.8045,
+      "pseudo_label": 0.9427
+    },
+    {
+      "teacher_id": 115,
+      "bm25_score": 21.1896,
+      "pseudo_label": 0.6527
+    },
+    {
+      "teacher_id": 267,
+      "bm25_score": 21.0513,
+      "pseudo_label": 0.5875
+    },
+    {
+      "teacher_id": 1001,
+      "bm25_score": 20.986,
+      "pseudo_label": 0.5567
+    },
+    {
+      "teacher_id": 105,
+      "bm25_score": 20.8691,
+      "pseudo_label": 0.5015
+    },
+    {
+      "teacher_id": 252,
+      "bm25_score": 20.8554,
+      "pseudo_label": 0.4951
+    },
+    {
+      "teacher_id": 85,
+      "bm25_score": 20.8462,
+      "pseudo_label": 0.4907
+    },
+    {
+      "teacher_id": 200,
+      "bm25_score": 20.8289,
+      "pseudo_label": 0.4826
+    },
+    {
+      "teacher_id": 126,
+      "bm25_score": 19.8056,
+      "pseudo_label": 0.0
+    }
+  ],
+  "光计算": [
+    {
+      "teacher_id": 636,
+      "bm25_score": 10.735,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 398,
+      "bm25_score": 10.3447,
+      "pseudo_label": 0.9499
+    },
+    {
+      "teacher_id": 618,
+      "bm25_score": 10.2478,
+      "pseudo_label": 0.9374
+    },
+    {
+      "teacher_id": 540,
+      "bm25_score": 9.7779,
+      "pseudo_label": 0.877
+    },
+    {
+      "teacher_id": 456,
+      "bm25_score": 9.6911,
+      "pseudo_label": 0.8659
+    },
+    {
+      "teacher_id": 670,
+      "bm25_score": 9.1247,
+      "pseudo_label": 0.7931
+    },
+    {
+      "teacher_id": 519,
+      "bm25_score": 8.6195,
+      "pseudo_label": 0.7282
+    },
+    {
+      "teacher_id": 701,
+      "bm25_score": 6.4575,
+      "pseudo_label": 0.4505
+    },
+    {
+      "teacher_id": 146,
+      "bm25_score": 2.9775,
+      "pseudo_label": 0.0034
+    },
+    {
+      "teacher_id": 159,
+      "bm25_score": 2.9509,
+      "pseudo_label": 0.0
+    }
+  ],
+  "后量子密码": [
+    {
+      "teacher_id": 212,
+      "bm25_score": 30.0458,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 1005,
+      "bm25_score": 29.7406,
+      "pseudo_label": 0.9819
+    },
+    {
+      "teacher_id": 198,
+      "bm25_score": 29.3103,
+      "pseudo_label": 0.9563
+    },
+    {
+      "teacher_id": 1006,
+      "bm25_score": 28.8097,
+      "pseudo_label": 0.9266
+    },
+    {
+      "teacher_id": 242,
+      "bm25_score": 28.5316,
+      "pseudo_label": 0.9101
+    },
+    {
+      "teacher_id": 312,
+      "bm25_score": 26.2927,
+      "pseudo_label": 0.7771
+    },
+    {
+      "teacher_id": 217,
+      "bm25_score": 26.1774,
+      "pseudo_label": 0.7702
+    },
+    {
+      "teacher_id": 220,
+      "bm25_score": 25.6626,
+      "pseudo_label": 0.7397
+    },
+    {
+      "teacher_id": 471,
+      "bm25_score": 21.4996,
+      "pseudo_label": 0.4924
+    },
+    {
+      "teacher_id": 247,
+      "bm25_score": 13.2084,
+      "pseudo_label": 0.0
+    }
+  ],
+  "安全多方计算": [
+    {
+      "teacher_id": 216,
+      "bm25_score": 35.2323,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 219,
+      "bm25_score": 34.2778,
+      "pseudo_label": 0.9661
+    },
+    {
+      "teacher_id": 1006,
+      "bm25_score": 33.9307,
+      "pseudo_label": 0.9538
+    },
+    {
+      "teacher_id": 249,
+      "bm25_score": 33.7312,
+      "pseudo_label": 0.9467
+    },
+    {
+      "teacher_id": 368,
+      "bm25_score": 10.545,
+      "pseudo_label": 0.1233
+    },
+    {
+      "teacher_id": 226,
+      "bm25_score": 7.187,
+      "pseudo_label": 0.0041
+    },
+    {
+      "teacher_id": 114,
+      "bm25_score": 7.1268,
+      "pseudo_label": 0.0019
+    },
+    {
+      "teacher_id": 230,
+      "bm25_score": 7.1097,
+      "pseudo_label": 0.0013
+    },
+    {
+      "teacher_id": 77,
+      "bm25_score": 7.0981,
+      "pseudo_label": 0.0009
+    },
+    {
+      "teacher_id": 218,
+      "bm25_score": 7.0726,
+      "pseudo_label": 0.0
+    }
+  ],
+  "数据挖掘": [
+    {
+      "teacher_id": 16,
+      "bm25_score": 29.087,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 241,
+      "bm25_score": 28.9748,
+      "pseudo_label": 0.9706
+    },
+    {
+      "teacher_id": 464,
+      "bm25_score": 28.5697,
+      "pseudo_label": 0.8646
+    },
+    {
+      "teacher_id": 119,
+      "bm25_score": 28.5097,
+      "pseudo_label": 0.8489
+    },
+    {
+      "teacher_id": 996,
+      "bm25_score": 28.3845,
+      "pseudo_label": 0.8162
+    },
+    {
+      "teacher_id": 194,
+      "bm25_score": 28.3505,
+      "pseudo_label": 0.8073
+    },
+    {
+      "teacher_id": 388,
+      "bm25_score": 27.6877,
+      "pseudo_label": 0.6338
+    },
+    {
+      "teacher_id": 530,
+      "bm25_score": 26.578,
+      "pseudo_label": 0.3434
+    },
+    {
+      "teacher_id": 80,
+      "bm25_score": 26.2166,
+      "pseudo_label": 0.2488
+    },
+    {
+      "teacher_id": 791,
+      "bm25_score": 25.2657,
+      "pseudo_label": 0.0
+    }
+  ],
+  "智能机器人": [
+    {
+      "teacher_id": 950,
+      "bm25_score": 23.8189,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 478,
+      "bm25_score": 22.8506,
+      "pseudo_label": 0.8744
+    },
+    {
+      "teacher_id": 417,
+      "bm25_score": 22.8197,
+      "pseudo_label": 0.8704
+    },
+    {
+      "teacher_id": 347,
+      "bm25_score": 22.3757,
+      "pseudo_label": 0.8128
+    },
+    {
+      "teacher_id": 371,
+      "bm25_score": 20.9998,
+      "pseudo_label": 0.6343
+    },
+    {
+      "teacher_id": 345,
+      "bm25_score": 20.9662,
+      "pseudo_label": 0.6299
+    },
+    {
+      "teacher_id": 407,
+      "bm25_score": 20.1764,
+      "pseudo_label": 0.5274
+    },
+    {
+      "teacher_id": 603,
+      "bm25_score": 16.5955,
+      "pseudo_label": 0.0629
+    },
+    {
+      "teacher_id": 162,
+      "bm25_score": 16.3423,
+      "pseudo_label": 0.03
+    },
+    {
+      "teacher_id": 685,
+      "bm25_score": 16.1109,
+      "pseudo_label": 0.0
+    }
+  ],
+  "机器学习系统": [
+    {
+      "teacher_id": 945,
+      "bm25_score": 29.8294,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 156,
+      "bm25_score": 28.1683,
+      "pseudo_label": 0.8453
+    },
+    {
+      "teacher_id": 6,
+      "bm25_score": 28.0728,
+      "pseudo_label": 0.8364
+    },
+    {
+      "teacher_id": 1012,
+      "bm25_score": 26.9981,
+      "pseudo_label": 0.7363
+    },
+    {
+      "teacher_id": 190,
+      "bm25_score": 23.3269,
+      "pseudo_label": 0.3943
+    },
+    {
+      "teacher_id": 952,
+      "bm25_score": 19.6451,
+      "pseudo_label": 0.0513
+    },
+    {
+      "teacher_id": 420,
+      "bm25_score": 19.4594,
+      "pseudo_label": 0.034
+    },
+    {
+      "teacher_id": 968,
+      "bm25_score": 19.3252,
+      "pseudo_label": 0.0215
+    },
+    {
+      "teacher_id": 178,
+      "bm25_score": 19.3179,
+      "pseudo_label": 0.0208
+    },
+    {
+      "teacher_id": 1014,
+      "bm25_score": 19.0946,
+      "pseudo_label": 0.0
+    }
+  ],
+  "理论计算机科学": [
+    {
+      "teacher_id": 72,
+      "bm25_score": 38.7612,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 70,
+      "bm25_score": 37.7853,
+      "pseudo_label": 0.9106
+    },
+    {
+      "teacher_id": 999,
+      "bm25_score": 37.6596,
+      "pseudo_label": 0.8991
+    },
+    {
+      "teacher_id": 67,
+      "bm25_score": 36.5856,
+      "pseudo_label": 0.8007
+    },
+    {
+      "teacher_id": 64,
+      "bm25_score": 36.4427,
+      "pseudo_label": 0.7876
+    },
+    {
+      "teacher_id": 73,
+      "bm25_score": 33.2457,
+      "pseudo_label": 0.4948
+    },
+    {
+      "teacher_id": 65,
+      "bm25_score": 29.7456,
+      "pseudo_label": 0.1742
+    },
+    {
+      "teacher_id": 68,
+      "bm25_score": 28.9288,
+      "pseudo_label": 0.0994
+    },
+    {
+      "teacher_id": 202,
+      "bm25_score": 28.5872,
+      "pseudo_label": 0.0681
+    },
+    {
+      "teacher_id": 71,
+      "bm25_score": 27.8434,
+      "pseudo_label": 0.0
+    }
+  ],
+  "移动计算": [
+    {
+      "teacher_id": 195,
+      "bm25_score": 20.0488,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 144,
+      "bm25_score": 19.4287,
+      "pseudo_label": 0.9476
+    },
+    {
+      "teacher_id": 226,
+      "bm25_score": 19.1514,
+      "pseudo_label": 0.9241
+    },
+    {
+      "teacher_id": 187,
+      "bm25_score": 18.9873,
+      "pseudo_label": 0.9103
+    },
+    {
+      "teacher_id": 292,
+      "bm25_score": 10.8303,
+      "pseudo_label": 0.2206
+    },
+    {
+      "teacher_id": 193,
+      "bm25_score": 10.3609,
+      "pseudo_label": 0.1809
+    },
+    {
+      "teacher_id": 178,
+      "bm25_score": 10.086,
+      "pseudo_label": 0.1577
+    },
+    {
+      "teacher_id": 298,
+      "bm25_score": 8.4146,
+      "pseudo_label": 0.0164
+    },
+    {
+      "teacher_id": 234,
+      "bm25_score": 8.3503,
+      "pseudo_label": 0.0109
+    },
+    {
+      "teacher_id": 678,
+      "bm25_score": 8.2208,
+      "pseudo_label": 0.0
+    }
+  ],
+  "类脑计算": [
+    {
+      "teacher_id": 685,
+      "bm25_score": 20.566,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 96,
+      "bm25_score": 20.4838,
+      "pseudo_label": 0.9953
+    },
+    {
+      "teacher_id": 79,
+      "bm25_score": 20.3655,
+      "pseudo_label": 0.9886
+    },
+    {
+      "teacher_id": 26,
+      "bm25_score": 20.066,
+      "pseudo_label": 0.9716
+    },
+    {
+      "teacher_id": 602,
+      "bm25_score": 19.9858,
+      "pseudo_label": 0.967
+    },
+    {
+      "teacher_id": 101,
+      "bm25_score": 19.6481,
+      "pseudo_label": 0.9478
+    },
+    {
+      "teacher_id": 266,
+      "bm25_score": 19.0252,
+      "pseudo_label": 0.9124
+    },
+    {
+      "teacher_id": 588,
+      "bm25_score": 9.8701,
+      "pseudo_label": 0.3919
+    },
+    {
+      "teacher_id": 731,
+      "bm25_score": 9.3051,
+      "pseudo_label": 0.3598
+    },
+    {
+      "teacher_id": 146,
+      "bm25_score": 2.9775,
+      "pseudo_label": 0.0
+    }
+  ],
+  "能源互联网": [
+    {
+      "teacher_id": 454,
+      "bm25_score": 34.4788,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 776,
+      "bm25_score": 31.9881,
+      "pseudo_label": 0.8455
+    },
+    {
+      "teacher_id": 345,
+      "bm25_score": 30.4322,
+      "pseudo_label": 0.749
+    },
+    {
+      "teacher_id": 893,
+      "bm25_score": 30.1974,
+      "pseudo_label": 0.7344
+    },
+    {
+      "teacher_id": 791,
+      "bm25_score": 29.8532,
+      "pseudo_label": 0.7131
+    },
+    {
+      "teacher_id": 795,
+      "bm25_score": 28.789,
+      "pseudo_label": 0.6471
+    },
+    {
+      "teacher_id": 811,
+      "bm25_score": 23.2957,
+      "pseudo_label": 0.3063
+    },
+    {
+      "teacher_id": 678,
+      "bm25_score": 21.1379,
+      "pseudo_label": 0.1724
+    },
+    {
+      "teacher_id": 139,
+      "bm25_score": 18.4899,
+      "pseudo_label": 0.0082
+    },
+    {
+      "teacher_id": 998,
+      "bm25_score": 18.358,
+      "pseudo_label": 0.0
+    }
+  ],
+  "计算机体系结构": [
+    {
+      "teacher_id": 43,
+      "bm25_score": 53.4933,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 146,
+      "bm25_score": 51.5884,
+      "pseudo_label": 0.9486
+    },
+    {
+      "teacher_id": 994,
+      "bm25_score": 51.5084,
+      "pseudo_label": 0.9465
+    },
+    {
+      "teacher_id": 1012,
+      "bm25_score": 50.913,
+      "pseudo_label": 0.9304
+    },
+    {
+      "teacher_id": 159,
+      "bm25_score": 50.1375,
+      "pseudo_label": 0.9095
+    },
+    {
+      "teacher_id": 44,
+      "bm25_score": 49.3813,
+      "pseudo_label": 0.8891
+    },
+    {
+      "teacher_id": 5,
+      "bm25_score": 31.5796,
+      "pseudo_label": 0.4089
+    },
+    {
+      "teacher_id": 567,
+      "bm25_score": 30.8004,
+      "pseudo_label": 0.3879
+    },
+    {
+      "teacher_id": 236,
+      "bm25_score": 29.9198,
+      "pseudo_label": 0.3641
+    },
+    {
+      "teacher_id": 12,
+      "bm25_score": 16.4197,
+      "pseudo_label": 0.0
+    }
+  ],
+  "ICCV": [
+    {
+      "teacher_id": 966,
+      "bm25_score": 9.4314,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 965,
+      "bm25_score": 9.4111,
+      "pseudo_label": 0.9492
+    },
+    {
+      "teacher_id": 48,
+      "bm25_score": 9.2911,
+      "pseudo_label": 0.6486
+    },
+    {
+      "teacher_id": 184,
+      "bm25_score": 9.0321,
+      "pseudo_label": 0.0
+    }
+  ],
+  "INFOCOM": [
+    {
+      "teacher_id": 145,
+      "bm25_score": 11.4255,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 279,
+      "bm25_score": 10.4246,
+      "pseudo_label": 0.5882
+    },
+    {
+      "teacher_id": 238,
+      "bm25_score": 9.301,
+      "pseudo_label": 0.1259
+    },
+    {
+      "teacher_id": 188,
+      "bm25_score": 8.995,
+      "pseudo_label": 0.0
+    }
+  ],
+  "人形机器人": [
+    {
+      "teacher_id": 478,
+      "bm25_score": 33.193,
+      "pseudo_label": 1.0
+    },
+    {
+      "teacher_id": 371,
+      "bm25_score": 30.978,
+      "pseudo_label": 0.8781
+    },
+    {
+      "teacher_id": 631,
+      "bm25_score": 25.614,
+      "pseudo_label": 0.583
+    },
+    {
+      "teacher_id": 506,
+      "bm25_score": 21.8092,
+      "pseudo_label": 0.3736
+    },
+    {
+      "teacher_id": 329,
+      "bm25_score": 15.9918,
+      "pseudo_label": 0.0535
+    },
+    {
+      "teacher_id": 298,
+      "bm25_score": 15.8792,
+      "pseudo_label": 0.0473
+    },
+    {
+      "teacher_id": 347,
+      "bm25_score": 15.2051,
+      "pseudo_label": 0.0103
+    },
+    {
+      "teacher_id": 603,
+      "bm25_score": 15.1659,
+      "pseudo_label": 0.0081
+    },
+    {
+      "teacher_id": 949,
+      "bm25_score": 15.1021,
+      "pseudo_label": 0.0046
+    },
+    {
+      "teacher_id": 300,
+      "bm25_score": 15.0188,
+      "pseudo_label": 0.0
+    }
+  ]
+}

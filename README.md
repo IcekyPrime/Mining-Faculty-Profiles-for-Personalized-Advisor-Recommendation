@@ -117,6 +117,14 @@
   输出规则 / BM25 / 纯主题 / 混合四种方法的 NDCG@10 / MAP@10 / HitRate@10 / P@5，
   当前结果 BM25F 0.768、混合 0.798；纯主题 0.097 只作诊断，不单独用于排序。详见
   `docs/eval/results.md`
+- **课程扩展分析（v2.8）**：7 项数据挖掘课程改进，全部在 `scripts/` 下，不影响原程序。
+  `evaluate_retrieval.py --expanded --kappa --pooling --ablation`：评估集扩容（10→38 条查询）、
+  Cohen's κ 标注一致性、伪相关反馈池、消融实验 + 显著性检验。
+  `recommendation_extensions.py --ltr --student-profile`：LambdaMART 学习排序（NDCG@10 0.867→0.883）、
+  学生画像个性化推荐（5 个 demo 画像）。
+  `teacher_analytics.py --anomaly --fwci --time-decay`：IsolationForest 异常检测（39 人/5%）、
+  FWCI 学院内引用归一化（445 人有 FWCI）、时间衰减分析（hl=5 推荐值）。
+  完整报告见 [`docs/eval/extensions_report.md`](docs/eval/extensions_report.md)
 - **荣誉时间线（本轮新增）**：数据工坊不再用普通逗号切荣誉，`2025年，上海市科技进步一等奖`
   会保留“年份 + 奖项”的完整关系；服务端统一过滤“国内奖励：/论文奖励：”等分区标题，
   按年份倒序展示，并在详情接口新增 `honor_stats`（有年份比例、最新年份、近五年数量、类别分布）。
@@ -299,7 +307,13 @@ APK 内页面是 HTTPS asset origin，`MIXED_CONTENT_NEVER_ALLOW` 会拦截明�
 │  ├─ merge_authoritative_data.py  补录整合版并入项目库（自动备份、去重、年份修复）
 │  ├─ supplement_papers.py         用 OpenAlex/Crossref 补代表论文（v2.7 合入）
 │  ├─ data_quality_report.py       生成数据质量报告
-│  ├─ evaluate_retrieval.py        规则/BM25/纯主题/混合四方法离线评估
+│  ├─ evaluate_retrieval.py        规则/BM25/纯主题/混合四方法离线评估 + 扩展分析
+│  │                              （--expanded 扩容、--kappa 一致性、--pooling 伪相关反馈、--ablation 消融）
+│  ├─ recommendation_extensions.py LambdaMART 学习排序 + 学生画像个性化推荐
+│  ├─ teacher_analytics.py         异常检测 / FWCI 归一化 / 时间衰减分析
+│  ├─ network_centrality.py        协作网络中心性分析（度/介数/PageRank/接近中心性 + 桥梁识别）
+│  ├─ shap_explainability.py       SHAP 模型可解释性（LambdaMART 特征贡献 + 局部解释）
+│  ├─ pca_visualization.py         PCA 降维可视化（方差解释比 + 学院/H指数分布）
 │  ├─ ingest_cs_names.py           计算机学院姓名补录
 │  └─ open_browser.py              run.bat 用：等服务健康后打开浏览器
 ├─ data/
@@ -325,6 +339,10 @@ APK 内页面是 HTTPS asset origin，`MIXED_CONTENT_NEVER_ALLOW` 会拦截明�
 │  ├─ 底层审查与数据挖掘改进.md 本轮 bug 修复、公开项目对照与改进清单
 │  ├─ 2026-11-26-审查复核与修复记录.md 第三方审查逐条复核、修复项与权威数字
 │  ├─ 数据挖掘-算法与泛化说明.md 公式、复杂度、泛化边界与课程知识点对应
+│  ├─ eval/extensions_report.md   7 项课程扩展分析合并报告
+│  ├─ eval/extensions/network_centrality_report.md   网络中心性分析（度/介数/PageRank/桥梁）
+│  ├─ eval/extensions/shap_explainability_report.md  SHAP 可解释性（全局+局部特征贡献）
+│  └─ eval/extensions/pca_visualization_report.md    PCA 降维可视化（方差解释比+学院分布）
 │  └─ 设计文档.md             最初的方案文档
 ├─ db.py                     表结构与写入（数据层）
 ├─ run_pipeline.py           数据采集入口
@@ -364,6 +382,9 @@ APK 内页面是 HTTPS asset origin，`MIXED_CONTENT_NEVER_ALLOW` 会拦截明�
 | scripts/evaluate_retrieval.py | NDCG@10 / MAP@10 / HitRate@10 / P@5 | 检索评估 |
 | score.py | 原始四维加权：论文 0.10 + 引用 0.20 + 荣誉 0.35 + 教学 0.25；教学缺失用全库均值填充并标记 `teaching_imputed` | 综合评分 |
 | score_v2.py | 五维分位数排名 + 缺失感知加权 + 收缩先验 + 荣誉年份时效（改进评分，与原始分并列展示） | 综合评分 |
+| network_centrality.py | 度/介数/PageRank/接近中心性 + Louvain 跨社区桥梁识别 | 社会网络分析 |
+| shap_explainability.py | SHAP TreeExplainer 全局特征重要性 + 局部教师贡献分解 | 模型可解释性 |
+| pca_visualization.py | PCA 降维 + 方差解释比 + 学院/H指数 2D 分布可视化 | 数据归约/降维 |
 
 ### 检索、主题与评估
 
@@ -448,6 +469,11 @@ python processing/refresh.py
 # 数据质量报告与检索评估
 python scripts/data_quality_report.py
 python scripts/evaluate_retrieval.py
+
+# 课程扩展分析（独立脚本，不依赖 Flask 服务）
+python scripts/network_centrality.py     # 协作网络中心性（度/介数/PageRank/桥梁）
+python scripts/shap_explainability.py    # SHAP 模型可解释性（需先运行 --ltr 训练模型）
+python scripts/pca_visualization.py      # PCA 降维可视化
 ```
 
 ## 配置

@@ -1,0 +1,2772 @@
+{
+  "baseline": "full_hybrid",
+  "alpha": 0.05,
+  "n_queries": 38,
+  "random_seeds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "queries": [
+    "计算机视觉",
+    "操作系统",
+    "强化学习",
+    "自然语言处理",
+    "芯片设计",
+    "医学图像",
+    "分布式系统",
+    "知识图谱",
+    "机器人",
+    "联邦学习",
+    "电力市场",
+    "云计算",
+    "人工智能安全",
+    "多模态大模型",
+    "智能电网",
+    "NeurIPS",
+    "区块链",
+    "CVPR",
+    "ICML",
+    "多智能体系统",
+    "计算机图形学",
+    "ECCV",
+    "ICLR",
+    "信息安全",
+    "光计算",
+    "后量子密码",
+    "安全多方计算",
+    "数据挖掘",
+    "智能机器人",
+    "机器学习系统",
+    "理论计算机科学",
+    "移动计算",
+    "类脑计算",
+    "能源互联网",
+    "计算机体系结构",
+    "ICCV",
+    "INFOCOM",
+    "人形机器人"
+  ],
+  "per_query": {
+    "full_hybrid": [
+      {
+        "query": "计算机视觉",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.6847,
+        "map10": 0.4896,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "操作系统",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.7314,
+        "map10": 0.5385,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "强化学习",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.6269,
+        "map10": 0.4048,
+        "hr10": 1.0,
+        "p5": 0.4
+      },
+      {
+        "query": "自然语言处理",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.8807,
+        "map10": 0.7469,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "芯片设计",
+        "source": "manual",
+        "relevant_count": 7,
+        "ndcg10": 0.803,
+        "map10": 0.7254,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "医学图像",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "分布式系统",
+        "source": "manual",
+        "relevant_count": 7,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "知识图谱",
+        "source": "manual",
+        "relevant_count": 3,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "机器人",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.2529,
+        "map10": 0.125,
+        "hr10": 1.0,
+        "p5": 0.2
+      },
+      {
+        "query": "联邦学习",
+        "source": "manual",
+        "relevant_count": 4,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "电力市场",
+        "source": "keyword",
+        "relevant_count": 14,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "云计算",
+        "source": "keyword",
+        "relevant_count": 13,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "人工智能安全",
+        "source": "keyword",
+        "relevant_count": 13,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "多模态大模型",
+        "source": "keyword",
+        "relevant_count": 15,
+        "ndcg10": 0.9266,
+        "map10": 0.8664,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "智能电网",
+        "source": "keyword",
+        "relevant_count": 13,
+        "ndcg10": 0.8701,
+        "map10": 0.8,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "NeurIPS",
+        "source": "keyword",
+        "relevant_count": 9,
+        "ndcg10": 0.9292,
+        "map10": 0.8889,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "区块链",
+        "source": "keyword",
+        "relevant_count": 13,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "CVPR",
+        "source": "keyword",
+        "relevant_count": 7,
+        "ndcg10": 0.9084,
+        "map10": 0.8571,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "ICML",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 0.9202,
+        "map10": 0.875,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "多智能体系统",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 0.7277,
+        "map10": 0.5781,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "计算机图形学",
+        "source": "keyword",
+        "relevant_count": 7,
+        "ndcg10": 0.9133,
+        "map10": 0.826,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "ECCV",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 0.8319,
+        "map10": 0.75,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "ICLR",
+        "source": "keyword",
+        "relevant_count": 5,
+        "ndcg10": 0.8688,
+        "map10": 0.8,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "信息安全",
+        "source": "keyword",
+        "relevant_count": 12,
+        "ndcg10": 0.9364,
+        "map10": 0.9,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "光计算",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 0.9202,
+        "map10": 0.875,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "后量子密码",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 0.9918,
+        "map10": 0.9705,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "安全多方计算",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "数据挖掘",
+        "source": "keyword",
+        "relevant_count": 14,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "智能机器人",
+        "source": "keyword",
+        "relevant_count": 10,
+        "ndcg10": 0.8007,
+        "map10": 0.7,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "机器学习系统",
+        "source": "keyword",
+        "relevant_count": 6,
+        "ndcg10": 0.7751,
+        "map10": 0.6667,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "理论计算机科学",
+        "source": "keyword",
+        "relevant_count": 6,
+        "ndcg10": 0.8922,
+        "map10": 0.8333,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "移动计算",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "类脑计算",
+        "source": "keyword",
+        "relevant_count": 7,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "能源互联网",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 0.9918,
+        "map10": 0.9705,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "计算机体系结构",
+        "source": "keyword",
+        "relevant_count": 6,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "ICCV",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 0.8319,
+        "map10": 0.75,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "INFOCOM",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 0.8319,
+        "map10": 0.75,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "人形机器人",
+        "source": "keyword",
+        "relevant_count": 5,
+        "ndcg10": 0.7227,
+        "map10": 0.6,
+        "hr10": 1.0,
+        "p5": 0.6
+      }
+    ],
+    "bm25_only": [
+      {
+        "query": "计算机视觉",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.6443,
+        "map10": 0.434,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "操作系统",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.6066,
+        "map10": 0.4329,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "强化学习",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.4094,
+        "map10": 0.2347,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "自然语言处理",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.8807,
+        "map10": 0.7469,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "芯片设计",
+        "source": "manual",
+        "relevant_count": 7,
+        "ndcg10": 0.803,
+        "map10": 0.7254,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "医学图像",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "分布式系统",
+        "source": "manual",
+        "relevant_count": 7,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "知识图谱",
+        "source": "manual",
+        "relevant_count": 3,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "机器人",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.3327,
+        "map10": 0.1562,
+        "hr10": 1.0,
+        "p5": 0.2
+      },
+      {
+        "query": "联邦学习",
+        "source": "manual",
+        "relevant_count": 4,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "电力市场",
+        "source": "keyword",
+        "relevant_count": 14,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "云计算",
+        "source": "keyword",
+        "relevant_count": 13,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "人工智能安全",
+        "source": "keyword",
+        "relevant_count": 13,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "多模态大模型",
+        "source": "keyword",
+        "relevant_count": 15,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "智能电网",
+        "source": "keyword",
+        "relevant_count": 13,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "NeurIPS",
+        "source": "keyword",
+        "relevant_count": 9,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "区块链",
+        "source": "keyword",
+        "relevant_count": 13,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "CVPR",
+        "source": "keyword",
+        "relevant_count": 7,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "ICML",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "多智能体系统",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 0.8359,
+        "map10": 0.75,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "计算机图形学",
+        "source": "keyword",
+        "relevant_count": 7,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "ECCV",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "ICLR",
+        "source": "keyword",
+        "relevant_count": 5,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "信息安全",
+        "source": "keyword",
+        "relevant_count": 12,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "光计算",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "后量子密码",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "安全多方计算",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "数据挖掘",
+        "source": "keyword",
+        "relevant_count": 14,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "智能机器人",
+        "source": "keyword",
+        "relevant_count": 10,
+        "ndcg10": 0.8007,
+        "map10": 0.7,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "机器学习系统",
+        "source": "keyword",
+        "relevant_count": 6,
+        "ndcg10": 0.9833,
+        "map10": 0.9444,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "理论计算机科学",
+        "source": "keyword",
+        "relevant_count": 6,
+        "ndcg10": 0.9833,
+        "map10": 0.9444,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "移动计算",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "类脑计算",
+        "source": "keyword",
+        "relevant_count": 7,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "能源互联网",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 0.9202,
+        "map10": 0.875,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "计算机体系结构",
+        "source": "keyword",
+        "relevant_count": 6,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "ICCV",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "INFOCOM",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "人形机器人",
+        "source": "keyword",
+        "relevant_count": 5,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      }
+    ],
+    "topic_only": [
+      {
+        "query": "计算机视觉",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.4856,
+        "map10": 0.2875,
+        "hr10": 1.0,
+        "p5": 0.4
+      },
+      {
+        "query": "操作系统",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.2529,
+        "map10": 0.125,
+        "hr10": 1.0,
+        "p5": 0.2
+      },
+      {
+        "query": "强化学习",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "自然语言处理",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "芯片设计",
+        "source": "manual",
+        "relevant_count": 7,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "医学图像",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.2357,
+        "map10": 0.0903,
+        "hr10": 1.0,
+        "p5": 0.2
+      },
+      {
+        "query": "分布式系统",
+        "source": "manual",
+        "relevant_count": 7,
+        "ndcg10": 0.6178,
+        "map10": 0.4028,
+        "hr10": 1.0,
+        "p5": 0.4
+      },
+      {
+        "query": "知识图谱",
+        "source": "manual",
+        "relevant_count": 3,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "机器人",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "联邦学习",
+        "source": "manual",
+        "relevant_count": 4,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "电力市场",
+        "source": "keyword",
+        "relevant_count": 14,
+        "ndcg10": 0.6379,
+        "map10": 0.4959,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "云计算",
+        "source": "keyword",
+        "relevant_count": 13,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "人工智能安全",
+        "source": "keyword",
+        "relevant_count": 13,
+        "ndcg10": 0.3437,
+        "map10": 0.1917,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "多模态大模型",
+        "source": "keyword",
+        "relevant_count": 15,
+        "ndcg10": 0.2201,
+        "map10": 0.1,
+        "hr10": 1.0,
+        "p5": 0.2
+      },
+      {
+        "query": "智能电网",
+        "source": "keyword",
+        "relevant_count": 13,
+        "ndcg10": 0.4448,
+        "map10": 0.2233,
+        "hr10": 1.0,
+        "p5": 0.4
+      },
+      {
+        "query": "NeurIPS",
+        "source": "keyword",
+        "relevant_count": 9,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "区块链",
+        "source": "keyword",
+        "relevant_count": 13,
+        "ndcg10": 0.4132,
+        "map10": 0.236,
+        "hr10": 1.0,
+        "p5": 0.4
+      },
+      {
+        "query": "CVPR",
+        "source": "keyword",
+        "relevant_count": 7,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "ICML",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "多智能体系统",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 0.2108,
+        "map10": 0.0774,
+        "hr10": 1.0,
+        "p5": 0.2
+      },
+      {
+        "query": "计算机图形学",
+        "source": "keyword",
+        "relevant_count": 7,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "ECCV",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "ICLR",
+        "source": "keyword",
+        "relevant_count": 5,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "信息安全",
+        "source": "keyword",
+        "relevant_count": 12,
+        "ndcg10": 0.2064,
+        "map10": 0.0693,
+        "hr10": 1.0,
+        "p5": 0.0
+      },
+      {
+        "query": "光计算",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 0.0843,
+        "map10": 0.0179,
+        "hr10": 1.0,
+        "p5": 0.0
+      },
+      {
+        "query": "后量子密码",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "安全多方计算",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "数据挖掘",
+        "source": "keyword",
+        "relevant_count": 14,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "智能机器人",
+        "source": "keyword",
+        "relevant_count": 10,
+        "ndcg10": 0.0734,
+        "map10": 0.0143,
+        "hr10": 1.0,
+        "p5": 0.0
+      },
+      {
+        "query": "机器学习系统",
+        "source": "keyword",
+        "relevant_count": 6,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "理论计算机科学",
+        "source": "keyword",
+        "relevant_count": 6,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "移动计算",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "类脑计算",
+        "source": "keyword",
+        "relevant_count": 7,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "能源互联网",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "计算机体系结构",
+        "source": "keyword",
+        "relevant_count": 6,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "ICCV",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "INFOCOM",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "人形机器人",
+        "source": "keyword",
+        "relevant_count": 5,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      }
+    ],
+    "hybrid_8_2": [
+      {
+        "query": "计算机视觉",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.6744,
+        "map10": 0.4688,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "操作系统",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.697,
+        "map10": 0.4871,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "强化学习",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.474,
+        "map10": 0.3042,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "自然语言处理",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.8807,
+        "map10": 0.7469,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "芯片设计",
+        "source": "manual",
+        "relevant_count": 7,
+        "ndcg10": 0.803,
+        "map10": 0.7254,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "医学图像",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "分布式系统",
+        "source": "manual",
+        "relevant_count": 7,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "知识图谱",
+        "source": "manual",
+        "relevant_count": 3,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "机器人",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.2529,
+        "map10": 0.125,
+        "hr10": 1.0,
+        "p5": 0.2
+      },
+      {
+        "query": "联邦学习",
+        "source": "manual",
+        "relevant_count": 4,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "电力市场",
+        "source": "keyword",
+        "relevant_count": 14,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "云计算",
+        "source": "keyword",
+        "relevant_count": 13,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "人工智能安全",
+        "source": "keyword",
+        "relevant_count": 13,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "多模态大模型",
+        "source": "keyword",
+        "relevant_count": 15,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "智能电网",
+        "source": "keyword",
+        "relevant_count": 13,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "NeurIPS",
+        "source": "keyword",
+        "relevant_count": 9,
+        "ndcg10": 0.9292,
+        "map10": 0.8889,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "区块链",
+        "source": "keyword",
+        "relevant_count": 13,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "CVPR",
+        "source": "keyword",
+        "relevant_count": 7,
+        "ndcg10": 0.9084,
+        "map10": 0.8571,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "ICML",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 0.9202,
+        "map10": 0.875,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "多智能体系统",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 0.8359,
+        "map10": 0.75,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "计算机图形学",
+        "source": "keyword",
+        "relevant_count": 7,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "ECCV",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 0.8319,
+        "map10": 0.75,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "ICLR",
+        "source": "keyword",
+        "relevant_count": 5,
+        "ndcg10": 0.8688,
+        "map10": 0.8,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "信息安全",
+        "source": "keyword",
+        "relevant_count": 12,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "光计算",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "后量子密码",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "安全多方计算",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "数据挖掘",
+        "source": "keyword",
+        "relevant_count": 14,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "智能机器人",
+        "source": "keyword",
+        "relevant_count": 10,
+        "ndcg10": 0.8007,
+        "map10": 0.7,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "机器学习系统",
+        "source": "keyword",
+        "relevant_count": 6,
+        "ndcg10": 0.8829,
+        "map10": 0.8056,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "理论计算机科学",
+        "source": "keyword",
+        "relevant_count": 6,
+        "ndcg10": 0.9877,
+        "map10": 0.9583,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "移动计算",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "类脑计算",
+        "source": "keyword",
+        "relevant_count": 7,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "能源互联网",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 0.9933,
+        "map10": 0.975,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "计算机体系结构",
+        "source": "keyword",
+        "relevant_count": 6,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "ICCV",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 0.8319,
+        "map10": 0.75,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "INFOCOM",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 0.8319,
+        "map10": 0.75,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "人形机器人",
+        "source": "keyword",
+        "relevant_count": 5,
+        "ndcg10": 0.9758,
+        "map10": 0.925,
+        "hr10": 1.0,
+        "p5": 0.8
+      }
+    ],
+    "hybrid_2_8": [
+      {
+        "query": "计算机视觉",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.6479,
+        "map10": 0.5,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "操作系统",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.6582,
+        "map10": 0.4635,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "强化学习",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.4525,
+        "map10": 0.2458,
+        "hr10": 1.0,
+        "p5": 0.4
+      },
+      {
+        "query": "自然语言处理",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.8807,
+        "map10": 0.7469,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "芯片设计",
+        "source": "manual",
+        "relevant_count": 7,
+        "ndcg10": 0.803,
+        "map10": 0.7254,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "医学图像",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.6188,
+        "map10": 0.4375,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "分布式系统",
+        "source": "manual",
+        "relevant_count": 7,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "知识图谱",
+        "source": "manual",
+        "relevant_count": 3,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "机器人",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.0979,
+        "map10": 0.025,
+        "hr10": 1.0,
+        "p5": 0.2
+      },
+      {
+        "query": "联邦学习",
+        "source": "manual",
+        "relevant_count": 4,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "电力市场",
+        "source": "keyword",
+        "relevant_count": 14,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "云计算",
+        "source": "keyword",
+        "relevant_count": 13,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "人工智能安全",
+        "source": "keyword",
+        "relevant_count": 13,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "多模态大模型",
+        "source": "keyword",
+        "relevant_count": 15,
+        "ndcg10": 0.6988,
+        "map10": 0.53,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "智能电网",
+        "source": "keyword",
+        "relevant_count": 13,
+        "ndcg10": 0.8701,
+        "map10": 0.8,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "NeurIPS",
+        "source": "keyword",
+        "relevant_count": 9,
+        "ndcg10": 0.9292,
+        "map10": 0.8889,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "区块链",
+        "source": "keyword",
+        "relevant_count": 13,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "CVPR",
+        "source": "keyword",
+        "relevant_count": 7,
+        "ndcg10": 0.9084,
+        "map10": 0.8571,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "ICML",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 0.9202,
+        "map10": 0.875,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "多智能体系统",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 0.6667,
+        "map10": 0.4621,
+        "hr10": 1.0,
+        "p5": 0.4
+      },
+      {
+        "query": "计算机图形学",
+        "source": "keyword",
+        "relevant_count": 7,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "ECCV",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 0.8319,
+        "map10": 0.75,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "ICLR",
+        "source": "keyword",
+        "relevant_count": 5,
+        "ndcg10": 0.8688,
+        "map10": 0.8,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "信息安全",
+        "source": "keyword",
+        "relevant_count": 12,
+        "ndcg10": 0.9364,
+        "map10": 0.9,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "光计算",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 0.4125,
+        "map10": 0.25,
+        "hr10": 1.0,
+        "p5": 0.4
+      },
+      {
+        "query": "后量子密码",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 0.5178,
+        "map10": 0.2899,
+        "hr10": 1.0,
+        "p5": 0.4
+      },
+      {
+        "query": "安全多方计算",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 0.9829,
+        "map10": 0.95,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "数据挖掘",
+        "source": "keyword",
+        "relevant_count": 14,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "智能机器人",
+        "source": "keyword",
+        "relevant_count": 10,
+        "ndcg10": 0.46,
+        "map10": 0.24,
+        "hr10": 1.0,
+        "p5": 0.4
+      },
+      {
+        "query": "机器学习系统",
+        "source": "keyword",
+        "relevant_count": 6,
+        "ndcg10": 0.4935,
+        "map10": 0.3333,
+        "hr10": 1.0,
+        "p5": 0.4
+      },
+      {
+        "query": "理论计算机科学",
+        "source": "keyword",
+        "relevant_count": 6,
+        "ndcg10": 0.7751,
+        "map10": 0.6667,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "移动计算",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 0.3904,
+        "map10": 0.25,
+        "hr10": 1.0,
+        "p5": 0.2
+      },
+      {
+        "query": "类脑计算",
+        "source": "keyword",
+        "relevant_count": 7,
+        "ndcg10": 0.5857,
+        "map10": 0.4286,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "能源互联网",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 0.539,
+        "map10": 0.375,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "计算机体系结构",
+        "source": "keyword",
+        "relevant_count": 6,
+        "ndcg10": 0.4329,
+        "map10": 0.25,
+        "hr10": 1.0,
+        "p5": 0.4
+      },
+      {
+        "query": "ICCV",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 0.8319,
+        "map10": 0.75,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "INFOCOM",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 0.8319,
+        "map10": 0.75,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "人形机器人",
+        "source": "keyword",
+        "relevant_count": 5,
+        "ndcg10": 0.7227,
+        "map10": 0.6,
+        "hr10": 1.0,
+        "p5": 0.6
+      }
+    ],
+    "rule_only": [
+      {
+        "query": "计算机视觉",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.9202,
+        "map10": 0.875,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "操作系统",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "强化学习",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.9202,
+        "map10": 0.875,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "自然语言处理",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "芯片设计",
+        "source": "manual",
+        "relevant_count": 7,
+        "ndcg10": 0.9493,
+        "map10": 0.8736,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "医学图像",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "分布式系统",
+        "source": "manual",
+        "relevant_count": 7,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "知识图谱",
+        "source": "manual",
+        "relevant_count": 3,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 0.6
+      },
+      {
+        "query": "机器人",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.7458,
+        "map10": 0.625,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "联邦学习",
+        "source": "manual",
+        "relevant_count": 4,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "电力市场",
+        "source": "keyword",
+        "relevant_count": 14,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "云计算",
+        "source": "keyword",
+        "relevant_count": 13,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "人工智能安全",
+        "source": "keyword",
+        "relevant_count": 13,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "多模态大模型",
+        "source": "keyword",
+        "relevant_count": 15,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "智能电网",
+        "source": "keyword",
+        "relevant_count": 13,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "NeurIPS",
+        "source": "keyword",
+        "relevant_count": 9,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "区块链",
+        "source": "keyword",
+        "relevant_count": 13,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "CVPR",
+        "source": "keyword",
+        "relevant_count": 7,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "ICML",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "多智能体系统",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "计算机图形学",
+        "source": "keyword",
+        "relevant_count": 7,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "ECCV",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "ICLR",
+        "source": "keyword",
+        "relevant_count": 5,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "信息安全",
+        "source": "keyword",
+        "relevant_count": 12,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "光计算",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "后量子密码",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "安全多方计算",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "数据挖掘",
+        "source": "keyword",
+        "relevant_count": 14,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "智能机器人",
+        "source": "keyword",
+        "relevant_count": 10,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "机器学习系统",
+        "source": "keyword",
+        "relevant_count": 6,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "理论计算机科学",
+        "source": "keyword",
+        "relevant_count": 6,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "移动计算",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "类脑计算",
+        "source": "keyword",
+        "relevant_count": 7,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "能源互联网",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "计算机体系结构",
+        "source": "keyword",
+        "relevant_count": 6,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      },
+      {
+        "query": "ICCV",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "INFOCOM",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 0.8
+      },
+      {
+        "query": "人形机器人",
+        "source": "keyword",
+        "relevant_count": 5,
+        "ndcg10": 1.0,
+        "map10": 1.0,
+        "hr10": 1.0,
+        "p5": 1.0
+      }
+    ],
+    "random": [
+      {
+        "query": "计算机视觉",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.0319,
+        "map10": 0.0125,
+        "hr10": 0.2,
+        "p5": 0.04
+      },
+      {
+        "query": "操作系统",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "强化学习",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.0152,
+        "map10": 0.0028,
+        "hr10": 0.2,
+        "p5": 0.0
+      },
+      {
+        "query": "自然语言处理",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.0196,
+        "map10": 0.005,
+        "hr10": 0.2,
+        "p5": 0.04
+      },
+      {
+        "query": "芯片设计",
+        "source": "manual",
+        "relevant_count": 7,
+        "ndcg10": 0.0159,
+        "map10": 0.0029,
+        "hr10": 0.2,
+        "p5": 0.0
+      },
+      {
+        "query": "医学图像",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "分布式系统",
+        "source": "manual",
+        "relevant_count": 7,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "知识图谱",
+        "source": "manual",
+        "relevant_count": 3,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "机器人",
+        "source": "manual",
+        "relevant_count": 8,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "联邦学习",
+        "source": "manual",
+        "relevant_count": 4,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "电力市场",
+        "source": "keyword",
+        "relevant_count": 14,
+        "ndcg10": 0.0309,
+        "map10": 0.0065,
+        "hr10": 0.4,
+        "p5": 0.04
+      },
+      {
+        "query": "云计算",
+        "source": "keyword",
+        "relevant_count": 13,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "人工智能安全",
+        "source": "keyword",
+        "relevant_count": 13,
+        "ndcg10": 0.0157,
+        "map10": 0.0033,
+        "hr10": 0.2,
+        "p5": 0.0
+      },
+      {
+        "query": "多模态大模型",
+        "source": "keyword",
+        "relevant_count": 15,
+        "ndcg10": 0.0336,
+        "map10": 0.0079,
+        "hr10": 0.4,
+        "p5": 0.04
+      },
+      {
+        "query": "智能电网",
+        "source": "keyword",
+        "relevant_count": 13,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "NeurIPS",
+        "source": "keyword",
+        "relevant_count": 9,
+        "ndcg10": 0.0142,
+        "map10": 0.0025,
+        "hr10": 0.2,
+        "p5": 0.0
+      },
+      {
+        "query": "区块链",
+        "source": "keyword",
+        "relevant_count": 13,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "CVPR",
+        "source": "keyword",
+        "relevant_count": 7,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "ICML",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 0.0305,
+        "map10": 0.0056,
+        "hr10": 0.4,
+        "p5": 0.0
+      },
+      {
+        "query": "多智能体系统",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "计算机图形学",
+        "source": "keyword",
+        "relevant_count": 7,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "ECCV",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "ICLR",
+        "source": "keyword",
+        "relevant_count": 5,
+        "ndcg10": 0.0204,
+        "map10": 0.0044,
+        "hr10": 0.2,
+        "p5": 0.0
+      },
+      {
+        "query": "信息安全",
+        "source": "keyword",
+        "relevant_count": 12,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "光计算",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 0.016,
+        "map10": 0.0031,
+        "hr10": 0.2,
+        "p5": 0.0
+      },
+      {
+        "query": "后量子密码",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "安全多方计算",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 0.039,
+        "map10": 0.0167,
+        "hr10": 0.2,
+        "p5": 0.04
+      },
+      {
+        "query": "数据挖掘",
+        "source": "keyword",
+        "relevant_count": 14,
+        "ndcg10": 0.0157,
+        "map10": 0.0033,
+        "hr10": 0.2,
+        "p5": 0.0
+      },
+      {
+        "query": "智能机器人",
+        "source": "keyword",
+        "relevant_count": 10,
+        "ndcg10": 0.0328,
+        "map10": 0.01,
+        "hr10": 0.2,
+        "p5": 0.04
+      },
+      {
+        "query": "机器学习系统",
+        "source": "keyword",
+        "relevant_count": 6,
+        "ndcg10": 0.0605,
+        "map10": 0.0333,
+        "hr10": 0.2,
+        "p5": 0.04
+      },
+      {
+        "query": "理论计算机科学",
+        "source": "keyword",
+        "relevant_count": 6,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "移动计算",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "类脑计算",
+        "source": "keyword",
+        "relevant_count": 7,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "能源互联网",
+        "source": "keyword",
+        "relevant_count": 8,
+        "ndcg10": 0.0196,
+        "map10": 0.005,
+        "hr10": 0.2,
+        "p5": 0.04
+      },
+      {
+        "query": "计算机体系结构",
+        "source": "keyword",
+        "relevant_count": 6,
+        "ndcg10": 0.0605,
+        "map10": 0.0333,
+        "hr10": 0.2,
+        "p5": 0.04
+      },
+      {
+        "query": "ICCV",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "INFOCOM",
+        "source": "keyword",
+        "relevant_count": 4,
+        "ndcg10": 0.0,
+        "map10": 0.0,
+        "hr10": 0.0,
+        "p5": 0.0
+      },
+      {
+        "query": "人形机器人",
+        "source": "keyword",
+        "relevant_count": 5,
+        "ndcg10": 0.0418,
+        "map10": 0.0094,
+        "hr10": 0.4,
+        "p5": 0.0
+      }
+    ]
+  },
+  "summary": {
+    "full_hybrid": {
+      "ndcg10": {
+        "mean": 0.8834,
+        "std": 0.147
+      },
+      "map10": {
+        "mean": 0.8234,
+        "std": 0.199
+      },
+      "hr10": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "p5": {
+        "mean": 0.8368,
+        "std": 0.2045
+      }
+    },
+    "bm25_only": {
+      "ndcg10": {
+        "mean": 0.9263,
+        "std": 0.1619
+      },
+      "map10": {
+        "mean": 0.8933,
+        "std": 0.2189
+      },
+      "hr10": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "p5": {
+        "mean": 0.8895,
+        "std": 0.1818
+      }
+    },
+    "topic_only": {
+      "ndcg10": {
+        "mean": 0.1112,
+        "std": 0.1856
+      },
+      "map10": {
+        "mean": 0.0614,
+        "std": 0.1187
+      },
+      "hr10": {
+        "mean": 0.3421,
+        "std": 0.4744
+      },
+      "p5": {
+        "mean": 0.1,
+        "std": 0.1933
+      }
+    },
+    "hybrid_8_2": {
+      "ndcg10": {
+        "mean": 0.9048,
+        "std": 0.1576
+      },
+      "map10": {
+        "mean": 0.859,
+        "std": 0.2086
+      },
+      "hr10": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "p5": {
+        "mean": 0.8579,
+        "std": 0.1942
+      }
+    },
+    "hybrid_2_8": {
+      "ndcg10": {
+        "mean": 0.7307,
+        "std": 0.255
+      },
+      "map10": {
+        "mean": 0.6353,
+        "std": 0.3034
+      },
+      "hr10": {
+        "mean": 0.9737,
+        "std": 0.1601
+      },
+      "p5": {
+        "mean": 0.6789,
+        "std": 0.2697
+      }
+    },
+    "rule_only": {
+      "ndcg10": {
+        "mean": 0.9878,
+        "std": 0.0442
+      },
+      "map10": {
+        "mean": 0.9802,
+        "std": 0.0675
+      },
+      "hr10": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "p5": {
+        "mean": 0.9526,
+        "std": 0.0966
+      }
+    },
+    "random": {
+      "ndcg10": {
+        "mean": 0.0135,
+        "std": 0.0173
+      },
+      "map10": {
+        "mean": 0.0044,
+        "std": 0.0079
+      },
+      "hr10": {
+        "mean": 0.1158,
+        "std": 0.1348
+      },
+      "p5": {
+        "mean": 0.0095,
+        "std": 0.017
+      }
+    }
+  },
+  "significance": {
+    "bm25_only": {
+      "ndcg10": {
+        "n": 38,
+        "mean_diff": -0.0429,
+        "wilcoxon_p": 0.0061,
+        "ttest_p": 0.0063,
+        "significant": true
+      },
+      "map10": {
+        "n": 38,
+        "mean_diff": -0.0699,
+        "wilcoxon_p": 0.0011,
+        "ttest_p": 0.001,
+        "significant": true
+      },
+      "hr10": {
+        "n": 38,
+        "wilcoxon_p": 1.0,
+        "ttest_p": 1.0,
+        "significant": false,
+        "note": "逐查询无差异"
+      },
+      "p5": {
+        "n": 38,
+        "mean_diff": -0.0526,
+        "wilcoxon_p": 0.0065,
+        "ttest_p": 0.0026,
+        "significant": true
+      }
+    },
+    "topic_only": {
+      "ndcg10": {
+        "n": 38,
+        "mean_diff": 0.7722,
+        "wilcoxon_p": 0.0,
+        "ttest_p": 0.0,
+        "significant": true
+      },
+      "map10": {
+        "n": 38,
+        "mean_diff": 0.762,
+        "wilcoxon_p": 0.0,
+        "ttest_p": 0.0,
+        "significant": true
+      },
+      "hr10": {
+        "n": 38,
+        "mean_diff": 0.6579,
+        "wilcoxon_p": 0.0,
+        "ttest_p": 0.0,
+        "significant": true
+      },
+      "p5": {
+        "n": 38,
+        "mean_diff": 0.7368,
+        "wilcoxon_p": 0.0,
+        "ttest_p": 0.0,
+        "significant": true
+      }
+    },
+    "hybrid_8_2": {
+      "ndcg10": {
+        "n": 38,
+        "mean_diff": -0.0213,
+        "wilcoxon_p": 0.0413,
+        "ttest_p": 0.0421,
+        "significant": true
+      },
+      "map10": {
+        "n": 38,
+        "mean_diff": -0.0356,
+        "wilcoxon_p": 0.011,
+        "ttest_p": 0.0111,
+        "significant": true
+      },
+      "hr10": {
+        "n": 38,
+        "wilcoxon_p": 1.0,
+        "ttest_p": 1.0,
+        "significant": false,
+        "note": "逐查询无差异"
+      },
+      "p5": {
+        "n": 38,
+        "mean_diff": -0.0211,
+        "wilcoxon_p": 0.0588,
+        "ttest_p": 0.0439,
+        "significant": false
+      }
+    },
+    "hybrid_2_8": {
+      "ndcg10": {
+        "n": 38,
+        "mean_diff": 0.1528,
+        "wilcoxon_p": 0.0002,
+        "ttest_p": 0.0002,
+        "significant": true
+      },
+      "map10": {
+        "n": 38,
+        "mean_diff": 0.1881,
+        "wilcoxon_p": 0.0002,
+        "ttest_p": 0.0002,
+        "significant": true
+      },
+      "hr10": {
+        "n": 38,
+        "mean_diff": 0.0263,
+        "wilcoxon_p": 0.3173,
+        "ttest_p": 0.3238,
+        "significant": false
+      },
+      "p5": {
+        "n": 38,
+        "mean_diff": 0.1579,
+        "wilcoxon_p": 0.0017,
+        "ttest_p": 0.0005,
+        "significant": true
+      }
+    },
+    "rule_only": {
+      "ndcg10": {
+        "n": 38,
+        "mean_diff": -0.1043,
+        "wilcoxon_p": 0.0,
+        "ttest_p": 0.0,
+        "significant": true
+      },
+      "map10": {
+        "n": 38,
+        "mean_diff": -0.1569,
+        "wilcoxon_p": 0.0,
+        "ttest_p": 0.0,
+        "significant": true
+      },
+      "hr10": {
+        "n": 38,
+        "wilcoxon_p": 1.0,
+        "ttest_p": 1.0,
+        "significant": false,
+        "note": "逐查询无差异"
+      },
+      "p5": {
+        "n": 38,
+        "mean_diff": -0.1158,
+        "wilcoxon_p": 0.0014,
+        "ttest_p": 0.0008,
+        "significant": true
+      }
+    },
+    "random": {
+      "ndcg10": {
+        "n": 38,
+        "mean_diff": 0.8699,
+        "wilcoxon_p": 0.0,
+        "ttest_p": 0.0,
+        "significant": true
+      },
+      "map10": {
+        "n": 38,
+        "mean_diff": 0.819,
+        "wilcoxon_p": 0.0,
+        "ttest_p": 0.0,
+        "significant": true
+      },
+      "hr10": {
+        "n": 38,
+        "mean_diff": 0.8842,
+        "wilcoxon_p": 0.0,
+        "ttest_p": 0.0,
+        "significant": true
+      },
+      "p5": {
+        "n": 38,
+        "mean_diff": 0.8274,
+        "wilcoxon_p": 0.0,
+        "ttest_p": 0.0,
+        "significant": true
+      }
+    }
+  }
+}

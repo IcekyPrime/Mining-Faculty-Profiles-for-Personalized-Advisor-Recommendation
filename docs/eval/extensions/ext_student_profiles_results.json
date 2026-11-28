@@ -1,0 +1,508 @@
+[
+  {
+    "label": "P1 计算机视觉+深度学习（要博导，学术导向）",
+    "profile": {
+      "research_interests": [
+        "计算机视觉",
+        "深度学习",
+        "图像处理"
+      ],
+      "preferred_college": "计算机学院",
+      "preferred_institute": null,
+      "wants_phd_advisor": true,
+      "weight_academic": 0.6,
+      "weight_teaching": 0.2,
+      "weight_research_match": 0.2
+    },
+    "top5": [
+      {
+        "id": 145,
+        "name": "陈晨",
+        "college": "计算机学院",
+        "institute": "先进计算研究所,约翰·霍普克罗夫特计算机科学中心",
+        "research_match": 0.0,
+        "academic": 1.0,
+        "teaching": 1.0,
+        "final_score": 0.8,
+        "score_parts": {
+          "research_match_weight": 0.2,
+          "academic_weight": 0.6,
+          "teaching_weight": 0.2
+        }
+      },
+      {
+        "id": 271,
+        "name": "黄涛",
+        "college": "计算机学院",
+        "institute": "约翰·霍普克罗夫特计算机科学中心",
+        "research_match": 0.7,
+        "academic": 0.7689,
+        "teaching": 0.9706,
+        "final_score": 0.7954,
+        "score_parts": {
+          "research_match_weight": 0.2,
+          "academic_weight": 0.6,
+          "teaching_weight": 0.2
+        }
+      },
+      {
+        "id": 18,
+        "name": "陈谐",
+        "college": "计算机学院",
+        "institute": "机器智能研究所",
+        "research_match": 0.1,
+        "academic": 0.9438,
+        "teaching": 0.9143,
+        "final_score": 0.7691,
+        "score_parts": {
+          "research_match_weight": 0.2,
+          "academic_weight": 0.6,
+          "teaching_weight": 0.2
+        }
+      },
+      {
+        "id": 150,
+        "name": "李超",
+        "college": "计算机学院",
+        "institute": "先进计算研究所",
+        "research_match": 0.0,
+        "academic": 0.9775,
+        "teaching": 0.773,
+        "final_score": 0.7411,
+        "score_parts": {
+          "research_match_weight": 0.2,
+          "academic_weight": 0.6,
+          "teaching_weight": 0.2
+        }
+      },
+      {
+        "id": 192,
+        "name": "唐飞龙",
+        "college": "计算机学院",
+        "institute": "先进网络研究所",
+        "research_match": 0.1,
+        "academic": 0.8909,
+        "teaching": 0.8857,
+        "final_score": 0.7317,
+        "score_parts": {
+          "research_match_weight": 0.2,
+          "academic_weight": 0.6,
+          "teaching_weight": 0.2
+        }
+      }
+    ],
+    "metrics": {
+      "ndcg10": 0.6851,
+      "hit_rate10": 1.0,
+      "map10": 0.5475,
+      "p5": 0.6,
+      "n_relevant": 339,
+      "n_ranked": 94
+    }
+  },
+  {
+    "label": "P2 NLP+大语言模型（均衡权重）",
+    "profile": {
+      "research_interests": [
+        "自然语言处理",
+        "大语言模型",
+        "NLP"
+      ],
+      "preferred_college": null,
+      "preferred_institute": null,
+      "wants_phd_advisor": false,
+      "weight_academic": 0.4,
+      "weight_teaching": 0.3,
+      "weight_research_match": 0.3
+    },
+    "top5": [
+      {
+        "id": 21,
+        "name": "吴梦玥",
+        "college": "计算机学院",
+        "institute": "机器智能研究所",
+        "research_match": 0.6667,
+        "academic": 0.6092,
+        "teaching": 1.0,
+        "final_score": 0.7437,
+        "score_parts": {
+          "research_match_weight": 0.3,
+          "academic_weight": 0.4,
+          "teaching_weight": 0.3
+        }
+      },
+      {
+        "id": 42,
+        "name": "顾小东",
+        "college": "计算机学院",
+        "institute": "可扩展计算研究所",
+        "research_match": 0.8889,
+        "academic": 0.6253,
+        "teaching": 0.6897,
+        "final_score": 0.7237,
+        "score_parts": {
+          "research_match_weight": 0.3,
+          "academic_weight": 0.4,
+          "teaching_weight": 0.3
+        }
+      },
+      {
+        "id": 401,
+        "name": "沈红斌",
+        "college": "自动化与感知学院",
+        "institute": "系统控制与信息处理教育部重点实验室",
+        "research_match": 0.1111,
+        "academic": 1.0,
+        "teaching": 0.925,
+        "final_score": 0.7108,
+        "score_parts": {
+          "research_match_weight": 0.3,
+          "academic_weight": 0.4,
+          "teaching_weight": 0.3
+        }
+      },
+      {
+        "id": 595,
+        "name": "林巍峣",
+        "college": "集成电路学院",
+        "institute": "信息智能研究所",
+        "research_match": 0.2222,
+        "academic": 0.8276,
+        "teaching": 0.9273,
+        "final_score": 0.6759,
+        "score_parts": {
+          "research_match_weight": 0.3,
+          "academic_weight": 0.4,
+          "teaching_weight": 0.3
+        }
+      },
+      {
+        "id": 15,
+        "name": "俞凯",
+        "college": "计算机学院",
+        "institute": "机器智能研究所",
+        "research_match": 0.6667,
+        "academic": 0.6,
+        "teaching": 0.7855,
+        "final_score": 0.6756,
+        "score_parts": {
+          "research_match_weight": 0.3,
+          "academic_weight": 0.4,
+          "teaching_weight": 0.3
+        }
+      }
+    ],
+    "metrics": {
+      "ndcg10": 0.8604,
+      "hit_rate10": 1.0,
+      "map10": 0.7675,
+      "p5": 1.0,
+      "n_relevant": 189,
+      "n_ranked": 773
+    }
+  },
+  {
+    "label": "P3 芯片设计/硬件（不要博导）",
+    "profile": {
+      "research_interests": [
+        "芯片设计",
+        "集成电路",
+        "硬件设计",
+        "EDA"
+      ],
+      "preferred_college": null,
+      "preferred_institute": null,
+      "wants_phd_advisor": false,
+      "weight_academic": 0.4,
+      "weight_teaching": 0.4,
+      "weight_research_match": 0.2
+    },
+    "top5": [
+      {
+        "id": 401,
+        "name": "沈红斌",
+        "college": "自动化与感知学院",
+        "institute": "系统控制与信息处理教育部重点实验室",
+        "research_match": 0.0,
+        "academic": 1.0,
+        "teaching": 0.925,
+        "final_score": 0.77,
+        "score_parts": {
+          "research_match_weight": 0.2,
+          "academic_weight": 0.4,
+          "teaching_weight": 0.4
+        }
+      },
+      {
+        "id": 145,
+        "name": "陈晨",
+        "college": "计算机学院",
+        "institute": "先进计算研究所,约翰·霍普克罗夫特计算机科学中心",
+        "research_match": 0.0,
+        "academic": 0.8402,
+        "teaching": 1.0,
+        "final_score": 0.7361,
+        "score_parts": {
+          "research_match_weight": 0.2,
+          "academic_weight": 0.4,
+          "teaching_weight": 0.4
+        }
+      },
+      {
+        "id": 298,
+        "name": "陈卫东",
+        "college": "自动化与感知学院",
+        "institute": "",
+        "research_match": 0.0,
+        "academic": 0.8195,
+        "teaching": 1.0,
+        "final_score": 0.7278,
+        "score_parts": {
+          "research_match_weight": 0.2,
+          "academic_weight": 0.4,
+          "teaching_weight": 0.4
+        }
+      },
+      {
+        "id": 657,
+        "name": "唐旻",
+        "college": "集成电路学院",
+        "institute": "电磁与智能系统研究所",
+        "research_match": 0.5556,
+        "academic": 0.6322,
+        "teaching": 0.9,
+        "final_score": 0.724,
+        "score_parts": {
+          "research_match_weight": 0.2,
+          "academic_weight": 0.4,
+          "teaching_weight": 0.4
+        }
+      },
+      {
+        "id": 595,
+        "name": "林巍峣",
+        "college": "集成电路学院",
+        "institute": "信息智能研究所",
+        "research_match": 0.0,
+        "academic": 0.8276,
+        "teaching": 0.9273,
+        "final_score": 0.7019,
+        "score_parts": {
+          "research_match_weight": 0.2,
+          "academic_weight": 0.4,
+          "teaching_weight": 0.4
+        }
+      }
+    ],
+    "metrics": {
+      "ndcg10": 0.1584,
+      "hit_rate10": 1.0,
+      "map10": 0.045,
+      "p5": 0.2,
+      "n_relevant": 162,
+      "n_ranked": 773
+    }
+  },
+  {
+    "label": "P4 医学影像+AI（偏好特定学院）",
+    "profile": {
+      "research_interests": [
+        "医学影像",
+        "人工智能",
+        "深度学习"
+      ],
+      "preferred_college": "人工智能学院",
+      "preferred_institute": null,
+      "wants_phd_advisor": true,
+      "weight_academic": 0.5,
+      "weight_teaching": 0.2,
+      "weight_research_match": 0.3
+    },
+    "top5": [
+      {
+        "id": 948,
+        "name": "金梦",
+        "college": "人工智能学院",
+        "institute": "人工智能学院（原约翰·霍普克罗夫特计算机科学中心）",
+        "research_match": 0.1111,
+        "academic": 1.0,
+        "teaching": 0.95,
+        "final_score": 0.7233,
+        "score_parts": {
+          "research_match_weight": 0.3,
+          "academic_weight": 0.5,
+          "teaching_weight": 0.2
+        }
+      },
+      {
+        "id": 944,
+        "name": "戴国浩",
+        "college": "人工智能学院",
+        "institute": "上海交通大学清源研究院定制计算中心",
+        "research_match": 0.0,
+        "academic": 0.734,
+        "teaching": 1.0,
+        "final_score": 0.567,
+        "score_parts": {
+          "research_match_weight": 0.3,
+          "academic_weight": 0.5,
+          "teaching_weight": 0.2
+        }
+      },
+      {
+        "id": 960,
+        "name": "王钰",
+        "college": "人工智能学院",
+        "institute": "未来媒体网络协同创新中心",
+        "research_match": 0.1111,
+        "academic": 0.578,
+        "teaching": 0.9474,
+        "final_score": 0.5118,
+        "score_parts": {
+          "research_match_weight": 0.3,
+          "academic_weight": 0.5,
+          "teaching_weight": 0.2
+        }
+      },
+      {
+        "id": 959,
+        "name": "王延峰",
+        "college": "人工智能学院",
+        "institute": "",
+        "research_match": 0.3333,
+        "academic": 0.7673,
+        "teaching": 0.0,
+        "final_score": 0.4836,
+        "score_parts": {
+          "research_match_weight": 0.3,
+          "academic_weight": 0.5,
+          "teaching_weight": 0.2
+        }
+      },
+      {
+        "id": 977,
+        "name": "周晓",
+        "college": "人工智能学院",
+        "institute": "人工智能学院",
+        "research_match": 0.3333,
+        "academic": 0.3299,
+        "teaching": 1.0,
+        "final_score": 0.465,
+        "score_parts": {
+          "research_match_weight": 0.3,
+          "academic_weight": 0.5,
+          "teaching_weight": 0.2
+        }
+      }
+    ],
+    "metrics": {
+      "ndcg10": 0.7917,
+      "hit_rate10": 1.0,
+      "map10": 0.6485,
+      "p5": 0.8,
+      "n_relevant": 368,
+      "n_ranked": 14
+    }
+  },
+  {
+    "label": "P5 机器人+控制系统（教学权重高）",
+    "profile": {
+      "research_interests": [
+        "机器人",
+        "控制系统",
+        "自动导航"
+      ],
+      "preferred_college": null,
+      "preferred_institute": null,
+      "wants_phd_advisor": false,
+      "weight_academic": 0.2,
+      "weight_teaching": 0.5,
+      "weight_research_match": 0.3
+    },
+    "top5": [
+      {
+        "id": 298,
+        "name": "陈卫东",
+        "college": "自动化与感知学院",
+        "institute": "",
+        "research_match": 0.375,
+        "academic": 0.8195,
+        "teaching": 1.0,
+        "final_score": 0.7764,
+        "score_parts": {
+          "research_match_weight": 0.3,
+          "academic_weight": 0.2,
+          "teaching_weight": 0.5
+        }
+      },
+      {
+        "id": 308,
+        "name": "方崇荣",
+        "college": "自动化与感知学院",
+        "institute": "自动化系",
+        "research_match": 0.5,
+        "academic": 0.5448,
+        "teaching": 1.0,
+        "final_score": 0.759,
+        "score_parts": {
+          "research_match_weight": 0.3,
+          "academic_weight": 0.2,
+          "teaching_weight": 0.5
+        }
+      },
+      {
+        "id": 495,
+        "name": "邹丹平",
+        "college": "自动化与感知学院",
+        "institute": "感知与导航研究所",
+        "research_match": 0.5,
+        "academic": 0.3724,
+        "teaching": 1.0,
+        "final_score": 0.7245,
+        "score_parts": {
+          "research_match_weight": 0.3,
+          "academic_weight": 0.2,
+          "teaching_weight": 0.5
+        }
+      },
+      {
+        "id": 315,
+        "name": "高安柱",
+        "college": "自动化与感知学院",
+        "institute": "上海交通大学自主机器人实验室",
+        "research_match": 0.5,
+        "academic": 0.6471,
+        "teaching": 0.88,
+        "final_score": 0.7194,
+        "score_parts": {
+          "research_match_weight": 0.3,
+          "academic_weight": 0.2,
+          "teaching_weight": 0.5
+        }
+      },
+      {
+        "id": 714,
+        "name": "杨斌",
+        "college": "集成电路学院",
+        "institute": "微纳器件与集成系统研究所",
+        "research_match": 0.375,
+        "academic": 0.5172,
+        "teaching": 1.0,
+        "final_score": 0.7159,
+        "score_parts": {
+          "research_match_weight": 0.3,
+          "academic_weight": 0.2,
+          "teaching_weight": 0.5
+        }
+      }
+    ],
+    "metrics": {
+      "ndcg10": 1.0,
+      "hit_rate10": 1.0,
+      "map10": 1.0,
+      "p5": 1.0,
+      "n_relevant": 384,
+      "n_ranked": 773
+    }
+  }
+]

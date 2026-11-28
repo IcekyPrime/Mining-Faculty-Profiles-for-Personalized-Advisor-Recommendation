@@ -1,0 +1,612 @@
+[
+  {
+    "teacher_id": 3,
+    "name": "陈海波",
+    "college": "计算机学院",
+    "score": -0.6375,
+    "top_extreme_features": [
+      "honor_count",
+      "paper_citations_per_paper",
+      "processing_score"
+    ],
+    "features": {
+      "paper_count": 7.0,
+      "citation_count": 16265.0,
+      "h_index": 47.0,
+      "honor_count": 38.0,
+      "course_count": 2.0,
+      "avg_rating": 0.0,
+      "rating_count": 0.0,
+      "paper_citations_per_paper": 2323.5714,
+      "is_advisor": 1.0,
+      "is_phd_advisor": 0.0,
+      "processing_score": 69.9,
+      "teaching_score": 0.0,
+      "recent_papers_5y": 21.0
+    },
+    "reasons": [
+      "citation_count 极高（16265）",
+      "h_index 很高（47）",
+      "honor_count 很多（38）",
+      "有课程但无评分（教学口碑数据缺失）"
+    ]
+  },
+  {
+    "teacher_id": 595,
+    "name": "林巍峣",
+    "college": "集成电路学院",
+    "score": -0.6372,
+    "top_extreme_features": [
+      "recent_papers_5y",
+      "processing_score",
+      "is_phd_advisor"
+    ],
+    "features": {
+      "paper_count": 47.0,
+      "citation_count": 10106.0,
+      "h_index": 44.0,
+      "honor_count": 15.0,
+      "course_count": 1.0,
+      "avg_rating": 4.6364,
+      "rating_count": 11.0,
+      "paper_citations_per_paper": 215.0213,
+      "is_advisor": 1.0,
+      "is_phd_advisor": 1.0,
+      "processing_score": 72.0,
+      "teaching_score": 4.6364,
+      "recent_papers_5y": 39.0
+    },
+    "reasons": [
+      "citation_count 极高（10106）",
+      "h_index 很高（44）",
+      "honor_count 很多（15）"
+    ]
+  },
+  {
+    "teacher_id": 329,
+    "name": "何建平",
+    "college": "自动化与感知学院",
+    "score": -0.6214,
+    "top_extreme_features": [
+      "recent_papers_5y",
+      "citation_count",
+      "course_count"
+    ],
+    "features": {
+      "paper_count": 42.0,
+      "citation_count": 16098.0,
+      "h_index": 39.0,
+      "honor_count": 10.0,
+      "course_count": 7.0,
+      "avg_rating": 0.6,
+      "rating_count": 15.0,
+      "paper_citations_per_paper": 383.2857,
+      "is_advisor": 1.0,
+      "is_phd_advisor": 0.0,
+      "processing_score": 47.2,
+      "teaching_score": 4.2,
+      "recent_papers_5y": 27.0
+    },
+    "reasons": [
+      "citation_count 极高（16098）",
+      "honor_count 很多（10）"
+    ]
+  },
+  {
+    "teacher_id": 914,
+    "name": "张峰",
+    "college": "电气工程学院",
+    "score": -0.6176,
+    "top_extreme_features": [
+      "rating_count",
+      "honor_count",
+      "course_count"
+    ],
+    "features": {
+      "paper_count": 15.0,
+      "citation_count": 12.0,
+      "h_index": 62.0,
+      "honor_count": 19.0,
+      "course_count": 7.0,
+      "avg_rating": 2.4247,
+      "rating_count": 823.0,
+      "paper_citations_per_paper": 0.8,
+      "is_advisor": 1.0,
+      "is_phd_advisor": 0.0,
+      "processing_score": 7.0,
+      "teaching_score": 1.3682,
+      "recent_papers_5y": 0.0
+    },
+    "reasons": [
+      "h_index 很高（62）",
+      "honor_count 很多（19）",
+      "近 5 年无论文（可能为早期入库或爬取不全）"
+    ]
+  },
+  {
+    "teacher_id": 266,
+    "name": "吴奇",
+    "college": "计算机学院",
+    "score": -0.6159,
+    "top_extreme_features": [
+      "is_phd_advisor",
+      "processing_score",
+      "teaching_score"
+    ],
+    "features": {
+      "paper_count": 1.0,
+      "citation_count": 435.0,
+      "h_index": 6.0,
+      "honor_count": 6.0,
+      "course_count": 0.0,
+      "avg_rating": 0.0,
+      "rating_count": 0.0,
+      "paper_citations_per_paper": 435.0,
+      "is_advisor": 1.0,
+      "is_phd_advisor": 1.0,
+      "processing_score": 47.0,
+      "teaching_score": 0.0,
+      "recent_papers_5y": 1.0
+    },
+    "reasons": [
+      "honor_count 很多（6）",
+      "无课程记录"
+    ]
+  },
+  {
+    "teacher_id": 517,
+    "name": "戴文睿",
+    "college": "集成电路学院",
+    "score": -0.6079,
+    "top_extreme_features": [
+      "recent_papers_5y",
+      "is_phd_advisor",
+      "processing_score"
+    ],
+    "features": {
+      "paper_count": 128.0,
+      "citation_count": 3391.0,
+      "h_index": 29.0,
+      "honor_count": 7.0,
+      "course_count": 6.0,
+      "avg_rating": 0.6667,
+      "rating_count": 1.0,
+      "paper_citations_per_paper": 26.4922,
+      "is_advisor": 1.0,
+      "is_phd_advisor": 1.0,
+      "processing_score": 56.6,
+      "teaching_score": 4.0,
+      "recent_papers_5y": 29.0
+    },
+    "reasons": [
+      "citation_count 很高（3391）",
+      "paper_count 较高（128）",
+      "honor_count 很多（7）"
+    ]
+  },
+  {
+    "teacher_id": 625,
+    "name": "闵雄阔",
+    "college": "集成电路学院",
+    "score": -0.607,
+    "top_extreme_features": [
+      "honor_count",
+      "citation_count",
+      "is_phd_advisor"
+    ],
+    "features": {
+      "paper_count": 100.0,
+      "citation_count": 18127.0,
+      "h_index": 51.0,
+      "honor_count": 32.0,
+      "course_count": 1.0,
+      "avg_rating": 0.0,
+      "rating_count": 0.0,
+      "paper_citations_per_paper": 181.27,
+      "is_advisor": 1.0,
+      "is_phd_advisor": 1.0,
+      "processing_score": 45.8,
+      "teaching_score": 0.0,
+      "recent_papers_5y": 0.0
+    },
+    "reasons": [
+      "citation_count 极高（18127）",
+      "h_index 很高（51）",
+      "honor_count 很多（32）",
+      "近 5 年无论文（可能为早期入库或爬取不全）",
+      "有课程但无评分（教学口碑数据缺失）"
+    ]
+  },
+  {
+    "teacher_id": 676,
+    "name": "王霆",
+    "college": "集成电路学院",
+    "score": -0.603,
+    "top_extreme_features": [
+      "recent_papers_5y",
+      "paper_citations_per_paper",
+      "teaching_score"
+    ],
+    "features": {
+      "paper_count": 4.0,
+      "citation_count": 4000.0,
+      "h_index": 0.0,
+      "honor_count": 1.0,
+      "course_count": 0.0,
+      "avg_rating": 0.0,
+      "rating_count": 0.0,
+      "paper_citations_per_paper": 1000.0,
+      "is_advisor": 1.0,
+      "is_phd_advisor": 0.0,
+      "processing_score": 26.0,
+      "teaching_score": 0.0,
+      "recent_papers_5y": 34.0
+    },
+    "reasons": [
+      "citation_count 很高（4000）",
+      "无课程记录但学术产出高（课程数据可能缺失）"
+    ]
+  },
+  {
+    "teacher_id": 242,
+    "name": "郁昱",
+    "college": "计算机学院",
+    "score": -0.6029,
+    "top_extreme_features": [
+      "honor_count",
+      "recent_papers_5y",
+      "processing_score"
+    ],
+    "features": {
+      "paper_count": 2.0,
+      "citation_count": 10.0,
+      "h_index": 1.0,
+      "honor_count": 14.0,
+      "course_count": 5.0,
+      "avg_rating": 0.0,
+      "rating_count": 0.0,
+      "paper_citations_per_paper": 5.0,
+      "is_advisor": 1.0,
+      "is_phd_advisor": 0.0,
+      "processing_score": 49.6,
+      "teaching_score": 0.0,
+      "recent_papers_5y": 19.0
+    },
+    "reasons": [
+      "honor_count 很多（14）",
+      "有课程但无评分（教学口碑数据缺失）"
+    ]
+  },
+  {
+    "teacher_id": 559,
+    "name": "黄鹏辉",
+    "college": "集成电路学院",
+    "score": -0.6021,
+    "top_extreme_features": [
+      "recent_papers_5y",
+      "paper_count",
+      "avg_rating"
+    ],
+    "features": {
+      "paper_count": 277.0,
+      "citation_count": 2201.0,
+      "h_index": 25.0,
+      "honor_count": 14.0,
+      "course_count": 1.0,
+      "avg_rating": 5.0,
+      "rating_count": 12.0,
+      "paper_citations_per_paper": 7.9458,
+      "is_advisor": 1.0,
+      "is_phd_advisor": 1.0,
+      "processing_score": 44.1,
+      "teaching_score": 5.0,
+      "recent_papers_5y": 38.0
+    },
+    "reasons": [
+      "citation_count 很高（2201）",
+      "paper_count 较高（277）",
+      "honor_count 很多（14）"
+    ]
+  },
+  {
+    "teacher_id": 168,
+    "name": "沈为",
+    "college": "计算机学院",
+    "score": -0.6007,
+    "top_extreme_features": [
+      "citation_count",
+      "processing_score",
+      "is_phd_advisor"
+    ],
+    "features": {
+      "paper_count": 159.0,
+      "citation_count": 16019.0,
+      "h_index": 48.0,
+      "honor_count": 2.0,
+      "course_count": 3.0,
+      "avg_rating": 1.6796,
+      "rating_count": 47.0,
+      "paper_citations_per_paper": 100.7484,
+      "is_advisor": 1.0,
+      "is_phd_advisor": 1.0,
+      "processing_score": 59.4,
+      "teaching_score": 1.4255,
+      "recent_papers_5y": 8.0
+    },
+    "reasons": [
+      "citation_count 极高（16019）",
+      "h_index 很高（48）",
+      "paper_count 较高（159）"
+    ]
+  },
+  {
+    "teacher_id": 15,
+    "name": "俞凯",
+    "college": "计算机学院",
+    "score": -0.5989,
+    "top_extreme_features": [
+      "is_phd_advisor",
+      "course_count",
+      "processing_score"
+    ],
+    "features": {
+      "paper_count": 7.0,
+      "citation_count": 21.0,
+      "h_index": 2.0,
+      "honor_count": 5.0,
+      "course_count": 6.0,
+      "avg_rating": 3.7663,
+      "rating_count": 55.0,
+      "paper_citations_per_paper": 3.0,
+      "is_advisor": 1.0,
+      "is_phd_advisor": 1.0,
+      "processing_score": 52.2,
+      "teaching_score": 3.9273,
+      "recent_papers_5y": 10.0
+    },
+    "reasons": [
+      "组合特征偏离主流分布（各维度非极端但综合异常）"
+    ]
+  },
+  {
+    "teacher_id": 271,
+    "name": "黄涛",
+    "college": "计算机学院",
+    "score": -0.5975,
+    "top_extreme_features": [
+      "citation_count",
+      "course_count",
+      "is_phd_advisor"
+    ],
+    "features": {
+      "paper_count": 44.0,
+      "citation_count": 16235.0,
+      "h_index": 33.0,
+      "honor_count": 1.0,
+      "course_count": 7.0,
+      "avg_rating": 2.1182,
+      "rating_count": 34.0,
+      "paper_citations_per_paper": 368.9773,
+      "is_advisor": 1.0,
+      "is_phd_advisor": 1.0,
+      "processing_score": 58.7,
+      "teaching_score": 4.8529,
+      "recent_papers_5y": 1.0
+    },
+    "reasons": [
+      "citation_count 极高（16235）"
+    ]
+  },
+  {
+    "teacher_id": 83,
+    "name": "孙锬锋",
+    "college": "计算机学院",
+    "score": -0.5974,
+    "top_extreme_features": [
+      "honor_count",
+      "is_phd_advisor",
+      "processing_score"
+    ],
+    "features": {
+      "paper_count": 196.0,
+      "citation_count": 5858.0,
+      "h_index": 28.0,
+      "honor_count": 20.0,
+      "course_count": 5.0,
+      "avg_rating": 1.0,
+      "rating_count": 1.0,
+      "paper_citations_per_paper": 29.8878,
+      "is_advisor": 1.0,
+      "is_phd_advisor": 1.0,
+      "processing_score": 54.6,
+      "teaching_score": 5.0,
+      "recent_papers_5y": 0.0
+    },
+    "reasons": [
+      "citation_count 很高（5858）",
+      "paper_count 较高（196）",
+      "honor_count 很多（20）",
+      "近 5 年无论文（可能为早期入库或爬取不全）"
+    ]
+  },
+  {
+    "teacher_id": 36,
+    "name": "易冉",
+    "college": "计算机学院",
+    "score": -0.597,
+    "top_extreme_features": [
+      "honor_count",
+      "is_phd_advisor",
+      "course_count"
+    ],
+    "features": {
+      "paper_count": 4.0,
+      "citation_count": 18.0,
+      "h_index": 2.0,
+      "honor_count": 27.0,
+      "course_count": 6.0,
+      "avg_rating": 0.8333,
+      "rating_count": 3.0,
+      "paper_citations_per_paper": 4.5,
+      "is_advisor": 1.0,
+      "is_phd_advisor": 1.0,
+      "processing_score": 31.5,
+      "teaching_score": 5.0,
+      "recent_papers_5y": 12.0
+    },
+    "reasons": [
+      "honor_count 很多（27）"
+    ]
+  },
+  {
+    "teacher_id": 80,
+    "name": "黄林庆",
+    "college": "计算机学院",
+    "score": -0.5957,
+    "top_extreme_features": [
+      "processing_score",
+      "citation_count",
+      "is_phd_advisor"
+    ],
+    "features": {
+      "paper_count": 58.0,
+      "citation_count": 16261.0,
+      "h_index": 11.0,
+      "honor_count": 8.0,
+      "course_count": 1.0,
+      "avg_rating": 0.0,
+      "rating_count": 0.0,
+      "paper_citations_per_paper": 280.3621,
+      "is_advisor": 1.0,
+      "is_phd_advisor": 1.0,
+      "processing_score": 72.4,
+      "teaching_score": 0.0,
+      "recent_papers_5y": 12.0
+    },
+    "reasons": [
+      "citation_count 极高（16261）",
+      "honor_count 很多（8）",
+      "有课程但无评分（教学口碑数据缺失）"
+    ]
+  },
+  {
+    "teacher_id": 359,
+    "name": "刘华",
+    "college": "自动化与感知学院",
+    "score": -0.5954,
+    "top_extreme_features": [
+      "course_count",
+      "h_index",
+      "processing_score"
+    ],
+    "features": {
+      "paper_count": 60.0,
+      "citation_count": 5886.0,
+      "h_index": 59.0,
+      "honor_count": 2.0,
+      "course_count": 7.0,
+      "avg_rating": 1.2964,
+      "rating_count": 41.0,
+      "paper_citations_per_paper": 98.1,
+      "is_advisor": 1.0,
+      "is_phd_advisor": 0.0,
+      "processing_score": 10.1,
+      "teaching_score": 1.561,
+      "recent_papers_5y": 1.0
+    },
+    "reasons": [
+      "citation_count 很高（5886）",
+      "h_index 很高（59）"
+    ]
+  },
+  {
+    "teacher_id": 11,
+    "name": "吴明瑜",
+    "college": "计算机学院",
+    "score": -0.5952,
+    "top_extreme_features": [
+      "citation_count",
+      "is_phd_advisor",
+      "teaching_score"
+    ],
+    "features": {
+      "paper_count": 23.0,
+      "citation_count": 16104.0,
+      "h_index": 14.0,
+      "honor_count": 1.0,
+      "course_count": 4.0,
+      "avg_rating": 0.0,
+      "rating_count": 0.0,
+      "paper_citations_per_paper": 700.1739,
+      "is_advisor": 1.0,
+      "is_phd_advisor": 1.0,
+      "processing_score": 41.9,
+      "teaching_score": 0.0,
+      "recent_papers_5y": 15.0
+    },
+    "reasons": [
+      "citation_count 极高（16104）",
+      "有课程但无评分（教学口碑数据缺失）"
+    ]
+  },
+  {
+    "teacher_id": 104,
+    "name": "陈黎兴",
+    "college": "计算机学院",
+    "score": -0.5947,
+    "top_extreme_features": [
+      "paper_citations_per_paper",
+      "citation_count",
+      "processing_score"
+    ],
+    "features": {
+      "paper_count": 8.0,
+      "citation_count": 16198.0,
+      "h_index": 24.0,
+      "honor_count": 2.0,
+      "course_count": 2.0,
+      "avg_rating": 0.0,
+      "rating_count": 0.0,
+      "paper_citations_per_paper": 2024.75,
+      "is_advisor": 1.0,
+      "is_phd_advisor": 1.0,
+      "processing_score": 60.4,
+      "teaching_score": 0.0,
+      "recent_papers_5y": 1.0
+    },
+    "reasons": [
+      "citation_count 极高（16198）",
+      "有课程但无评分（教学口碑数据缺失）"
+    ]
+  },
+  {
+    "teacher_id": 368,
+    "name": "龙承念",
+    "college": "自动化与感知学院",
+    "score": -0.5946,
+    "top_extreme_features": [
+      "is_phd_advisor",
+      "honor_count",
+      "recent_papers_5y"
+    ],
+    "features": {
+      "paper_count": 62.0,
+      "citation_count": 3018.0,
+      "h_index": 30.0,
+      "honor_count": 14.0,
+      "course_count": 3.0,
+      "avg_rating": 2.1667,
+      "rating_count": 38.0,
+      "paper_citations_per_paper": 48.6774,
+      "is_advisor": 1.0,
+      "is_phd_advisor": 1.0,
+      "processing_score": 44.0,
+      "teaching_score": 1.9737,
+      "recent_papers_5y": 16.0
+    },
+    "reasons": [
+      "citation_count 很高（3018）",
+      "honor_count 很多（14）"
+    ]
+  }
+]

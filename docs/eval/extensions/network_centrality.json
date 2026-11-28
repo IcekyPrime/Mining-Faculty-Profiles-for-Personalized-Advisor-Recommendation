@@ -1,0 +1,485 @@
+{
+  "graph": {
+    "nodes": 729,
+    "edges": 2938,
+    "density": 0.0111,
+    "average_degree": 8.06,
+    "connected_components": 3
+  },
+  "top15_degree": [
+    {
+      "id": 578,
+      "name": "李浩洋",
+      "college": "集成电路学院",
+      "score": 0.0591
+    },
+    {
+      "id": 868,
+      "name": "王辉",
+      "college": "电气工程学院",
+      "score": 0.0577
+    },
+    {
+      "id": 299,
+      "name": "陈新",
+      "college": "自动化与感知学院",
+      "score": 0.0577
+    },
+    {
+      "id": 454,
+      "name": "杨博",
+      "college": "自动化与感知学院",
+      "score": 0.0563
+    },
+    {
+      "id": 1022,
+      "name": "王昕",
+      "college": "电气工程学院",
+      "score": 0.0536
+    },
+    {
+      "id": 739,
+      "name": "张宸",
+      "college": "集成电路学院",
+      "score": 0.0536
+    },
+    {
+      "id": 99,
+      "name": "王瑞",
+      "college": "计算机学院",
+      "score": 0.0508
+    },
+    {
+      "id": 504,
+      "name": "陈凯",
+      "college": "集成电路学院",
+      "score": 0.0508
+    },
+    {
+      "id": 90,
+      "name": "杨旸",
+      "college": "计算机学院",
+      "score": 0.0508
+    },
+    {
+      "id": 647,
+      "name": "宋利",
+      "college": "集成电路学院",
+      "score": 0.0481
+    },
+    {
+      "id": 969,
+      "name": "杨旸",
+      "college": "人工智能学院",
+      "score": 0.0481
+    },
+    {
+      "id": 457,
+      "name": "杨杰",
+      "college": "自动化与感知学院",
+      "score": 0.0467
+    },
+    {
+      "id": 473,
+      "name": "张晗",
+      "college": "自动化与感知学院",
+      "score": 0.0453
+    },
+    {
+      "id": 913,
+      "name": "张琛",
+      "college": "电气工程学院",
+      "score": 0.0453
+    },
+    {
+      "id": 32,
+      "name": "李伟",
+      "college": "计算机学院",
+      "score": 0.044
+    }
+  ],
+  "top15_betweenness": [
+    {
+      "id": 299,
+      "name": "陈新",
+      "college": "自动化与感知学院",
+      "score": 0.0455
+    },
+    {
+      "id": 1022,
+      "name": "王昕",
+      "college": "电气工程学院",
+      "score": 0.0426
+    },
+    {
+      "id": 99,
+      "name": "王瑞",
+      "college": "计算机学院",
+      "score": 0.0424
+    },
+    {
+      "id": 454,
+      "name": "杨博",
+      "college": "自动化与感知学院",
+      "score": 0.0419
+    },
+    {
+      "id": 247,
+      "name": "王磊",
+      "college": "计算机学院",
+      "score": 0.038
+    },
+    {
+      "id": 578,
+      "name": "李浩洋",
+      "college": "集成电路学院",
+      "score": 0.0366
+    },
+    {
+      "id": 32,
+      "name": "李伟",
+      "college": "计算机学院",
+      "score": 0.0353
+    },
+    {
+      "id": 868,
+      "name": "王辉",
+      "college": "电气工程学院",
+      "score": 0.0339
+    },
+    {
+      "id": 457,
+      "name": "杨杰",
+      "college": "自动化与感知学院",
+      "score": 0.0299
+    },
+    {
+      "id": 504,
+      "name": "陈凯",
+      "college": "集成电路学院",
+      "score": 0.029
+    },
+    {
+      "id": 473,
+      "name": "张晗",
+      "college": "自动化与感知学院",
+      "score": 0.0278
+    },
+    {
+      "id": 480,
+      "name": "张涛",
+      "college": "自动化与感知学院",
+      "score": 0.0265
+    },
+    {
+      "id": 939,
+      "name": "程远",
+      "college": "人工智能学院",
+      "score": 0.026
+    },
+    {
+      "id": 90,
+      "name": "杨旸",
+      "college": "计算机学院",
+      "score": 0.0257
+    },
+    {
+      "id": 739,
+      "name": "张宸",
+      "college": "集成电路学院",
+      "score": 0.0247
+    }
+  ],
+  "top15_pagerank": [
+    {
+      "id": 96,
+      "name": "吕宝粮",
+      "college": "计算机学院",
+      "score": 0.0069
+    },
+    {
+      "id": 473,
+      "name": "张晗",
+      "college": "自动化与感知学院",
+      "score": 0.0068
+    },
+    {
+      "id": 323,
+      "name": "关新平",
+      "college": "自动化与感知学院",
+      "score": 0.0068
+    },
+    {
+      "id": 1022,
+      "name": "王昕",
+      "college": "电气工程学院",
+      "score": 0.0061
+    },
+    {
+      "id": 197,
+      "name": "朱燕民",
+      "college": "计算机学院",
+      "score": 0.0059
+    },
+    {
+      "id": 746,
+      "name": "张文军",
+      "college": "集成电路学院",
+      "score": 0.0059
+    },
+    {
+      "id": 647,
+      "name": "宋利",
+      "college": "集成电路学院",
+      "score": 0.0057
+    },
+    {
+      "id": 296,
+      "name": "陈彩莲",
+      "college": "自动化与感知学院",
+      "score": 0.0051
+    },
+    {
+      "id": 649,
+      "name": "苏翼凯",
+      "college": "集成电路学院",
+      "score": 0.0049
+    },
+    {
+      "id": 1002,
+      "name": "过敏意",
+      "college": "计算机学院",
+      "score": 0.0048
+    },
+    {
+      "id": 457,
+      "name": "杨杰",
+      "college": "自动化与感知学院",
+      "score": 0.0048
+    },
+    {
+      "id": 3,
+      "name": "陈海波",
+      "college": "计算机学院",
+      "score": 0.0047
+    },
+    {
+      "id": 41,
+      "name": "管海兵",
+      "college": "计算机学院",
+      "score": 0.0046
+    },
+    {
+      "id": 468,
+      "name": "郁文贤",
+      "college": "自动化与感知学院",
+      "score": 0.0045
+    },
+    {
+      "id": 827,
+      "name": "柳璐",
+      "college": "电气工程学院",
+      "score": 0.0045
+    }
+  ],
+  "top15_closeness": [
+    {
+      "id": 299,
+      "name": "陈新",
+      "college": "自动化与感知学院",
+      "score": 0.392
+    },
+    {
+      "id": 868,
+      "name": "王辉",
+      "college": "电气工程学院",
+      "score": 0.3875
+    },
+    {
+      "id": 1022,
+      "name": "王昕",
+      "college": "电气工程学院",
+      "score": 0.3865
+    },
+    {
+      "id": 739,
+      "name": "张宸",
+      "college": "集成电路学院",
+      "score": 0.3848
+    },
+    {
+      "id": 454,
+      "name": "杨博",
+      "college": "自动化与感知学院",
+      "score": 0.3818
+    },
+    {
+      "id": 504,
+      "name": "陈凯",
+      "college": "集成电路学院",
+      "score": 0.3794
+    },
+    {
+      "id": 578,
+      "name": "李浩洋",
+      "college": "集成电路学院",
+      "score": 0.3782
+    },
+    {
+      "id": 99,
+      "name": "王瑞",
+      "college": "计算机学院",
+      "score": 0.3776
+    },
+    {
+      "id": 647,
+      "name": "宋利",
+      "college": "集成电路学院",
+      "score": 0.376
+    },
+    {
+      "id": 913,
+      "name": "张琛",
+      "college": "电气工程学院",
+      "score": 0.3754
+    },
+    {
+      "id": 247,
+      "name": "王磊",
+      "college": "计算机学院",
+      "score": 0.3738
+    },
+    {
+      "id": 90,
+      "name": "杨旸",
+      "college": "计算机学院",
+      "score": 0.3729
+    },
+    {
+      "id": 473,
+      "name": "张晗",
+      "college": "自动化与感知学院",
+      "score": 0.3715
+    },
+    {
+      "id": 668,
+      "name": "王辉",
+      "college": "集成电路学院",
+      "score": 0.3704
+    },
+    {
+      "id": 808,
+      "name": "姜山",
+      "college": "电气工程学院",
+      "score": 0.3702
+    }
+  ],
+  "bridges": [
+    {
+      "id": 299,
+      "name": "陈新",
+      "college": "自动化与感知学院",
+      "betweenness": 0.0455,
+      "n_communities": 18
+    },
+    {
+      "id": 1022,
+      "name": "王昕",
+      "college": "电气工程学院",
+      "betweenness": 0.0426,
+      "n_communities": 16
+    },
+    {
+      "id": 99,
+      "name": "王瑞",
+      "college": "计算机学院",
+      "betweenness": 0.0424,
+      "n_communities": 16
+    },
+    {
+      "id": 454,
+      "name": "杨博",
+      "college": "自动化与感知学院",
+      "betweenness": 0.0419,
+      "n_communities": 16
+    },
+    {
+      "id": 247,
+      "name": "王磊",
+      "college": "计算机学院",
+      "betweenness": 0.038,
+      "n_communities": 13
+    },
+    {
+      "id": 578,
+      "name": "李浩洋",
+      "college": "集成电路学院",
+      "betweenness": 0.0366,
+      "n_communities": 16
+    },
+    {
+      "id": 32,
+      "name": "李伟",
+      "college": "计算机学院",
+      "betweenness": 0.0353,
+      "n_communities": 18
+    },
+    {
+      "id": 868,
+      "name": "王辉",
+      "college": "电气工程学院",
+      "betweenness": 0.0339,
+      "n_communities": 17
+    },
+    {
+      "id": 457,
+      "name": "杨杰",
+      "college": "自动化与感知学院",
+      "betweenness": 0.0299,
+      "n_communities": 13
+    },
+    {
+      "id": 504,
+      "name": "陈凯",
+      "college": "集成电路学院",
+      "betweenness": 0.029,
+      "n_communities": 18
+    },
+    {
+      "id": 473,
+      "name": "张晗",
+      "college": "自动化与感知学院",
+      "betweenness": 0.0278,
+      "n_communities": 13
+    },
+    {
+      "id": 480,
+      "name": "张涛",
+      "college": "自动化与感知学院",
+      "betweenness": 0.0265,
+      "n_communities": 13
+    },
+    {
+      "id": 939,
+      "name": "程远",
+      "college": "人工智能学院",
+      "betweenness": 0.026,
+      "n_communities": 12
+    },
+    {
+      "id": 90,
+      "name": "杨旸",
+      "college": "计算机学院",
+      "betweenness": 0.0257,
+      "n_communities": 12
+    },
+    {
+      "id": 739,
+      "name": "张宸",
+      "college": "集成电路学院",
+      "betweenness": 0.0247,
+      "n_communities": 15
+    }
+  ],
+  "communities": 28
+}

@@ -13,6 +13,7 @@ from datetime import datetime
 from flask import Blueprint, current_app, jsonify
 
 from .db import db_stamp, get_db
+from .services import _load_json_from_stamp
 
 bp = Blueprint("insights", __name__, url_prefix="/api")
 
@@ -39,11 +40,7 @@ def _json_files():
 
 def _load_json(name, default):
     path = os.path.join(_json_files(), name)
-    try:
-        with open(path, encoding="utf-8") as handle:
-            return json.load(handle)
-    except (OSError, ValueError):
-        return default
+    return _load_json_from_stamp((path,), default)
 
 
 def _parse_keywords(value):

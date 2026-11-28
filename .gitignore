@@ -21,6 +21,9 @@ data/raw/
 data/deleted_phase*.csv
 data/sparse_teachers.csv
 
+# 临时工作区（脚本测试、调试输出等，可随时清空）
+scratch/
+
 # 本地配置
 .env
 .env.*

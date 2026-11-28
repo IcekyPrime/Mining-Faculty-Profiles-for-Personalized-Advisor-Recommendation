@@ -217,18 +217,22 @@ def bm25_scores(stamp, query):
     return bm25_index(stamp).scores(query)
 
 
-@lru_cache(maxsize=4)
-def topics_payload(stamp):
-    """按 topics.json 文件时间戳缓存主题模型；换数据后重跑处理层即可失效。"""
+def _load_json_from_stamp(stamp, default):
+    """按文件路径缓存读取 JSON；路径不存在或解析失败时返回 default。"""
     path = stamp[0]
     try:
         with open(path, encoding="utf-8") as handle:
-            payload = json.load(handle)
+            return json.load(handle)
     except (OSError, ValueError, TypeError):
-        return {"method": "未生成", "k": 0, "topics": [], "doc_topics": {}}
-    return payload if isinstance(payload, dict) else {
-        "method": "未生成", "k": 0, "topics": [], "doc_topics": {}
-    }
+        return default
+
+
+@lru_cache(maxsize=4)
+def topics_payload(stamp):
+    """按 topics.json 文件时间戳缓存主题模型；换数据后重跑处理层即可失效。"""
+    fallback = {"method": "未生成", "k": 0, "topics": [], "doc_topics": {}}
+    payload = _load_json_from_stamp(stamp, fallback)
+    return payload if isinstance(payload, dict) else fallback
 
 
 def topic_query_scores(stamp, query):
@@ -329,12 +333,7 @@ def percentile_rank(sequence, value):
 
 @lru_cache(maxsize=8)
 def similar_map(stamp):
-    path = stamp[0]
-    try:
-        with open(path, encoding="utf-8") as fh:
-            pairs = json.load(fh)
-    except (OSError, ValueError):
-        pairs = []
+    pairs = _load_json_from_stamp(stamp, [])
     mapping = defaultdict(set)
     for item in pairs:
         try:
